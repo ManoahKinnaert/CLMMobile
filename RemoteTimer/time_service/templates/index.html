@@ -10,24 +10,27 @@
 </head>
 <body>
     <div class="content">
-<div class="timer-container">
-        <p id="time-lbl">15:00</p>
-        <button id="start-stop-btn">
-        </button>
-    </div>
-    <div class="talk-selector-container">
-        <button id="prev"></button>
-        <div class="dropdown">
-            <button class="dropbtn">Dropdown Menu</button>
-            <div class="dropdown-content">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
-            </div>
+        <div class="timer-container">
+            <p id="time-lbl">15:00</p>
+            <button id="start-stop-btn">
+            </button>
         </div>
-        <button id="next"></button>
+        <div class="talk-selector-container">
+            <button id="prev">
+                <img src="{{ url_for('time_service.static', filename='images/backward.png') }}">
+            </button>
+            <div class="dropdown">
+                <button class="dropbtn">Dropdown Menu</button>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div>
+            <button id="next">
+                <img src="{{ url_for('time_service.static', filename='images/forward.png') }}">
+            </button>
+        </div>
     </div>
-    </div>
-    
 </body>
 </html>
