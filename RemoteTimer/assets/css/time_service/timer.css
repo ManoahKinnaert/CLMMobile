@@ -1,101 +1,230 @@
 @import "../colors.css";
 
+* {
+    box-sizing: border-box;
+}
 
 .content {
-    max-width: 800px;
-    width: 100%;
-    margin: 0 auto;
-    display: block;
+    width: min(600px, calc(100% - 24px));
+    margin: 30px auto;
+    padding: 30px;
     background-color: var(--secondary-bg);
-    padding: 40px;
-
-    margin-top: 50px;
     border-radius: 20px;
 }
 
-.timer-container,
-.talk-selector-container {
-    max-width: 800px;
+/* =========================
+   Timer
+   ========================= */
+
+.timer-container {
     width: 100%;
-    margin: 0 auto;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    margin: 30px auto;
+    margin: 20px auto 40px;
 }
 
-#prev {
-    padding: 20px;
+#time-lbl {
+    margin: 0 0 45px;
+    font-size: clamp(3.5rem, 15vw, 6rem);
+    font-weight: bold;
+    line-height: 1;
+}
+
+#start-stop-btn {
+    padding: 15px 170px 15px 170px;
     border: none;
     border-radius: 10px;
-
-    background-color: var(--main-bg);
-    margin-right: 20px;
-}
-
-#prev:hover { opacity: 0.7; cursor: pointer; }
-
-#next {
-    padding: 20px;
-    border: none;
-    border-radius: 10px;    
-
-    background-color: var(--main-bg);
-    margin-left: 20px;
-}
-
-#next:hover { opacity: 0.7; cursor: pointer; }
-
-/* Dropdown stuff */
-.dropdown {
-    position: relative;
-    
-    width: 100%;   
-    display: inline-block;
-}
-
-/* Style the dropdown button */
-.dropbtn {
-    max-width: 800px;
-    width: 100%;
     background-color: var(--title-bar);
     color: white;
-    padding: 20px;
+    font-size: 26px;
+}
+
+#start-stop-btn:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+/* =========================
+   Talk selector
+   ========================= */
+
+.talk-selector-container {
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px auto;
+}
+
+/* Previous / next buttons */
+#prev,
+#next {
+    flex: 0 0 55px;
+    width: 55px;
+    min-height: 55px;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--main-bg);
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#prev:hover,
+#next:hover {
+    opacity: 0.7;
+}
+
+#prev img,
+#next img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+/* =========================
+   Dropdown
+   ========================= */
+
+.dropdown {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+
+.dropbtn {
+    width: 100%;
+    min-height: 55px;
+    padding: 15px;
+    background-color: var(--title-bar);
+    color: white;
     font-size: 16px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
+
+    /* Prevent long talk titles from breaking the layout */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-/* Dropdown content */
+.dropbtn:hover {
+    opacity: 0.7;
+}
+
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    z-index: 10;
+    left: 0;
+    right: 0;
     width: 100%;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    max-height: 50vh;
+    overflow-y: auto;
+
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
 
-/* Links inside dropdown content */
 .dropdown-content a {
     color: black;
-    padding: 12px 16px;
+    padding: 14px 16px;
     text-decoration: none;
     display: block;
     border-radius: 10px;
 }
 
-/* Change color of dropdown links on hover */
 .dropdown-content a:hover {
-    background-color: #f1f1f1
+    background-color: #f1f1f1;
 }
 
-/* Show the dropdown content on hover */
+/* Desktop hover behavior */
 .dropdown:hover .dropdown-content {
     display: block;
 }
 
-/* Change background color of dropdown button on hover */
-.dropdown:hover .dropbtn {
-    opacity: 0.7;
+
+/* =========================
+   Mobile
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .content {
+        width: calc(100% - 20px);
+        margin: 10px auto;
+        padding: 20px 15px;
+        border-radius: 15px;
+    }
+
+    .timer-container {
+        margin: 15px auto 30px;
+    }
+
+    #time-lbl {
+        font-size: clamp(3.5rem, 20vw, 5rem);
+        margin-bottom: 20px;
+    }
+
+    .talk-selector-container {
+        gap: 8px;
+    }
+
+    #prev,
+    #next {
+        flex: 0 0 48px;
+        width: 48px;
+        min-height: 48px;
+        padding: 10px;
+    }
+
+    #prev img,
+    #next img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .dropbtn {
+        min-height: 48px;
+        padding: 12px;
+        font-size: 15px;
+    }
+}
+
+
+/* =========================
+   Very small phones
+   ========================= */
+
+@media (max-width: 380px) {
+
+    .content {
+        width: calc(100% - 12px);
+        padding: 15px 10px;
+    }
+
+    .talk-selector-container {
+        gap: 5px;
+    }
+
+    #prev,
+    #next {
+        flex-basis: 44px;
+        width: 44px;
+        min-height: 44px;
+    }
+
+    .dropbtn {
+        font-size: 14px;
+        padding: 10px 8px;
+    }
 }

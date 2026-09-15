@@ -6,7 +6,7 @@ from base import Base
 
 server = Flask(__name__)
 socketio = SocketIO(server)
-PORT = 5000
+PORT = 5051
 
 # register blueprints
 time_service = TimeService(server, socketio)
@@ -19,4 +19,4 @@ def run_server(debug=False, globaly=False):
     socketio.run(app=server, debug=debug, port=PORT, host="127.0.0.1" if not globaly else "0.0.0.0") 
 
 if __name__ == "__main__":
-    run_server(debug=True)
+    run_server(debug=True, globaly=True)
