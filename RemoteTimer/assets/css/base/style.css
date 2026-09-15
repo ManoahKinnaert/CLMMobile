@@ -1,0 +1,96 @@
+@import "../colors.css";
+
+.titlebar {
+    margin: 0;
+    padding: 12px 20px;
+    background-color: var(--title-bar);
+}
+
+.overview {
+    max-width: 700px;
+    width: 100%;
+    margin: 40px auto 0;
+    padding: 30px 40px 50px;
+    box-sizing: border-box;
+
+    background-color: var(--secondary-bg);
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgb(0 0 0 / 20%);
+
+    text-align: center;
+}
+
+.adresscollection {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.navigation {
+    max-width: 700px;
+    width: 100%;
+
+    margin: 0 auto;
+    margin-top: 40px;
+    text-align: center;
+
+    background-color: var(--secondary-bg);
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgb(0 0 0 / 20%);    
+    padding: 20px 0px 20px 0px;
+}
+
+.navigation a {
+    text-decoration: none;
+    color: white;
+}
+
+.navigation button {
+    border: none;
+    padding: 10px 40px 10px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgb(0 0 0 / 20%);
+    margin: 0px 5px 0px 5px;
+}
+
+.navigation button:hover {
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+#admin-btn {
+    background-color: red;
+}
+
+#go-to-webclock-btn {
+    background-color: var(--title-bar);
+}
+
+#go-to-timer-btn {
+    background-color: var(--online-text);
+}
+
+h1 {
+    margin: 0 0 20px;
+    color: var(--text-highlighted);
+    font-size: clamp(24px, 6vw, 35px);
+    text-align: center;
+}
+
+p {
+    color: var(--online-text);
+}
+
+@media (max-width: 600px) {
+    .titlebar {
+        padding: 10px 16px;
+    }
+
+    .overview {
+        margin: 20px 12px 0;
+        padding: 24px 20px 32px;
+        border-radius: 16px;
+        width: auto;
+    }
+}

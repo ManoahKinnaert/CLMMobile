@@ -5,8 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remote Timer - Overview</title>
     <link rel="stylesheet" href="{{ url_for('base.static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('base.static', filename='css/base/style.css') }}">
 </head>
 <body>
-    This is an overview
+    <div class="titlebar">
+        <h1>CLM Timer</h1>
+    </div>
+    <div class="overview">
+        <h3>Overview - How to connect</h3>
+        <div class="adresscollection">
+            <p>IP local: {{ ip_local }}</p>
+            <p>local adress: http://{{ ip_local }}:{{ port }}/</p>
+            <p>IP global: {{ ip_global }}</p>
+            <p>global adress: http://{{ ip_global }}:{{ port }}</p>
+        </div>
+        
+    </div>
+    <div class="navigation">
+        <button id="admin-btn"><a href="">Admin</a></button>
+        <button id="go-to-webclock-btn"><a href="">Webclock</a></button>
+        <button id="go-to-timer-btn"><a href="">Timer</a></button>
+    </div>
 </body>
 </html>

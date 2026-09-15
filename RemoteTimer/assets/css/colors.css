@@ -1,0 +1,8 @@
+:root {
+    --main-bg: rgb(200, 200, 210);
+    --secondary-bg: rgb(240, 240, 240);
+    
+    --title-bar: rgb(100, 150, 200);
+    --text-highlighted: rgb(250, 220, 120);
+    --online-text: rgb(50, 190, 100);
+}
