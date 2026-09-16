@@ -17,7 +17,7 @@ class TimeService:
                             url_prefix=self.NAMESPACE)
 
         self.socketio: SocketIO = socketio
-        self.timer = Timer(socketio=self.socketio)
+        self.timer: Timer = Timer(socketio=self.socketio)
 
         self.register_endpoints()
         self.register_sockets()
@@ -32,7 +32,7 @@ class TimeService:
 
     def register_sockets(self):
         # timer control
-        self.socketio.on_event("connect", self.emit_status, namespace=self.NAMESPACE)
+        self.socketio.on_event("connect_event", self.connect, namespace=self.NAMESPACE)
         self.socketio.on_event("toggle", self.toggle, namespace=self.NAMESPACE)
 
     def toggle(self):
@@ -40,9 +40,15 @@ class TimeService:
         else: self.timer.start()
         # emit status
         self.emit_status()
+
+    def connect(self):
+        self.socketio.emit("connect_event", {
+            "timer_started": self.timer.running,
+            "schedule": [talk.to_dict() for talk in self.timer.schedule],
+            "current": self.timer.schedule[self.timer.current].to_dict()
+        }, namespace=self.NAMESPACE)
         
     def emit_status(self):
-        print("status")
         self.socketio.emit("status", {
             "timer_started": self.timer.running,
             "current": self.timer.schedule[self.timer.current].to_dict()

@@ -132,19 +132,22 @@
 
     background-color: #f9f9f9;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
 }
 
-.dropdown-content a {
-    color: black;
+.dropdown-content button {
+    color: rgba(0, 0, 0, 0.7);
     padding: 14px 16px;
     text-decoration: none;
     display: block;
-    border-radius: 10px;
+    border: none;
+    background-color: #f9f9f9;
+    text-align: left;
+    width: 100%;
 }
 
-.dropdown-content a:hover {
+.dropdown-content button:hover {
     background-color: #f1f1f1;
+    cursor: pointer;
 }
 
 /* Desktop hover behavior */
