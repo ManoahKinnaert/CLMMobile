@@ -15,20 +15,19 @@ class TalkType(enum.Enum):
     SPIRITUAL_GEMS = "Spiritual Gems"
     BIBLE_READING = "Bible Reading"
     # apply yourself to the field ministry
-    MINISTRY_ONE = "Talk 1"
-    MINISTRY_TWO = "Talk 2"
-    MINISTRY_THREE = "Talk 3"
-    MINISTRY_FOUR = "Talk 4"
+    MINISTRY_TALK = "Ministry - Talk"
     # Living as christians
-    CHRISTIANS_ONE = "Talk 1"
-    CHRISTIANS_TWO = "Talk 2"
-    CHRISTIANS_THREE = "Talk 3"
+    LIVING_TALK = "Living - Talk"
     CONGREGATION_BIBLE_STUDY = "Congregation Bible Study"
+    CLOSING_COMMENTS = "Closing Comments"
 
 class Talk:
     def __init__(self, talk_type: TalkType, time_limit: int):
         self.talk_type = talk_type
         self.time_limit = time_limit
+
+    def __repr__(self):
+        return f"TalkType: {self.talk_type} / Time limit: {self.time_limit} min."
 
 def update_schedule_data_auto():
     if not FEED_PATH.parent.exists(): FEED_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -58,7 +57,21 @@ def get_schedule_data_auto():
     for meeting in data:
         _, week, dow = datetime.datetime.fromisoformat(meeting["date"]).isocalendar()
         if week == weeknum and ((dayofweek < 6 and dow < 6) or dayofweek >= 6): relevant = meeting 
-    return relevant
+    return relevant["talks"]
+
+def assemble_schedule():
+    talks = [
+        Talk(TalkType.OPENING_COMMENTS, time_limit=1),
+        Talk(TalkType.TREASURES_TALK, time_limit=10),
+        Talk(TalkType.SPIRITUAL_GEMS, time_limit=10),
+        Talk(TalkType.BIBLE_READING, time_limit=4)
+    ]
+    remaining = get_schedule_data_auto()
+    for talk in remaining:
+        talks.append(Talk(talk_type=TalkType.MINISTRY_TALK if talk["talkType"] // 100 == 1 else TalkType.LIVING_TALK, time_limit=talk["minutes"]))
+    talks.append(Talk(TalkType.CONGREGATION_BIBLE_STUDY, time_limit=30))
+    talks.append(Talk(TalkType.CLOSING_COMMENTS, time_limit=3))
+    return talks 
 
 if __name__ == "__main__":
-    print(get_schedule_data_auto())
+    print(assemble_schedule())
