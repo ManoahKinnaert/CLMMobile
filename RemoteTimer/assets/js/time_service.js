@@ -4,6 +4,8 @@ let forwardBtn = document.getElementById("next")
 let backwardBtn = document.getElementById("prev")
 let timeLbl = document.getElementById("time-lbl")
 
+//socket.emit("connect")
+
 startStopBtn.onclick = () => {
     socket.emit("toggle")
     console.log("test")
@@ -15,6 +17,8 @@ socket.on("status", (data) => {
     } else {
         startStopBtn.textContent = "Start"
     }
+
+    // TODO: setup the dropdown selector
 })
 
 socket.on("clockdata", (data) => {
