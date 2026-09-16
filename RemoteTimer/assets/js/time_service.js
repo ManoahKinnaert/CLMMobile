@@ -18,6 +18,7 @@ socket.on("status", (data) => {
 })
 
 socket.on("clockdata", (data) => {
+    if (startStopBtn.textContent = "Start") startStopBtn.textContent = "Stop"
     const isOvertime = data.remaining <= 0
     const totalSeconds = isOvertime ? data.over_time : data.remaining
 
