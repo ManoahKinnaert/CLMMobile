@@ -2,10 +2,33 @@ import urllib.request
 import json 
 import pathlib
 import datetime
+import enum 
 
 SOUNDBOX_API_FEED = "https://soundbox.blob.core.windows.net/meeting-feeds/feed.json"
-HOME_PATH = pathlib.Path.home().joinpath(".clmtimer/")
-FEED_PATH =  HOME_PATH.joinpath("meetingfeed.json")
+HOME_PATH = pathlib.Path.home().joinpath(".clmtimer")
+FEED_PATH =  HOME_PATH.joinpath("feed/meetingfeed.json")
+
+class TalkType(enum.Enum):
+    # Treasures from Gods word
+    OPENING_COMMENTS = "Opening Comments"
+    TREASURES_TALK = "Treasures Talk"
+    SPIRITUAL_GEMS = "Spiritual Gems"
+    BIBLE_READING = "Bible Reading"
+    # apply yourself to the field ministry
+    MINISTRY_ONE = "Talk 1"
+    MINISTRY_TWO = "Talk 2"
+    MINISTRY_THREE = "Talk 3"
+    MINISTRY_FOUR = "Talk 4"
+    # Living as christians
+    CHRISTIANS_ONE = "Talk 1"
+    CHRISTIANS_TWO = "Talk 2"
+    CHRISTIANS_THREE = "Talk 3"
+    CONGREGATION_BIBLE_STUDY = "Congregation Bible Study"
+
+class Talk:
+    def __init__(self, talk_type: TalkType, time_limit: int):
+        self.talk_type = talk_type
+        self.time_limit = time_limit
 
 def update_schedule_data_auto():
     if not FEED_PATH.parent.exists(): FEED_PATH.parent.mkdir(parents=True, exist_ok=True)
