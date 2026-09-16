@@ -52,14 +52,15 @@ socket.on("clockdata", (data) => {
 })
 
 function selectCurrent(current) {
-    dropdown.innerText = current.talktype[1]
+    dropdown.innerText = current.name
 }
 
 // Setup all the items in the dropdown
 function setupDropDown(items) {
     let html = ""
     items.forEach(element => {  
-        html += `<button>${element.talktype[1]}</button>`
+        html += `<button>${element.name}</button>`
+        
     })
     dropdownContent.innerHTML = html 
 }

@@ -25,15 +25,21 @@ class TalkType(enum.Enum):
         return (self.name, self.value)
 
 class Talk:
-    def __init__(self, talk_type: TalkType, time_limit: int):
+    def __init__(self, talk_type: TalkType, time_limit: int, num: int=None):
         self.talk_type = talk_type
         self.time_limit = time_limit
+        self.num = num
 
     def __repr__(self):
         return f"TalkType: {self.talk_type} / Time limit: {self.time_limit} min."
 
     def to_dict(self):
-        return {"talktype": self.talk_type.__repr__(), "time": self.time_limit}
+        return {
+            "talktype": self.talk_type.__repr__(), 
+            "name": f"{self.talk_type.__repr__()[1]} {self.num if self.num is not None else ""}", 
+            "time": self.time_limit, 
+            "num": self.num
+        }
 
 def update_schedule_data_auto():
     if not FEED_PATH.parent.exists(): FEED_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -73,8 +79,14 @@ def assemble_schedule():
         Talk(TalkType.BIBLE_READING, time_limit=4)
     ]
     remaining = get_schedule_data_auto()
+    ministry, living = 1, 1
     for talk in remaining:
-        talks.append(Talk(talk_type=TalkType.MINISTRY_TALK if talk["talkType"] // 100 == 1 else TalkType.LIVING_TALK, time_limit=talk["minutes"]))
+        if talk["talkType"] // 100 == 1:
+            talks.append(Talk(talk_type=TalkType.MINISTRY_TALK, time_limit=talk["minutes"], num=ministry))
+            ministry += 1
+        else:
+            talks.append(Talk(talk_type=TalkType.LIVING_TALK, time_limit=talk["minutes"], num=living))
+            living += 1
     talks.append(Talk(TalkType.CONGREGATION_BIBLE_STUDY, time_limit=30))
     talks.append(Talk(TalkType.CLOSING_COMMENTS, time_limit=3))
     return talks 
