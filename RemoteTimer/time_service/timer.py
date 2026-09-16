@@ -2,6 +2,8 @@ from flask_socketio import SocketIO
 import threading
 import time 
 
+from .schedule_service import assemble_schedule
+
 class Timer:
     def __init__(self, socketio, limit: int=1):
         self.socket = socketio 
@@ -16,6 +18,15 @@ class Timer:
 
         self.socket.start_background_task(self._run)
 
+        self.schedule = assemble_schedule()
+        self.current = 0
+
+    def setup_time(self):
+        self.limit = self.schedule[self.current].time_limit * 60
+        self.remaining = self.limit
+        self.over_time = 0
+        self.end_time = None
+
     def start(self):
         with self.lock:
             if not self.running:
@@ -28,6 +39,8 @@ class Timer:
             self.running = False 
             self.end_time = None
 
+        self.setup_time()
+
     def stop(self):
         with self.lock:
             if self.running:
@@ -35,7 +48,11 @@ class Timer:
                 if self.remaining <= 0: self.over_time = round(time.monotonic() - self.end_time)
             self.running = False 
         self._emit()
-
+        # go to the next talk unless this was the last one, if it is the last one we revert to the first talk
+        if self.current + 1 < len(self.schedule): self.current += 1
+        else: self.current = 0
+        self.setup_time()
+        
     def _run(self):
         while True:
             with self.lock:
