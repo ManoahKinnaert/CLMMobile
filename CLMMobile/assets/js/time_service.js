@@ -27,7 +27,6 @@ socket.on("connect", () => {
 })
 
 socket.on("connect_event", (data) => {
-    console.log("test")
     if (data.timer_started === true) {
         startStopBtn.textContent = "Stop"
     } else {
@@ -39,8 +38,6 @@ socket.on("connect_event", (data) => {
     selectCurrent(data.current)
 })
 
-
-
 socket.on("status", (data) => {
     if (data.timer_started === true) {
         startStopBtn.textContent = "Stop"
@@ -51,6 +48,10 @@ socket.on("status", (data) => {
     timeLbl.innerText = `${data.current.time}:00`
     timeLbl.style.color = "black"
     selectCurrent(data.current)
+})
+
+socket.on("warning", (data) => {
+    alert(data.message)
 })
 
 socket.on("clockdata", (data) => {

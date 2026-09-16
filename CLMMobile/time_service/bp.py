@@ -67,19 +67,22 @@ class TimeService:
             }, 
             namespace=self.NAMESPACE)
 
-    def emit_warning(self):
-        pass 
+    def emit_warning(self, message: str):
+        self.socketio.emit("warning", {
+            "message": message
+        },
+        namespace=self.NAMESPACE)
 
     def next(self):
         if self.timer.running:
-            pass    # emit warning
+            self.emit_warning("Please make sure the timer is not running!")    # emit warning
         else: 
             self.timer.next()
             self.emit_status()
 
     def prev(self):
         if self.timer.running:
-            pass    # emit warning
+            self.emit_warning("Please make sure the timer is not running!")    # emit warning
         else:
             self.timer.prev()
             self.emit_status()
