@@ -21,6 +21,9 @@ class TalkType(enum.Enum):
     CONGREGATION_BIBLE_STUDY = "Congregation Bible Study"
     CLOSING_COMMENTS = "Closing Comments"
 
+    def __repr__(self):
+        return (self.name, self.value)
+
 class Talk:
     def __init__(self, talk_type: TalkType, time_limit: int):
         self.talk_type = talk_type
@@ -28,6 +31,9 @@ class Talk:
 
     def __repr__(self):
         return f"TalkType: {self.talk_type} / Time limit: {self.time_limit} min."
+
+    def to_dict(self):
+        return {"talktype": self.talk_type.__repr__(), "time": self.time_limit}
 
 def update_schedule_data_auto():
     if not FEED_PATH.parent.exists(): FEED_PATH.parent.mkdir(parents=True, exist_ok=True)

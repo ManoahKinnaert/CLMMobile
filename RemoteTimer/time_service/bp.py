@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template
+from flask import Flask, Blueprint, render_template, jsonify
 from flask_socketio import SocketIO
 import pathlib 
 
@@ -44,4 +44,4 @@ class TimeService:
 
     def get_schedule(self):
         schedule = self.timer.schedule
-        return schedule
+        return jsonify([talk.to_dict() for talk in schedule])
