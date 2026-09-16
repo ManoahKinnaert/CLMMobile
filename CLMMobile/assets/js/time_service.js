@@ -36,6 +36,7 @@ socket.on("status", (data) => {
     }
 
     timeLbl.innerText = `${data.current.time}:00`
+    timeLbl.style.color = "black"
     selectCurrent(data.current)
 })
 
