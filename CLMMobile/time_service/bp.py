@@ -89,6 +89,7 @@ class TimeService:
             self.emit_status()
 
     def set_current(self, data):
+        if self.timer.running: self.emit_warning("Please make sure the timer is not running!"); return
         index = data["index"]
         self.timer.set_current(index)
         self.emit_status()
