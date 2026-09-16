@@ -50,10 +50,20 @@ class Timer:
         self._emit()
         # TODO: Save the data to a database
         # go to the next talk unless this was the last one, if it is the last one we revert to the first talk
+        self.next()
+
+    def next(self):
+        if self.running: return
         if self.current + 1 < len(self.schedule): self.current += 1
         else: self.current = 0
-        self.setup_time()
-        
+        self.setup_time() 
+
+    def prev(self):
+        if self.running: return
+        if self.current - 1 >= 0: 
+            self.current -= 1
+            self.setup_time()
+
     def _run(self):
         while True:
             with self.lock:

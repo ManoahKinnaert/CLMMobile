@@ -8,6 +8,20 @@ let dropdownContent = document.getElementById("dropdown-content")
 let dropdown = document.getElementById("dropdown")
 var currentBtn = null
 
+// button click events
+startStopBtn.onclick = () => {
+    socket.emit("toggle")
+}
+
+forwardBtn.onclick = () => {
+    socket.emit("next")
+}
+
+backwardBtn.onclick = () => {
+    socket.emit("prev")
+}
+
+// Socket events
 socket.on("connect", () => {
     socket.emit("connect_event")
 })
@@ -25,9 +39,7 @@ socket.on("connect_event", (data) => {
     selectCurrent(data.current)
 })
 
-startStopBtn.onclick = () => {
-    socket.emit("toggle")
-}
+
 
 socket.on("status", (data) => {
     if (data.timer_started === true) {
@@ -65,7 +77,6 @@ function setupDropDown(items) {
     let html = ""
     items.forEach(element => {  
         html += `<button id="${element.name}">${element.name}</button>`
-        
     })
     dropdownContent.innerHTML = html 
 }

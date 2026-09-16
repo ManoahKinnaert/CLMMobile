@@ -4,7 +4,6 @@ import pathlib
 
 from .timer import Timer
 
-
 class TimeService:
     FILE = pathlib.Path(__file__).resolve().parent
     NAMESPACE = "/timeservice"
@@ -34,12 +33,25 @@ class TimeService:
         # timer control
         self.socketio.on_event("connect_event", self.connect, namespace=self.NAMESPACE)
         self.socketio.on_event("toggle", self.toggle, namespace=self.NAMESPACE)
+        self.socketio.on_event("next", self.next, namespace=self.NAMESPACE)
+        self.socketio.on_event("prev", self.prev, namespace=self.NAMESPACE)
+
+    # endpoints and websocket stuff
+    def control_endpoint(self):
+        return render_template("index.html")
+
+    def get_schedule(self):
+        schedule = self.timer.schedule
+        return jsonify([talk.to_dict() for talk in schedule])
+
+    def get_current(self):
+        return jsonify(self.timer.schedule[self.timer.current].to_dict())
 
     def toggle(self):
-        if self.timer.running: self.timer.stop()
-        else: self.timer.start()
-        # emit status
-        self.emit_status()
+            if self.timer.running: self.timer.stop()
+            else: self.timer.start()
+            # emit status
+            self.emit_status()
 
     def connect(self):
         self.socketio.emit("connect_event", {
@@ -55,13 +67,19 @@ class TimeService:
             }, 
             namespace=self.NAMESPACE)
 
-    # endpoints and websocket stuff
-    def control_endpoint(self):
-        return render_template("index.html")
+    def emit_warning(self):
+        pass 
 
-    def get_schedule(self):
-        schedule = self.timer.schedule
-        return jsonify([talk.to_dict() for talk in schedule])
+    def next(self):
+        if self.timer.running:
+            pass    # emit warning
+        else: 
+            self.timer.next()
+            self.emit_status()
 
-    def get_current(self):
-        return jsonify(self.timer.schedule[self.timer.current].to_dict())
+    def prev(self):
+        if self.timer.running:
+            pass    # emit warning
+        else:
+            self.timer.prev()
+            self.emit_status()
