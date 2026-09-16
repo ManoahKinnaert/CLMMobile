@@ -35,6 +35,7 @@ class TimeService:
         self.socketio.on_event("toggle", self.toggle, namespace=self.NAMESPACE)
         self.socketio.on_event("next", self.next, namespace=self.NAMESPACE)
         self.socketio.on_event("prev", self.prev, namespace=self.NAMESPACE)
+        self.socketio.on_event("set_current", self.set_current, namespace=self.NAMESPACE)
 
     # endpoints and websocket stuff
     def control_endpoint(self):
@@ -86,3 +87,8 @@ class TimeService:
         else:
             self.timer.prev()
             self.emit_status()
+
+    def set_current(self, data):
+        index = data["index"]
+        self.timer.set_current(index)
+        self.emit_status()

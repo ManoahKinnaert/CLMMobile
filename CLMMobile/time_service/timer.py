@@ -64,6 +64,11 @@ class Timer:
             self.current -= 1
             self.setup_time()
 
+    def set_current(self, index: int):
+        if index < 0 or index >= len(self.schedule): return 
+        self.current = index 
+        self.setup_time()
+
     def _run(self):
         while True:
             with self.lock:

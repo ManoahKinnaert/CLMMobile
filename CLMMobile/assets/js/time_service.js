@@ -6,6 +6,7 @@ let timeLbl = document.getElementById("time-lbl")
 
 let dropdownContent = document.getElementById("dropdown-content")
 let dropdown = document.getElementById("dropdown")
+let schedule = null
 var currentBtn = null
 
 // button click events
@@ -73,11 +74,27 @@ function selectCurrent(current) {
     currentBtn.style.color = "rgb(0, 0, 0)"
 }
 
+function setCurrent(item) {
+    let index = 0
+    schedule.forEach(element => {
+        if (element === item) {
+            index = schedule.indexOf(element)
+        }   
+    })
+    socket.emit("set_current", {"index": index})
+}
+
 // Setup all the items in the dropdown
 function setupDropDown(items) {
+    schedule = items
     let html = ""
     items.forEach(element => {  
         html += `<button id="${element.name}">${element.name}</button>`
     })
     dropdownContent.innerHTML = html 
+    // setup button onclicks...
+    items.forEach(element => {
+        let btn = document.getElementById(element.name)
+        btn.onclick = () => { setCurrent(element) }
+    })
 }
