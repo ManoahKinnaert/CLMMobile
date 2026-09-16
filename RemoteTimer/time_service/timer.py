@@ -48,6 +48,7 @@ class Timer:
                 if self.remaining <= 0: self.over_time = round(time.monotonic() - self.end_time)
             self.running = False 
         self._emit()
+        # TODO: Save the data to a database
         # go to the next talk unless this was the last one, if it is the last one we revert to the first talk
         if self.current + 1 < len(self.schedule): self.current += 1
         else: self.current = 0

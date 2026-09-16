@@ -27,6 +27,7 @@ class TimeService:
 
     def register_endpoints(self):
         self.bp.add_url_rule("/control", "control", self.control_endpoint, methods=["GET"])
+        self.bp.add_url_rule("/schedule", "schedule", self.get_schedule, methods=["GET"])
 
     def register_sockets(self):
         # timer control
@@ -40,3 +41,7 @@ class TimeService:
     # endpoints and websocket stuff
     def control_endpoint(self):
         return render_template("index.html")
+
+    def get_schedule(self):
+        schedule = self.timer.schedule
+        return schedule
