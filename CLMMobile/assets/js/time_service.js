@@ -6,6 +6,7 @@ let timeLbl = document.getElementById("time-lbl")
 
 let dropdownContent = document.getElementById("dropdown-content")
 let dropdown = document.getElementById("dropdown")
+var currentBtn = null
 
 socket.on("connect", () => {
     socket.emit("connect_event")
@@ -53,14 +54,17 @@ socket.on("clockdata", (data) => {
 })
 
 function selectCurrent(current) {
+    if (currentBtn) currentBtn.style.color = "rgba(0, 0, 0, 0.5)"
     dropdown.innerText = current.name
+    currentBtn = document.getElementById(current.name)
+    currentBtn.style.color = "rgb(0, 0, 0)"
 }
 
 // Setup all the items in the dropdown
 function setupDropDown(items) {
     let html = ""
     items.forEach(element => {  
-        html += `<button>${element.name}</button>`
+        html += `<button id="${element.name}">${element.name}</button>`
         
     })
     dropdownContent.innerHTML = html 
