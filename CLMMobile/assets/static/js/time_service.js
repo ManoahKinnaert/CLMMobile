@@ -70,7 +70,7 @@ socket.on("clockdata", (data) => {
 
 function selectCurrent(current) {
     if (currentBtn) currentBtn.style.color = "rgba(0, 0, 0, 0.5)"
-    dropdown.innerText = current.name
+    dropdown.innerText = `${current.name} (${current.time}:00)`
     currentBtn = document.getElementById(current.name)
     currentBtn.style.color = "rgb(0, 0, 0)"
     dropdownContentShown = false 
@@ -92,7 +92,7 @@ function setupDropDown(items) {
     schedule = items
     let html = ""
     items.forEach(element => {  
-        html += `<button id="${element.name}">${element.name}</button>`
+        html += `<button id="${element.name}">${element.name} (${element.time}:00)</button>`
     })
     dropdownContent.innerHTML = html 
     // setup button onclicks...
