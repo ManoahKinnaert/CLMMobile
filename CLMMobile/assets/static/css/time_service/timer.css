@@ -44,7 +44,6 @@
 
 #start-stop-btn:hover {
     cursor: pointer;
-    opacity: 0.7;
 }
 
 /* =========================
@@ -117,7 +116,7 @@
 }
 
 .dropbtn:hover {
-    opacity: 0.7;
+    cursor: pointer;
 }
 
 .dropdown-content {

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,24 +8,29 @@
     <link rel="stylesheet" href="{{ url_for('base.static', filename='css/base.css') }}">
     <link rel="stylesheet" href="{{ url_for('base.static', filename='css/base/style.css') }}">
 </head>
+
 <body>
     <div class="titlebar">
         <h1>CLM Timer</h1>
     </div>
-    <div class="overview">
-        <h3>Overview - How to connect</h3>
-        <div class="adresscollection">
-            <p>IP local: {{ ip_local }}</p>
-            <p>local adress: http://{{ ip_local }}:{{ port }}/</p>
-            <p>IP global: {{ ip_global }}</p>
-            <p>global adress: http://{{ ip_global }}:{{ port }}</p>
+    <div class="content">
+        <div class="overview">
+            <h3>Overview - How to connect</h3>
+            <div class="adresscollection">
+                <p>IP local: {{ ip_local }}</p>
+                <p>local adress: http://{{ ip_local }}:{{ port }}/</p>
+                <p>IP global: {{ ip_global }}</p>
+                <p>global adress: http://{{ ip_global }}:{{ port }}</p>
+            </div>
+
         </div>
-        
+        <div class="navigation">
+            <a id="admin-btn" href="">Admin</a>
+            <a id="go-to-webclock-btn" href="{{ url_for('webclock_service.webclock') }}">Webclock</a>
+            <a id="go-to-timer-btn" href="{{ url_for('time_service.control') }}">Timer</a>
+        </div>
     </div>
-    <div class="navigation">
-        <a id="admin-btn" href="">Admin</a>
-        <a id="go-to-webclock-btn" href="{{ url_for('webclock_service.webclock') }}">Webclock</a>
-        <a id="go-to-timer-btn" href="{{ url_for('time_service.control') }}">Timer</a>
-    </div>
+
 </body>
+
 </html>
