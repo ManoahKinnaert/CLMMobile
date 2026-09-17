@@ -149,11 +149,6 @@
     cursor: pointer;
 }
 
-/* Desktop hover behavior */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
 
 /* =========================
    Mobile

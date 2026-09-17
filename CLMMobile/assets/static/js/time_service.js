@@ -8,6 +8,7 @@ let dropdownContent = document.getElementById("dropdown-content")
 let dropdown = document.getElementById("dropdown")
 let schedule = null
 var currentBtn = null
+var dropdownContentShown = false 
 
 // button click events
 startStopBtn.onclick = () => {
@@ -20,6 +21,11 @@ forwardBtn.onclick = () => {
 
 backwardBtn.onclick = () => {
     socket.emit("prev")
+}
+
+dropdown.onclick = () => {
+    dropdownContentShown = !dropdownContentShown
+    updateDropDownContentAppearance()
 }
 
 socket.on("connect_event", (data) => {
@@ -67,6 +73,8 @@ function selectCurrent(current) {
     dropdown.innerText = current.name
     currentBtn = document.getElementById(current.name)
     currentBtn.style.color = "rgb(0, 0, 0)"
+    dropdownContentShown = false 
+    updateDropDownContentAppearance()
 }
 
 function setCurrent(item) {
@@ -92,4 +100,12 @@ function setupDropDown(items) {
         let btn = document.getElementById(element.name)
         btn.onclick = () => { setCurrent(element) }
     })
+}
+
+function updateDropDownContentAppearance() {
+    if (dropdownContentShown) {
+        dropdownContent.style.display = "block"
+    } else {
+        dropdownContent.style.display = "none"
+    }
 }
