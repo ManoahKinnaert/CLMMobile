@@ -16,10 +16,11 @@ class Timer:
 
         self.lock = threading.Lock()
 
-        self.socket.start_background_task(self._run)
-
         self.schedule = assemble_schedule()
         self.current = 0
+
+        self.setup_time()
+        self.socket.start_background_task(self._run)
 
     def setup_time(self):
         self.limit = self.schedule[self.current].time_limit * 60
@@ -33,65 +34,67 @@ class Timer:
                 self.end_time = round(time.monotonic() + self.remaining) if self.end_time is None else self.end_time
                 self.running = True 
 
-    def reset(self):
-        with self.lock:
-            self.remaining = self.limit
-            self.running = False 
-            self.end_time = None
-
-        self.setup_time()
-
     def stop(self):
         with self.lock:
+            emit_data = None
             if self.running:
                 self.remaining = max(0, round(self.end_time - time.monotonic()))
                 if self.remaining <= 0: self.over_time = round(time.monotonic() - self.end_time)
+                emit_data = (self.remaining, self.over_time)
             self.running = False 
-        self._emit()
+        if emit_data is not None:
+            self._emit(emit_data)
         # TODO: Save the data to a database
         # go to the next talk unless this was the last one, if it is the last one we revert to the first talk
         self.next()
 
     def next(self):
-        if self.running: return
-        if self.current + 1 < len(self.schedule): self.current += 1
-        else: self.current = 0
-        self.setup_time() 
+        with self.lock:
+            if self.running: return
+            if self.current + 1 < len(self.schedule): self.current += 1
+            else: self.current = 0
+            self.setup_time() 
 
     def prev(self):
-        if self.running: return
-        if self.current - 1 >= 0: 
-            self.current -= 1
-            self.setup_time()
+        with self.lock:
+            if self.running: return
+            if self.current - 1 >= 0: 
+                self.current -= 1
+                self.setup_time()
 
     def set_current(self, index: int):
-        if index < 0 or index >= len(self.schedule): return 
-        self.current = index 
-        self.setup_time()
+        with self.lock:
+            if index < 0 or index >= len(self.schedule) or self.running: return 
+            self.current = index 
+            self.setup_time()
 
     def _run(self):
         while True:
+            emit_data = None
             with self.lock:
                 if self.running:
                     self.remaining = max(0, round(self.end_time - time.monotonic()))
+                    if self.remaining <= 0:
+                        self.over_time = round(time.monotonic() - self.end_time)
 
-            if self.running:
-                self._emit()
-                if self.remaining <= 0:
-                    self.over_time = round(time.monotonic() - self.end_time)
+                    emit_data = (self.remaining, self.over_time)
 
+            if emit_data is not None:
+                self._emit(emit_data)
+                
             self.socket.sleep(0.2)
 
-    def _emit(self):
+    def _emit(self, emit_data):
+        remaining, overtime = emit_data
         # submit webclock data
         self.socket.emit("webclockdata", {
-            "remaining": self.remaining, 
-            "over_time": self.over_time
+            "remaining": remaining, 
+            "over_time": overtime
         }, 
         namespace="/webclockservice")
         # submit control clock data
         self.socket.emit("clockdata", {
-            "remaining": self.remaining, 
-            "over_time": self.over_time
+            "remaining": remaining, 
+            "over_time": overtime
         }, 
         namespace="/timeservice")
