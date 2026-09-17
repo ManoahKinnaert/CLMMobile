@@ -3,13 +3,13 @@ import pathlib
 import socket 
 
 class Base:
-    FILE = pathlib.Path(__file__).resolve().parent
+    FILE = pathlib.Path(__file__).resolve().parent.parent
 
     def __init__(self, app: Flask, port: int):
         self.app: Flask = app 
         self.bp: Blueprint = Blueprint("base", __name__, 
-                            template_folder=str(self.FILE / "./templates"),
-                            static_folder=str(self.FILE.parent / "./assets"))
+                            template_folder=str(self.FILE / "assets/templates"),
+                            static_folder=str(self.FILE / "assets/static"))
 
         self._ip = self._get_ip()
         self._local_ip = "127.0.0.1"
@@ -37,4 +37,4 @@ class Base:
     
     # endpoints and websocket stuff
     def base_endpoint(self):
-        return render_template("base.html", ip_local=self._local_ip, ip_global=self._ip, port=self.port)
+        return render_template("base/index.html", ip_local=self._local_ip, ip_global=self._ip, port=self.port)

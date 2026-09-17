@@ -4,14 +4,14 @@ import pathlib
 
 
 class WebclockService:
-    FILE = pathlib.Path(__file__).resolve().parent
+    FILE = pathlib.Path(__file__).resolve().parent.parent
     NAMESPACE = "/webclockservice"
 
     def __init__(self, app: Flask, socketio: SocketIO, timer):
         self.app: Flask = app 
         self.bp: Blueprint = Blueprint("webclock_service", __name__,
-                            template_folder=str(self.FILE / "./templates"),
-                            static_folder=str(self.FILE.parent / "./assets"),
+                            template_folder=str(self.FILE / "assets/templates"),
+                            static_folder=str(self.FILE / "assets/static"),
                             url_prefix=self.NAMESPACE)
         self.socketio: SocketIO = socketio
         self.timer = timer
@@ -30,7 +30,7 @@ class WebclockService:
 
     # endpoints
     def webclock_endpoint(self):
-        return render_template("webclock.html")
+        return render_template("webclock_service/index.html")
 
     def connect(self):
         self.socketio.emit("status", {

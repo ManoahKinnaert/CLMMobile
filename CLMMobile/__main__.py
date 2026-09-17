@@ -6,7 +6,7 @@ from time_service.timer import Timer
 from base import Base
 from webclock_service import WebclockService
 
-server = Flask(__name__)
+server = Flask(__name__, static_folder=None, template_folder=None)
 socketio = SocketIO(server)
 timer = Timer(socketio)
 PORT = 5051
