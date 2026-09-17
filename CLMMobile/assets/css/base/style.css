@@ -41,12 +41,11 @@
     padding: 20px 0px 20px 0px;
 }
 
+
+
 .navigation a {
     text-decoration: none;
     color: white;
-}
-
-.navigation button {
     border: none;
     padding: 10px 40px 10px 40px;
     border-radius: 10px;
@@ -54,7 +53,7 @@
     margin: 0px 5px 0px 5px;
 }
 
-.navigation button:hover {
+.navigation a:hover {
     opacity: 0.4;
     cursor: pointer;
 }
