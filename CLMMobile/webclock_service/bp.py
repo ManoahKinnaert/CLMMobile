@@ -7,7 +7,7 @@ class WebclockService:
     FILE = pathlib.Path(__file__).resolve().parent.parent
     NAMESPACE = "/webclockservice"
 
-    def __init__(self, app: Flask, socketio: SocketIO, timer):
+    def __init__(self, app: Flask, socketio: SocketIO, timer, trans):
         self.app: Flask = app 
         self.bp: Blueprint = Blueprint("webclock_service", __name__,
                             template_folder=str(self.FILE / "assets/templates"),
@@ -15,6 +15,7 @@ class WebclockService:
                             url_prefix=self.NAMESPACE)
         self.socketio: SocketIO = socketio
         self.timer = timer
+        self.trans = trans  # translation service
 
         self.register_endpoints()
         self.register_sockets()
@@ -35,6 +36,6 @@ class WebclockService:
     def connect(self):
         self.socketio.emit("status", {
             "timer_started": self.timer.running,
-            "current": self.timer.schedule[self.timer.current].to_dict()
+            "current": self.timer.schedule[self.timer.current].to_dict(self.trans)
         },
         namespace=self.NAMESPACE)

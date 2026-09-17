@@ -1,0 +1,14 @@
+{
+    "name": "English",
+
+    "meeting_codes": {
+        "OPENING_COMMENTS": "Opening Comments",
+        "TREASURES_TALK" : "Treasures Talk",
+        "SPIRITUAL_GEMS" : "Spiritual Gems",
+        "BIBLE_READING" : "Bible Reading",
+        "MINISTRY_TALK" : "Ministry - Talk",
+        "LIVING_TALK" : "Living - Talk",
+        "CONGREGATION_BIBLE_STUDY" : "Congregation Bible Study",
+        "CLOSING_COMMENTS" : "Closing Comments"
+    }
+}

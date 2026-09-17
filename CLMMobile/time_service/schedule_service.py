@@ -4,6 +4,7 @@ import pathlib
 import datetime
 import enum 
 
+
 SOUNDBOX_API_FEED = "https://soundbox.blob.core.windows.net/meeting-feeds/feed.json"
 HOME_PATH = pathlib.Path.home().joinpath(".clmtimer")
 FEED_PATH =  HOME_PATH.joinpath("feed/meetingfeed.json")
@@ -22,7 +23,7 @@ class TalkType(enum.Enum):
     CLOSING_COMMENTS = "Closing Comments"
 
     def __repr__(self):
-        return (self.name, self.value)
+        return self.name
 
 class Talk:
     def __init__(self, talk_type: TalkType, time_limit: int, num: int=None):
@@ -33,10 +34,11 @@ class Talk:
     def __repr__(self):
         return f"TalkType: {self.talk_type} / Time limit: {self.time_limit} min."
 
-    def to_dict(self):
+    def to_dict(self, trans):
+        meeting_codes = trans.get_meeting_codes()
         return {
             "talktype": self.talk_type.__repr__(), 
-            "name": f"{self.talk_type.__repr__()[1]} {self.num if self.num is not None else ""}", 
+            "name": f"{meeting_codes[str(self.talk_type.__repr__())]} {self.num if self.num is not None else ""}", 
             "time": self.time_limit, 
             "num": self.num
         }

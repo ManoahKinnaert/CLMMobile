@@ -1,0 +1,14 @@
+{
+    "name": "Français",
+
+    "meeting_codes": {
+        "OPENING_COMMENTS": "Paroles d'introduction",
+        "TREASURES_TALK" : "Joyaux de la Parole de Dieu - discours",
+        "SPIRITUAL_GEMS" : "Perles spirituelles",
+        "BIBLE_READING" : "Lecture de la Bible",
+        "MINISTRY_TALK" : "Applique-toi ministère",
+        "LIVING_TALK" : "Vie chrétienne",
+        "CONGREGATION_BIBLE_STUDY" : "Étude biblique de l'assemblée",
+        "CLOSING_COMMENTS" : "Paroles de conclusion"
+    }
+}

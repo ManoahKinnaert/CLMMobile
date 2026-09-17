@@ -9,7 +9,7 @@ class TimeService:
     NAMESPACE = "/timeservice"
     WEBCLOCK_NAMESPACE = "/webclockservice"
 
-    def __init__(self, app: Flask, socketio: SocketIO, timer: Timer):
+    def __init__(self, app: Flask, socketio: SocketIO, timer: Timer, trans):
         self.app: Flask = app 
         self.bp: Blueprint = Blueprint("time_service", __name__,
                             template_folder=str(self.FILE / "assets/templates"), 
@@ -18,6 +18,7 @@ class TimeService:
 
         self.socketio: SocketIO = socketio
         self.timer: Timer = timer
+        self.trans = trans
 
         self.register_endpoints()
         self.register_sockets()
@@ -44,10 +45,10 @@ class TimeService:
 
     def get_schedule(self):
         schedule = self.timer.schedule
-        return jsonify([talk.to_dict() for talk in schedule])
+        return jsonify([talk.to_dict(self.trans) for talk in schedule])
 
     def get_current(self):
-        return jsonify(self.timer.schedule[self.timer.current].to_dict())
+        return jsonify(self.timer.schedule[self.timer.current].to_dict(self.trans))
 
     def toggle(self):
             if self.timer.running: self.timer.stop()
@@ -58,20 +59,20 @@ class TimeService:
     def connect(self):
         self.socketio.emit("connect_event", {
             "timer_started": self.timer.running,
-            "schedule": [talk.to_dict() for talk in self.timer.schedule],
-            "current": self.timer.schedule[self.timer.current].to_dict()
+            "schedule": [talk.to_dict(self.trans) for talk in self.timer.schedule],
+            "current": self.timer.schedule[self.timer.current].to_dict(self.trans)
         }, namespace=self.NAMESPACE)
         
     def emit_status(self):
         self.socketio.emit("status", {
             "timer_started": self.timer.running,
-            "current": self.timer.schedule[self.timer.current].to_dict()
+            "current": self.timer.schedule[self.timer.current].to_dict(self.trans)
             }, 
             namespace=self.NAMESPACE)
         # send webclock status too
         self.socketio.emit("status", {
             "timer_started": self.timer.running,
-            "current": self.timer.schedule[self.timer.current].to_dict()
+            "current": self.timer.schedule[self.timer.current].to_dict(self.trans)
         },
         namespace=self.WEBCLOCK_NAMESPACE)
 

@@ -1,0 +1,14 @@
+{
+    "name": "Nederlands",
+
+    "meeting_codes": {
+        "OPENING_COMMENTS": "Inleiding",
+        "TREASURES_TALK" : "Schatten Lezing",
+        "SPIRITUAL_GEMS" : "Geestelijke juweeltjes",
+        "BIBLE_READING" : "Bijbellezen",
+        "MINISTRY_TALK" : "Velddienst - Aandeel",
+        "LIVING_TALK" : "Leven - Aandeel",
+        "CONGREGATION_BIBLE_STUDY" : "Gemeentebijbelstudie",
+        "CLOSING_COMMENTS" : "Slotopmerkingen"
+    }
+}
