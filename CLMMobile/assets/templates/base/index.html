@@ -22,6 +22,16 @@
                 <p>IP global: {{ ip_global }}</p>
                 <p>global adress: http://{{ ip_global }}:{{ port }}</p>
             </div>
+            <div class="qrcodecollection">
+                <div class="qr-container">
+                    <h4>Scan for webclock:</h4>
+                    <img class="qr-image" src="data:image/png;base64, {{ webclock_qr }}" alt="Webclock QR Code">
+                </div>
+                <div class="qr-container">
+                    <h4>Scan for timer:</h4>
+                    <img class="qr-image" src="data:image/png;base64, {{ timer_qr }}" alt="Timer QR Code">
+                </div>
+            </div>
 
         </div>
         <div class="navigation">

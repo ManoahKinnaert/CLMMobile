@@ -86,6 +86,21 @@ p {
     color: var(--online-text);
 }
 
+.qrcodecollection {
+    display: flex;
+    flex-direction: row;
+}
+
+.qr-container {
+    margin-right: 40px;
+}
+
+.qr-image {
+    width: 100px;
+    height: auto;
+    border-radius: 10px;
+}
+
 @media (max-width: 600px) {
     .titlebar {
         padding: 10px 16px;
