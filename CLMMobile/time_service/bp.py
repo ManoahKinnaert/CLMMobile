@@ -31,7 +31,7 @@ class TimeService:
 
     def register_sockets(self):
         # timer control
-        self.socketio.on_event("connect_event", self.connect, namespace=self.NAMESPACE)
+        self.socketio.on_event("connect", self.connect, namespace=self.NAMESPACE)
         self.socketio.on_event("toggle", self.toggle, namespace=self.NAMESPACE)
         self.socketio.on_event("next", self.next, namespace=self.NAMESPACE)
         self.socketio.on_event("prev", self.prev, namespace=self.NAMESPACE)

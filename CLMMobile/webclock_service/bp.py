@@ -15,6 +15,7 @@ class WebclockService:
         self.socketio: SocketIO = socketio
 
         self.register_endpoints()
+        self.register_sockets()
 
     def register(self):
         self.app.register_blueprint(self.bp)
@@ -22,6 +23,12 @@ class WebclockService:
     def register_endpoints(self):
         self.bp.add_url_rule("/", "webclock", self.webclock_endpoint, methods=["GET"])
 
+    def register_sockets(self):
+         self.socketio.on_event("connect", self.connect, namespace=self.NAMESPACE)
+
     # endpoints
     def webclock_endpoint(self):
         return render_template("webclock.html")
+
+    # dummy method
+    def connect(self): pass

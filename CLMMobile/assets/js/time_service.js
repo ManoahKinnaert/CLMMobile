@@ -22,10 +22,7 @@ backwardBtn.onclick = () => {
     socket.emit("prev")
 }
 
-// Socket events
-socket.on("connect", () => {
-    socket.emit("connect_event")
-})
+
 
 socket.on("connect_event", (data) => {
     if (data.timer_started === true) {
