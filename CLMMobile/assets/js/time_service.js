@@ -22,8 +22,6 @@ backwardBtn.onclick = () => {
     socket.emit("prev")
 }
 
-
-
 socket.on("connect_event", (data) => {
     if (data.timer_started === true) {
         startStopBtn.textContent = "Stop"

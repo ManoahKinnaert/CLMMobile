@@ -1,5 +1,6 @@
 var socket = io("/webclockservice")
 let digitalClock = document.getElementById("digital-clock")
+let talkLbl = document.getElementById("talk-lbl")
 
 // socket stuff
 // socket connect
@@ -11,7 +12,10 @@ socket.on("disconnect", () => {
     console.log("Server disconnected!")
 })
 
-socket.on("status", () => {
+socket.on("status", (data) => {
+    talkLbl.innerText = `${data.current.name}   -   ${data.current.time}:00`
+    digitalClock.innerText = `${data.current.time}:00`
+    digitalClock.style.color = "white"
 })
 
 // getting timer data
@@ -26,6 +30,6 @@ socket.on("webclockdata", (data) => {
     digitalClock.innerText = `${mins}:${String(secs).padStart(2, "0")}`
     
     if (isOvertime) digitalClock.style.color = "red"
-    else if (!isOvertime && secs === 20) digitalClock.style.color = "orange"
+    else if (!isOvertime && mins === 0 && secs <= 20) digitalClock.style.color = "orange"
     else digitalClock.style.color = "lime"
 })

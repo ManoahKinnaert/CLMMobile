@@ -7,8 +7,9 @@ from .timer import Timer
 class TimeService:
     FILE = pathlib.Path(__file__).resolve().parent
     NAMESPACE = "/timeservice"
+    WEBCLOCK_NAMESPACE = "/webclockservice"
 
-    def __init__(self, app: Flask, socketio: SocketIO):
+    def __init__(self, app: Flask, socketio: SocketIO, timer: Timer):
         self.app: Flask = app 
         self.bp: Blueprint = Blueprint("time_service", __name__,
                             template_folder=str(self.FILE / "./templates"), 
@@ -16,7 +17,7 @@ class TimeService:
                             url_prefix=self.NAMESPACE)
 
         self.socketio: SocketIO = socketio
-        self.timer: Timer = Timer(socketio=self.socketio)
+        self.timer: Timer = timer
 
         self.register_endpoints()
         self.register_sockets()
@@ -67,6 +68,12 @@ class TimeService:
             "current": self.timer.schedule[self.timer.current].to_dict()
             }, 
             namespace=self.NAMESPACE)
+        # send webclock status too
+        self.socketio.emit("status", {
+            "timer_started": self.timer.running,
+            "current": self.timer.schedule[self.timer.current].to_dict()
+        },
+        namespace=self.WEBCLOCK_NAMESPACE)
 
     def emit_warning(self, message: str):
         self.socketio.emit("warning", {

@@ -9,6 +9,16 @@ html, body {
     text-align: center;
 }
 
+#talk-lbl {
+    font-size: 15px;
+    color: white;
+    opacity: 0.8;
+
+    -webkit-user-select: none;
+    -ms-user-select: none;      
+    user-select: none;
+}
+
 #digital-clock {
     font-size: 60px;
     font-size: 14vw;

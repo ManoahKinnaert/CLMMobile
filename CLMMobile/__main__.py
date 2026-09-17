@@ -2,17 +2,19 @@ from flask import Flask
 from flask_socketio import SocketIO
 
 from time_service import TimeService
+from time_service.timer import Timer
 from base import Base
 from webclock_service import WebclockService
 
 server = Flask(__name__)
 socketio = SocketIO(server)
+timer = Timer(socketio)
 PORT = 5051
 
 # register blueprints
 Base(server, PORT).register()
-TimeService(server, socketio).register()
-WebclockService(server, socketio).register()
+TimeService(server, socketio, timer).register()
+WebclockService(server, socketio, timer).register()
 
 def run_server(debug=False, globaly=False):
     socketio.run(app=server, debug=debug, port=PORT, host="127.0.0.1" if not globaly else "0.0.0.0") 
