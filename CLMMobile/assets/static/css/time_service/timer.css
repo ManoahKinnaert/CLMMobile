@@ -34,7 +34,10 @@
 }
 
 #start-stop-btn {
-    padding: 15px 170px 15px 170px;
+    display: block;
+    width: 99%;
+    text-align: center;
+    padding: 15px 20px;
     border: none;
     border-radius: 10px;
     background-color: var(--title-bar);
