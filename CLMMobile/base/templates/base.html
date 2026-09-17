@@ -23,7 +23,7 @@
     </div>
     <div class="navigation">
         <button id="admin-btn"><a href="">Admin</a></button>
-        <button id="go-to-webclock-btn"><a href="">Webclock</a></button>
+        <button id="go-to-webclock-btn"><a href="{{ url_for('webclock_service.webclock') }}">Webclock</a></button>
         <button id="go-to-timer-btn"><a href="{{ url_for('time_service.control') }}">Timer</a></button>
     </div>
 </body>
