@@ -84,6 +84,6 @@ class Timer:
 
     def _emit(self):
         # submit webclock data
-        self.socket.emit("webclockdata", {"remaining": self.remaining, "over_time": self.over_time}) # TODO: namespace to be added
+        self.socket.emit("webclockdata", {"remaining": self.remaining, "over_time": self.over_time}, namespace="/webclockservice")
         # submit control clock data
         self.socket.emit("clockdata", {"remaining": self.remaining, "over_time": self.over_time}, namespace="/timeservice")

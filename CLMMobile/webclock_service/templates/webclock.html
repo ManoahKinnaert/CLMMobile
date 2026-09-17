@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webclock</title>
+    <link rel="stylesheet" href="{{ url_for('webclock_service.static', filename='css/webclock_service/style.css') }}">
 </head>
 <body>
-    Webclock
+    <div class="clock-container">
+        <canvas id="analog-clock"></canvas>
+        <p id="digital-clock">15:00</p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <script src="{{ url_for('webclock_service.static', filename='js/webclock_service.js') }}"></script>
 </body>
 </html>

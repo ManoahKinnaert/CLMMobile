@@ -1,0 +1,21 @@
+html, body {
+    background-color: black;
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    overflow: hidden;
+}
+
+.clock-container {
+    text-align: center;
+}
+
+#digital-clock {
+    font-size: 60px;
+    font-size: 14vw;
+    font-weight: bold;
+    color: white;
+
+    -webkit-user-select: none;
+    -ms-user-select: none;      
+    user-select: none;
+}
