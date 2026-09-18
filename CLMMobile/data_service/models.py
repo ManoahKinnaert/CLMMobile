@@ -14,4 +14,5 @@ class Talk(BaseModel):
     meeting = ForeignKeyField(Meeting) 
     talk_type = IntegerField()
     measured_time = IntegerField()  # in seconds
+    time_limit = IntegerField() # in minutes
     sequence_number = IntegerField()

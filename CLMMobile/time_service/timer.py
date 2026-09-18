@@ -45,9 +45,9 @@ class Timer:
             self.running = False 
         if emit_data is not None:
             self._emit(emit_data)
-        # TODO: Save the data to a database
+        # save the data to a database
         talk = self.schedule[self.current]
-        self.db.add_talk(talk.talk_type.value, self.limit - self.remaining + self.over_time, talk.num)
+        self.db.add_talk(talk.talk_type.value, self.limit - self.remaining + self.over_time, self.limit // 60, talk.num)
         # go to the next talk unless this was the last one, if it is the last one we revert to the first talk
         self.next()
 

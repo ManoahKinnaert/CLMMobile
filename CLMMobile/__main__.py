@@ -22,7 +22,10 @@ TimeService(server, socketio, timer, trans).register()
 WebclockService(server, socketio, timer, trans).register()
 
 def run_server(debug=False):
-    socketio.run(app=server, debug=debug, port=PORT, host="0.0.0.0") 
+    try:
+        socketio.run(app=server, debug=debug, port=PORT, host="0.0.0.0") 
+    except KeyboardInterrupt:
+        db.close()
 
 if __name__ == "__main__":
     run_server(debug=True)

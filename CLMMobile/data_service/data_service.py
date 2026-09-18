@@ -41,7 +41,7 @@ class DataService:
         except IntegrityError:
             print("[ERROR]: DB Integrity error")
 
-    def add_talk(self, talk_type, time: int, seq_num: int=0):
+    def add_talk(self, talk_type, time: int, time_limit: int, seq_num: int=0):
         if self.meeting is None: print("[ERROR]: meeting is None"); return
         try:
             with self.db.atomic():
@@ -49,6 +49,7 @@ class DataService:
                     meeting=self.meeting,
                     talk_type=talk_type,
                     measured_time=time,
+                    time_limit=time_limit,
                     sequence_number=seq_num
                 )
         except IntegrityError:
