@@ -7,8 +7,10 @@ from base import Base
 from webclock_service import WebclockService
 from translation_service import TranslationService
 from data_service import DataService
+from data_service.auth import get_secret_key
 
 server = Flask(__name__, static_folder=None, template_folder=None)
+server.secret_key = get_secret_key()
 socketio = SocketIO(server)
 db = DataService()
 timer = Timer(socketio, db=db)
@@ -18,7 +20,7 @@ db.init_meeting()
 
 # register blueprints
 Base(server, PORT).register()
-TimeService(server, socketio, timer, trans).register()
+TimeService(server, socketio, timer, trans, db).register()
 WebclockService(server, socketio, timer, trans).register()
 
 def run_server(debug=False):

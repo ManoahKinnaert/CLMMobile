@@ -16,3 +16,7 @@ class Talk(BaseModel):
     measured_time = IntegerField()  # in seconds
     time_limit = IntegerField() # in minutes
     sequence_number = IntegerField()
+
+class Credential(BaseModel):
+    role = CharField(unique=True)  # user or admin
+    passcode_hash = CharField()

@@ -1,7 +1,20 @@
-@import "base.css";
+@import "colors.css";
 
 html, body {
     background-color: var(--main-bg);
     margin: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.titlebar {
+    margin: 0;
+    padding: 12px 20px;
+    background-color: var(--title-bar);
+}
+
+.titlebar h1 {
+    margin: 0 0 20px;
+    color: var(--text-highlighted);
+    font-size: clamp(24px, 6vw, 35px);
+    text-align: center;
 }

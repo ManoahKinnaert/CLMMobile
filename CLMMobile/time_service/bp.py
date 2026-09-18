@@ -1,15 +1,16 @@
-from flask import Flask, Blueprint, render_template, jsonify
+from flask import Flask, Blueprint, render_template, jsonify, request, session, redirect, url_for
 from flask_socketio import SocketIO
 import pathlib 
 
 from .timer import Timer
+from data_service.auth import role_required, socket_role_required
 
 class TimeService:
     FILE = pathlib.Path(__file__).resolve().parent.parent
     NAMESPACE = "/timeservice"
     WEBCLOCK_NAMESPACE = "/webclockservice"
 
-    def __init__(self, app: Flask, socketio: SocketIO, timer: Timer, trans):
+    def __init__(self, app: Flask, socketio: SocketIO, timer: Timer, trans, dataservice):
         self.app: Flask = app 
         self.bp: Blueprint = Blueprint("time_service", __name__,
                             template_folder=str(self.FILE / "assets/templates"), 
@@ -19,6 +20,7 @@ class TimeService:
         self.socketio: SocketIO = socketio
         self.timer: Timer = timer
         self.trans = trans
+        self.dataservice = dataservice
 
         self.register_endpoints()
         self.register_sockets()
@@ -27,7 +29,8 @@ class TimeService:
         self.app.register_blueprint(self.bp)
 
     def register_endpoints(self):
-        self.bp.add_url_rule("/control", "control", self.control_endpoint, methods=["GET"])
+        self.bp.add_url_rule("/login", "login", self.login, methods=["POST", "GET"])
+        self.bp.add_url_rule("/control", "control", role_required("user")(self.control_endpoint), methods=["GET"])
         self.bp.add_url_rule("/schedule", "schedule", self.get_schedule, methods=["GET"])
         self.bp.add_url_rule("/schedule/current", "current", self.get_current, methods=["GET"])
 
@@ -39,6 +42,17 @@ class TimeService:
         self.socketio.on_event("prev", self.prev, namespace=self.NAMESPACE)
         self.socketio.on_event("set_current", self.set_current, namespace=self.NAMESPACE)
 
+    def login(self):
+        if request.method == "POST":
+            passcode = request.form.get("passcode", "")
+            role = self.dataservice.verify_passcode(passcode)
+            if role:
+                session["role"] = role
+                return redirect(url_for("time_service.control"))
+            return render_template("time_service/login.html", error="Invalid passcode")
+    
+        return render_template("time_service/login.html", error=None)
+    
     # endpoints and websocket stuff
     def control_endpoint(self):
         return render_template("time_service/index.html")
@@ -50,19 +64,21 @@ class TimeService:
     def get_current(self):
         return jsonify(self.timer.schedule[self.timer.current].to_dict(self.trans))
 
+    @socket_role_required("user")
     def toggle(self):
             if self.timer.running: self.timer.stop()
             else: self.timer.start()
             # emit status
             self.emit_status()
 
+    @socket_role_required("user")
     def connect(self):
         self.socketio.emit("connect_event", {
             "timer_started": self.timer.running,
             "schedule": [talk.to_dict(self.trans) for talk in self.timer.schedule],
             "current": self.timer.schedule[self.timer.current].to_dict(self.trans)
         }, namespace=self.NAMESPACE)
-        
+
     def emit_status(self):
         self.socketio.emit("status", {
             "timer_started": self.timer.running,
@@ -89,6 +105,7 @@ class TimeService:
             self.timer.next()
             self.emit_status()
 
+    @socket_role_required("user")
     def prev(self):
         if self.timer.running:
             self.emit_warning("Please make sure the timer is not running!")    # emit warning
@@ -96,6 +113,7 @@ class TimeService:
             self.timer.prev()
             self.emit_status()
 
+    @socket_role_required("user")
     def set_current(self, data):
         if self.timer.running: self.emit_warning("Please make sure the timer is not running!"); return
         index = data["index"]
