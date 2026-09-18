@@ -6,12 +6,15 @@ from time_service.timer import Timer
 from base import Base
 from webclock_service import WebclockService
 from translation_service import TranslationService
+from data_service import DataService
 
 server = Flask(__name__, static_folder=None, template_folder=None)
 socketio = SocketIO(server)
-timer = Timer(socketio)
+db = DataService()
+timer = Timer(socketio, db=db)
 trans = TranslationService()
 PORT = 5051
+db.init_meeting()
 
 # register blueprints
 Base(server, PORT).register()

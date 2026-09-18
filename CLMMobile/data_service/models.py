@@ -8,7 +8,7 @@ class BaseModel(Model):
         database = DB_PROXY
 
 class Meeting(BaseModel):
-    date = DateField(default=datetime.date.today, index=True) 
+    date = DateField(default=datetime.date.today, index=True, unique=True) 
 
 class Talk(BaseModel):
     meeting = ForeignKeyField(Meeting) 

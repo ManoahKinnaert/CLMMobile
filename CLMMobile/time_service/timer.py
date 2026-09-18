@@ -5,8 +5,9 @@ import time
 from .schedule_service import assemble_schedule
 
 class Timer:
-    def __init__(self, socketio, limit: int=1):
+    def __init__(self, socketio, db, limit: int=1):
         self.socket = socketio 
+        self.db = db
 
         self.limit: int = 60 * limit 
         self.remaining: int = self.limit
@@ -45,6 +46,8 @@ class Timer:
         if emit_data is not None:
             self._emit(emit_data)
         # TODO: Save the data to a database
+        talk = self.schedule[self.current]
+        self.db.add_talk(talk.talk_type.value, self.limit - self.remaining + self.over_time, talk.num)
         # go to the next talk unless this was the last one, if it is the last one we revert to the first talk
         self.next()
 

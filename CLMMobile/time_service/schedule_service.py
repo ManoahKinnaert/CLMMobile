@@ -11,22 +11,22 @@ FEED_PATH =  HOME_PATH.joinpath("feed/meetingfeed.json")
 
 class TalkType(enum.Enum):
     # Treasures from Gods word
-    OPENING_COMMENTS = "Opening Comments"
-    TREASURES_TALK = "Treasures Talk"
-    SPIRITUAL_GEMS = "Spiritual Gems"
-    BIBLE_READING = "Bible Reading"
+    OPENING_COMMENTS = 0
+    TREASURES_TALK = 1
+    SPIRITUAL_GEMS = 2
+    BIBLE_READING = 3
     # apply yourself to the field ministry
-    MINISTRY_TALK = "Ministry - Talk"
+    MINISTRY_TALK = 4
     # Living as christians
-    LIVING_TALK = "Living - Talk"
-    CONGREGATION_BIBLE_STUDY = "Congregation Bible Study"
-    CLOSING_COMMENTS = "Closing Comments"
+    LIVING_TALK = 5
+    CONGREGATION_BIBLE_STUDY = 6
+    CLOSING_COMMENTS = 7
 
     def __repr__(self):
         return self.name
 
 class Talk:
-    def __init__(self, talk_type: TalkType, time_limit: int, num: int=None):
+    def __init__(self, talk_type: TalkType, time_limit: int, num: int=0):
         self.talk_type = talk_type
         self.time_limit = time_limit
         self.num = num
@@ -38,7 +38,7 @@ class Talk:
         meeting_codes = trans.get_meeting_codes()
         return {
             "talktype": self.talk_type.__repr__(), 
-            "name": f"{meeting_codes[str(self.talk_type.__repr__())]} {self.num if self.num is not None else ""}", 
+            "name": f"{meeting_codes[str(self.talk_type.__repr__())]} {self.num if self.num != 0 else ""}", 
             "time": self.time_limit, 
             "num": self.num
         }
