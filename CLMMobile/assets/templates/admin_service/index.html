@@ -1,27 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('admin_service.static', filename='css/base.css') }}">
-    <link rel="stylesheet" href="{{ url_for('admin_service.static', filename='css/admin_service/dashboard.css') }}">
-</head>
-<body>
-    <div class="titlebar">
-        <h1>CLM Timer</h1>
-    </div>
-    <div class="content">
-        <div class="language-selector">
-            <h3>CLMMobile - Language</h3>
-            <div class="dropdown">
-                <button id="dropdown" class="dropbtn">Dropdown Menu</button>
-                <div id="dropdown-content" class="dropdown-content">
-                </div>
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('admin_service.static', filename='css/admin_service/dashboard.css') }}">
+{% endblock %}
+{% block content %}
+<div class="content">
+    <div class="language-selector">
+        <h3>CLMMobile - Language</h3>
+        <div class="dropdown">
+            <button id="dropdown" class="dropbtn">Dropdown Menu</button>
+            <div id="dropdown-content" class="dropdown-content">
             </div>
         </div>
     </div>
-
-    <script src="{{ url_for('admin_service.static', filename='js/admin_service/admin_service.js') }}"></script>
-</body>
-</html>
+</div>
+{% endblock %}
+{% block js %}
+ <script src="{{ url_for('admin_service.static', filename='js/admin_service/admin_service.js') }}"></script>
+ {% endblock %}
