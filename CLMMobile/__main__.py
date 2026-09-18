@@ -7,7 +7,8 @@ from base import Base
 from webclock_service import WebclockService
 from translation_service import TranslationService
 from data_service import DataService
-from data_service.auth import get_secret_key
+from admin_service import AdminService
+from auth_service import get_secret_key
 
 server = Flask(__name__, static_folder=None, template_folder=None)
 server.secret_key = get_secret_key()
@@ -22,6 +23,7 @@ db.init_meeting()
 Base(server, PORT).register()
 TimeService(server, socketio, timer, trans, db).register()
 WebclockService(server, socketio, timer, trans).register()
+AdminService(server, trans, db).register()
 
 def run_server(debug=False):
     try:

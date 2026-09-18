@@ -3,7 +3,7 @@ from flask_socketio import SocketIO
 import pathlib 
 
 from .timer import Timer
-from data_service.auth import role_required, socket_role_required
+from auth_service import role_required, socket_role_required
 
 class TimeService:
     FILE = pathlib.Path(__file__).resolve().parent.parent
@@ -30,7 +30,7 @@ class TimeService:
 
     def register_endpoints(self):
         self.bp.add_url_rule("/login", "login", self.login, methods=["POST", "GET"])
-        self.bp.add_url_rule("/control", "control", role_required("user")(self.control_endpoint), methods=["GET"])
+        self.bp.add_url_rule("/control", "control", role_required("user", "time_service.login")(self.control_endpoint), methods=["GET"])
         self.bp.add_url_rule("/schedule", "schedule", self.get_schedule, methods=["GET"])
         self.bp.add_url_rule("/schedule/current", "current", self.get_current, methods=["GET"])
 
@@ -50,7 +50,7 @@ class TimeService:
                 session["role"] = role
                 return redirect(url_for("time_service.control"))
             return render_template("time_service/login.html", error="Invalid passcode")
-    
+
         return render_template("time_service/login.html", error=None)
     
     # endpoints and websocket stuff
@@ -98,6 +98,7 @@ class TimeService:
         },
         namespace=self.NAMESPACE)
 
+    @socket_role_required("user")
     def next(self):
         if self.timer.running:
             self.emit_warning("Please make sure the timer is not running!")    # emit warning
