@@ -55,3 +55,29 @@ form button:hover {
     opacity: 0.8;
     cursor: pointer;
 }
+
+/* =========================
+   Mobile
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .content {
+        width: calc(100% - 20px);
+        margin: 10px auto;
+        padding: 20px 15px;
+        border-radius: 15px;
+    }
+}
+
+/* =========================
+   Very small phones
+   ========================= */
+   
+@media (max-width: 380px) {
+
+    .content {
+        width: calc(100% - 12px);
+        padding: 15px 10px;
+    }
+}

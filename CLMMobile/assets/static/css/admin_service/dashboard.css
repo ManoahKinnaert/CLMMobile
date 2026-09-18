@@ -12,3 +12,30 @@
     border-radius: 20px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
 }
+
+
+/* =========================
+   Mobile
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .content {
+        width: calc(100% - 20px);
+        margin: 10px auto;
+        padding: 20px 15px;
+        border-radius: 15px;
+    }
+}
+
+/* =========================
+   Very small phones
+   ========================= */
+   
+@media (max-width: 380px) {
+
+    .content {
+        width: calc(100% - 12px);
+        padding: 15px 10px;
+    }
+}
