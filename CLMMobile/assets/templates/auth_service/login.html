@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block css%}
+<link rel="stylesheet" href="{{ url_for('time_service.static', filename='css/auth_service/login.css') }}">
+{% endblock %}
+{% block content %}
+<div class="content">
+    <h1>{{ form_title }}</h1>
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+    <form action="{{ url }}" method="post">
+        <input type="password" name="passcode" placeholder="passcode">
+        <button type="submit">Enter</button>
+    </form>
+</div>
+{% endblock %}

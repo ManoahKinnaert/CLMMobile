@@ -49,9 +49,9 @@ class TimeService:
             if role:
                 session["role"] = role
                 return redirect(url_for("time_service.control"))
-            return render_template("time_service/login.html", error="Invalid passcode")
+            return render_template("auth_service/login.html", error="Invalid passcode", form_title="Login - Timer", url=url_for("time_service.login"))
 
-        return render_template("time_service/login.html", error=None)
+        return render_template("auth_service/login.html", error=None, form_title="Login - Timer", url=url_for("time_service.login"))
     
     # endpoints and websocket stuff
     def control_endpoint(self):
