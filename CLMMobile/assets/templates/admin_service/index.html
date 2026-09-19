@@ -4,14 +4,36 @@
 <link rel="stylesheet" href="{{ url_for('admin_service.static', filename='css/admin_service/dashboard.css') }}">
 {% endblock %}
 {% block content %}
+<!-- small switch lang function -->
+<script>
+    function switchLang(lang) {
+        const url = "{{ url_for('admin_service.set_language') }}"
+        const data = {language: lang}
+        fetch(url,
+            {            
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }  
+        )
+        .catch(error => console.error('Fout:', error));
+        location.reload()
+    }
+</script>
 <div class="content">
     <div class="language-selector">
         <h3>CLMMobile - Language</h3>
         <div class="dropdown">
-            <button id="dropdown" class="dropbtn">Dropdown Menu</button>
+            <button id="dropdown" class="dropbtn">Current: {{ current_lang }}</button>
             <div id="dropdown-content" class="dropdown-content">
                 {% for lang in langs %}
-                    <button id="{{ lang }}">{{ lang }}</button>
+                    {% if lang == current_lang %}
+                        <button id="{{ lang }}" style="color: rgb(0, 0, 0)" onclick="switchLang('{{ lang }}')">{{ lang }}</button>
+                    {% else %}
+                        <button id="{{ lang }}" style="color: rgba(0, 0, 0, 0.5)" onclick="switchLang('{{ lang }}')">{{ lang }}</button>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>

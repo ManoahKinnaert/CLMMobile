@@ -3,6 +3,7 @@ from flask_socketio import SocketIO
 
 from time_service import TimeService
 from time_service.timer import Timer
+from settings_service import SettingsService
 from base import Base
 from webclock_service import WebclockService
 from translation_service import TranslationService
@@ -14,9 +15,10 @@ server = Flask(__name__, static_folder=None, template_folder=None)
 server.secret_key = get_secret_key()
 PORT = 5051
 socketio = SocketIO(server)
-# non blueprints services
+# non-blueprint services
 db = DataService()
-trans = TranslationService()
+settings = SettingsService()
+trans = TranslationService(settings)
 auth = AuthService()
 timer = Timer(socketio, db=db)
 # init meeting on db

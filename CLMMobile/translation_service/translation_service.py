@@ -2,24 +2,29 @@ import json
 import pathlib
 import os 
 
+from settings_service import SettingsService
+
 class TranslationService:
     FILE = pathlib.Path(__file__).resolve().parent.parent 
     TRANS_DIR = FILE / "assets/translations"
 
-    def __init__(self, language: str="en"):
-        self._lang = language
-        self._cached_meeting_codes = None
+    def __init__(self, settings_service: SettingsService):
+        self._settings_service: SettingsService = settings_service
+        self._lang: str = self._settings_service.get_language()
+        self._cached_meeting_codes: dict = None
 
     @property
-    def language(self): return self._lang 
+    def language(self): 
+        return self._lang 
 
     @language.setter 
     def language(self, new_lang: str):
-        if not pathlib.Path(str(self.TRANS_DIR / "{new_lang}.json")).exists():
+        if not pathlib.Path(str(self.TRANS_DIR / f"{new_lang}.json")).exists():
             return  # we don't allow setting a language that doesn't exist
         # reset cached meeting codes
         self._cached_meeting_codes = None
         self._lang = new_lang 
+        self._settings_service.set_language(new_lang)
 
     def get_lang_name(self):
         return self._get("name")

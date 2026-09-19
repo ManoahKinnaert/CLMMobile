@@ -1,7 +1,8 @@
-from flask import Flask, Blueprint, render_template, request, session, redirect, url_for
+from flask import Flask, Blueprint, render_template, request, session, redirect, url_for, Response
 from auth_service import role_required, AuthService
 from translation_service import TranslationService
 from data_service import DataService
+from settings_service import SettingsService
 import pathlib
 
 class AdminService:
@@ -16,7 +17,7 @@ class AdminService:
                             url_prefix=self.NAMESPACE)
         self.trans: TranslationService = trans 
         self.dataservice: DataService = dataservice
-        self.auth: DataService = auth
+        self.auth: AuthService = auth
 
         self.register_endpoints()
 
@@ -26,6 +27,7 @@ class AdminService:
     def register_endpoints(self):
         self.bp.add_url_rule("/login", "login", self.login, methods=["POST", "GET"])
         self.bp.add_url_rule("/", "dashboard", role_required("admin", "admin_service.login")(self.dashboard), methods=["GET"])
+        self.bp.add_url_rule("/set_language", "set_language", role_required("admin", "admin_service.login")(self.set_language), methods=["POST"])
 
     def login(self):
         if request.method == "POST":
@@ -39,4 +41,19 @@ class AdminService:
         return render_template("auth_service/login.html", error=None, form_title="Login - Admin", url=url_for("admin_service.login")) 
 
     def dashboard(self):
-        return render_template("admin_service/index.html", langs=self.trans.get_languages())
+        return render_template("admin_service/index.html", langs=self.trans.get_languages(), current_lang=self.trans.language)
+
+    def set_language(self):
+        data = request.get_json(silent=True)
+        if not data or "language" not in data:
+            return {"error": "Missing 'lang' in request body"}, 400
+
+        lang = data["language"]
+        if not isinstance(lang, str) or not lang.strip():
+            return {"error": "'language' must be a non-empty string"}, 400
+
+        if lang not in self.trans.get_languages():
+            return {"error": f"Unsupported language: {lang}"}, 400
+
+        self.trans.language = lang
+        return Response(status=200)
