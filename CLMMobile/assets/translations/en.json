@@ -9,6 +9,8 @@
         "MINISTRY_TALK" : "Ministry - Talk",
         "LIVING_TALK" : "Living - Talk",
         "CONGREGATION_BIBLE_STUDY" : "Congregation Bible Study",
-        "CLOSING_COMMENTS" : "Closing Comments"
+        "CLOSING_COMMENTS" : "Closing Comments",
+        "PUBLIC_TALK": "Public Talk",
+        "WATCHTOWER_STUDY": "Watchtower Study"
     }
 }

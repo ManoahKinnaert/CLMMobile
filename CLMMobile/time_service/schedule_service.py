@@ -22,6 +22,10 @@ class TalkType(enum.Enum):
     CONGREGATION_BIBLE_STUDY = 6
     CLOSING_COMMENTS = 7
 
+    # weekend specific
+    PUBLIC_TALK = 8
+    WATCHTOWER_STUDY = 9
+
     def __repr__(self):
         return self.name
 
@@ -73,7 +77,7 @@ def get_schedule_data_auto():
         if week == weeknum and ((dayofweek < 6 and dow < 6) or dayofweek >= 6): relevant = meeting 
     return relevant["talks"]
 
-def assemble_schedule():
+def assemble_schedule_midweek():
     talks = [
         Talk(TalkType.OPENING_COMMENTS, time_limit=1),
         Talk(TalkType.TREASURES_TALK, time_limit=10),
@@ -91,7 +95,19 @@ def assemble_schedule():
             living += 1
     talks.append(Talk(TalkType.CONGREGATION_BIBLE_STUDY, time_limit=30))
     talks.append(Talk(TalkType.CLOSING_COMMENTS, time_limit=3))
-    return talks 
+    return talks
+
+def assemble_schedule_weekend():
+    return [
+        Talk(TalkType.PUBLIC_TALK, time_limit=30),
+        Talk(TalkType.WATCHTOWER_STUDY, time_limit=60)
+    ]
+
+def assemble_schedule():
+    _, __, dow = datetime.datetime.now().isocalendar()
+    if dow >= 6:
+        return assemble_schedule_weekend()
+    return assemble_schedule_midweek()
 
 if __name__ == "__main__":
     print(assemble_schedule())

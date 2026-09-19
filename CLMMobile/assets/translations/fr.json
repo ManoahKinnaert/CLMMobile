@@ -9,6 +9,8 @@
         "MINISTRY_TALK" : "Applique-toi ministère",
         "LIVING_TALK" : "Vie chrétienne",
         "CONGREGATION_BIBLE_STUDY" : "Étude biblique de l'assemblée",
-        "CLOSING_COMMENTS" : "Paroles de conclusion"
+        "CLOSING_COMMENTS" : "Paroles de conclusion",
+        "PUBLIC_TALK": "Discours Publique",
+        "WATCHTOWER_STUDY": "Étude de la tour Tour de garde"
     }
 }

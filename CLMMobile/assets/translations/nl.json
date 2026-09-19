@@ -9,6 +9,8 @@
         "MINISTRY_TALK" : "Velddienst - Aandeel",
         "LIVING_TALK" : "Leven - Aandeel",
         "CONGREGATION_BIBLE_STUDY" : "Gemeentebijbelstudie",
-        "CLOSING_COMMENTS" : "Slotopmerkingen"
+        "CLOSING_COMMENTS" : "Slotopmerkingen",
+        "PUBLIC_TALK": "Openbare Lezing",
+        "WATCHTOWER_STUDY": "Wachttorenstudie"
     }
 }
