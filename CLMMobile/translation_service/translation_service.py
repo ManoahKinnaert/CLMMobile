@@ -1,5 +1,6 @@
 import json 
 import pathlib
+import os 
 
 class TranslationService:
     FILE = pathlib.Path(__file__).resolve().parent.parent 
@@ -23,6 +24,9 @@ class TranslationService:
     def get_lang_name(self):
         return self._get("name")
 
+    def get_languages(self):
+        return [lang.split(".")[0] for lang in os.listdir(str(self.TRANS_DIR))]
+
     def get_meeting_codes(self):
         if self._cached_meeting_codes is None: 
             self._cached_meeting_codes = self._get("meeting_codes")
@@ -37,3 +41,7 @@ class TranslationService:
     
     def _resolve_file(self):
         return str(self.TRANS_DIR / f"{self._lang}.json")
+
+if __name__ == "__main__":
+    trans = TranslationService()
+    print(trans.get_languages())

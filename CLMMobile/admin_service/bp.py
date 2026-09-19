@@ -1,12 +1,14 @@
 from flask import Flask, Blueprint, render_template, request, session, redirect, url_for
 from auth_service import role_required
+from translation_service import TranslationService
+from data_service import DataService
 import pathlib
 
 class AdminService:
     FILE = pathlib.Path(__file__).resolve().parent.parent 
     NAMESPACE = "/admin"
 
-    def __init__(self, app: Flask, trans, dataservice):
+    def __init__(self, app: Flask, trans: TranslationService, dataservice: DataService):
         self.app: Flask = app
         self.bp: Blueprint = Blueprint("admin_service", __name__,
                             template_folder=str(self.FILE / "assets/templates"),
@@ -36,4 +38,4 @@ class AdminService:
         return render_template("auth_service/login.html", error=None, form_title="Login - Admin", url=url_for("admin_service.login")) 
 
     def dashboard(self):
-        return render_template("admin_service/index.html")
+        return render_template("admin_service/index.html", langs=self.trans.get_languages())

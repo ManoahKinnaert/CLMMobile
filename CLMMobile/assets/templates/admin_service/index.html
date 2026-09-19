@@ -10,6 +10,9 @@
         <div class="dropdown">
             <button id="dropdown" class="dropbtn">Dropdown Menu</button>
             <div id="dropdown-content" class="dropdown-content">
+                {% for lang in langs %}
+                    <button id="{{ lang }}">{{ lang }}</button>
+                {% endfor %}
             </div>
         </div>
     </div>
