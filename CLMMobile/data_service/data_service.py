@@ -1,6 +1,5 @@
-from .models import DB_PROXY, Meeting, Talk, Credential
+from .models import DB_PROXY, Meeting, Talk
 from peewee import *
-from werkzeug.security import generate_password_hash, check_password_hash
 import pathlib
 import datetime
 
@@ -30,10 +29,7 @@ class DataService:
         })
         DB_PROXY.initialize(self.db)
         # we also want to create all relevant tables
-        self.db.create_tables([Meeting, Talk, Credential])
-        # setup basic starter passwords, recommended to change later...
-        self.set_passcode("admin", "admin")
-        self.set_passcode("user", "user")
+        self.db.create_tables([Meeting, Talk])
 
     def init_meeting(self):
         try:
@@ -58,24 +54,6 @@ class DataService:
                 )
         except IntegrityError:
             print("[ERROR]: DB Integrity error")
-
-    def set_passcode(self, role: str, passcode: str):
-        hashed = generate_password_hash(passcode)
-        try:
-            with self.db.atomic():
-                Credential.insert(role=role, passcode_hash=hashed).on_conflict(
-                    conflict_target=[Credential.role],
-                    update={Credential.passcode_hash: hashed}
-                ).execute()
-        except IntegrityError:
-            print("[ERROR]: DB Integrity error")
-
-    def verify_passcode(self, passcode: str):
-        # return matching role ('user' or 'admin') if passcode matches otherwise None
-        for cred in Credential.select():
-            if check_password_hash(cred.passcode_hash, passcode):
-                return cred.role
-        return None
 
     def close(self):
         self.db.close()

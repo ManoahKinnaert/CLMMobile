@@ -3,14 +3,15 @@ from flask_socketio import SocketIO
 import pathlib 
 
 from .timer import Timer
-from auth_service import role_required, socket_role_required
+from auth_service import role_required, socket_role_required, AuthService
+from translation_service import TranslationService
 
 class TimeService:
     FILE = pathlib.Path(__file__).resolve().parent.parent
     NAMESPACE = "/timeservice"
     WEBCLOCK_NAMESPACE = "/webclockservice"
 
-    def __init__(self, app: Flask, socketio: SocketIO, timer: Timer, trans, dataservice):
+    def __init__(self, app: Flask, socketio: SocketIO, timer: Timer, trans: TranslationService, auth: AuthService):
         self.app: Flask = app 
         self.bp: Blueprint = Blueprint("time_service", __name__,
                             template_folder=str(self.FILE / "assets/templates"), 
@@ -19,8 +20,8 @@ class TimeService:
 
         self.socketio: SocketIO = socketio
         self.timer: Timer = timer
-        self.trans = trans
-        self.dataservice = dataservice
+        self.trans: TranslationService = trans
+        self.auth: AuthService = auth
 
         self.register_endpoints()
         self.register_sockets()
@@ -45,7 +46,7 @@ class TimeService:
     def login(self):
         if request.method == "POST":
             passcode = request.form.get("passcode", "")
-            role = self.dataservice.verify_passcode(passcode)
+            role = self.auth.verify_passcode(passcode)
             if role:
                 session["role"] = role
                 return redirect(url_for("time_service.control"))
