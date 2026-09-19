@@ -5,10 +5,12 @@ import qrcode
 import base64
 from io import BytesIO
 
+from translation_service import TranslationService
+
 class Base:
     FILE = pathlib.Path(__file__).resolve().parent.parent
 
-    def __init__(self, app: Flask, port: int):
+    def __init__(self, app: Flask, port: int, trans: TranslationService):
         self.app: Flask = app 
         self.bp: Blueprint = Blueprint("base", __name__, 
                             template_folder=str(self.FILE / "assets/templates"),
@@ -18,6 +20,7 @@ class Base:
         self._local_ip = "127.0.0.1"
         self.port = port
         self.webclock_qr, self.timer_qr = self.generate_qr_codes()
+        self.trans = trans
         self.register_endpoints()    
 
     def register(self):
@@ -51,4 +54,4 @@ class Base:
     # endpoints
     def base_endpoint(self):
         return render_template("base/index.html", ip_local=self._local_ip, ip_global=self._ip, port=self.port,
-                               webclock_qr=self.webclock_qr, timer_qr=self.timer_qr)
+                               webclock_qr=self.webclock_qr, timer_qr=self.timer_qr, strings=self.trans.get_ui_strings()["home"])

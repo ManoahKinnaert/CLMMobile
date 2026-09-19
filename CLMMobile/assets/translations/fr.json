@@ -12,5 +12,21 @@
         "CLOSING_COMMENTS" : "Paroles de conclusion",
         "PUBLIC_TALK": "Discours Publique",
         "WATCHTOWER_STUDY": "Étude de la tour Tour de garde"
+    },
+
+    "ui": {
+        "home": {
+            "overview-lbl": "Aperçu - Comment se connecter",
+            "ip_local": "IP locale",
+            "local_addr": "Adresse locale",
+            "ip_global": "IP globale",
+            "global_addr": "Adresse globale",
+            "scan_webclock": "Rechercher l'horloge web",
+            "scan_timer": "Rechercher le minuteur"
+        },
+
+        "admin-dash": {
+            "language-lbl": "CLMMobile - Langue"
+        }
     }
 }

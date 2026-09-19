@@ -41,7 +41,7 @@ class AdminService:
         return render_template("auth_service/login.html", error=None, form_title="Login - Admin", url=url_for("admin_service.login")) 
 
     def dashboard(self):
-        return render_template("admin_service/index.html", langs=self.trans.get_languages(), current_lang=self.trans.language)
+        return render_template("admin_service/index.html", langs=self.trans.get_languages(), current_lang=self.trans.language, strings=self.trans.get_ui_strings()["admin-dash"])
 
     def set_language(self):
         data = request.get_json(silent=True)

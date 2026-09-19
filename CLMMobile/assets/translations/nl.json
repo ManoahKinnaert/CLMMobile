@@ -12,5 +12,21 @@
         "CLOSING_COMMENTS" : "Slotopmerkingen",
         "PUBLIC_TALK": "Openbare Lezing",
         "WATCHTOWER_STUDY": "Wachttorenstudie"
+    },
+
+    "ui": {
+        "home": {
+            "overview-lbl": "Overzicht - Hoe te verbinden",
+            "ip_local": "IP lokaal",
+            "local_addr": "Lokaal adres",
+            "ip_global": "IP globaal",
+            "global_addr": "Globaal adres",
+            "scan_webclock": "Scan voor webklok",
+            "scan_timer": "Scan voor timer"
+        },
+
+        "admin-dash": {
+            "language-lbl": "CLMMobile - Taal"
+        }
     }
 }

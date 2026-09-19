@@ -12,6 +12,7 @@ class TranslationService:
         self._settings_service: SettingsService = settings_service
         self._lang: str = self._settings_service.get_language()
         self._cached_meeting_codes: dict = None
+        self._cached_ui_strings: dict = None
 
     @property
     def language(self): 
@@ -23,6 +24,7 @@ class TranslationService:
             return  # we don't allow setting a language that doesn't exist
         # reset cached meeting codes
         self._cached_meeting_codes = None
+        self._cached_ui_strings = None
         self._lang = new_lang 
         self._settings_service.set_language(new_lang)
 
@@ -36,6 +38,11 @@ class TranslationService:
         if self._cached_meeting_codes is None: 
             self._cached_meeting_codes = self._get("meeting_codes")
         return self._cached_meeting_codes
+
+    def get_ui_strings(self):
+        if self._cached_ui_strings is None:
+            self._cached_ui_strings = self._get("ui")
+        return self._cached_ui_strings
     
     def _get(self, key: str):
         return self._get_all()[key]

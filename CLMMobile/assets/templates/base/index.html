@@ -6,20 +6,20 @@
 {% block content %}
 <div class="content">
     <div class="overview">
-        <h3>Overview - How to connect</h3>
+        <h3>{{ strings['overview-lbl'] }}</h3>
         <div class="adresscollection">
-            <p>IP local: {{ ip_local }}</p>
-            <p>local adress: http://{{ ip_local }}:{{ port }}/</p>
-            <p>IP global: {{ ip_global }}</p>
-            <p>global adress: http://{{ ip_global }}:{{ port }}</p>
+            <p>{{ strings['ip_local'] }}: {{ ip_local }}</p>
+            <p>{{ strings['local_addr'] }}: http://{{ ip_local }}:{{ port }}/</p>
+            <p>{{ strings['ip_global'] }}: {{ ip_global }}</p>
+            <p>{{ strings['global_addr']}}: http://{{ ip_global }}:{{ port }}</p>
         </div>
         <div class="qrcodecollection">
             <div class="qr-container">
-                <h4>Scan for webclock:</h4>
+                <h4>{{ strings['scan_webclock'] }}:</h4>
                 <img class="qr-image" src="data:image/png;base64, {{ webclock_qr }}" alt="Webclock QR Code">
             </div>
             <div class="qr-container">
-                <h4>Scan for timer:</h4>
+                <h4>{{ strings['scan_timer'] }}:</h4>
                 <img class="qr-image" src="data:image/png;base64, {{ timer_qr }}" alt="Timer QR Code">
             </div>
         </div>

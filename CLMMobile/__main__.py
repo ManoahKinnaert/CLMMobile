@@ -24,7 +24,7 @@ timer = Timer(socketio, db=db)
 # init meeting on db
 db.init_meeting()
 # register blueprints
-Base(server, PORT).register()
+Base(server, PORT, trans).register()
 TimeService(server, socketio, timer, trans, auth).register()
 WebclockService(server, socketio, timer, trans).register()
 AdminService(server, trans, db, auth).register()
