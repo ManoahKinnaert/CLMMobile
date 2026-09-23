@@ -2,7 +2,6 @@ html, body {
     background-color: black;
     margin: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    overflow: hidden;
 }
 
 .clock-container {
@@ -12,7 +11,7 @@ html, body {
 }
 
 #talk-lbl {
-    font-size: 15px;
+    font-size: 20px;
     color: white;
     opacity: 0.8;
 

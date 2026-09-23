@@ -2,7 +2,6 @@ from flask import Flask, Blueprint, render_template, request, session, redirect,
 from auth_service import role_required, AuthService
 from translation_service import TranslationService
 from data_service import DataService
-from settings_service import SettingsService
 import pathlib
 
 class AdminService:

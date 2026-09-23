@@ -85,7 +85,7 @@ class Timer:
             if emit_data is not None:
                 self._emit(emit_data)
                 
-            self.socket.sleep(0.2)
+            self.socket.sleep(0.1)
 
     def _emit(self, emit_data):
         remaining, overtime = emit_data
