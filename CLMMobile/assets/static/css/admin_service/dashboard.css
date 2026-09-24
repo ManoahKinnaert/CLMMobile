@@ -74,6 +74,22 @@
   cursor: pointer;
 }
 
+#report-dash-btn {
+    background-color: var(--main-bg);
+    color: rgba(0, 0, 0, 0.5);
+    padding: 14px 16px;
+    display: block;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#report-dash-btn:hover {
+    cursor: pointer;
+    color: black;
+}
+
 /* =========================
    Mobile
    ========================= */

@@ -31,7 +31,7 @@
 </script>
 <div class="content">
   <div class="language-selector">
-    <h3>{{ strings['language-lbl'] }}</h3>
+    <h2>{{ strings['language-lbl'] }}</h2>
     <div class="dropdown">
       <button id="dropdown" class="dropbtn">Current: {{ current_lang }}</button>
       <div id="dropdown-content" class="dropdown-content">
@@ -55,6 +55,7 @@
       </div>
     </div>
   </div>
+  <button id="report-dash-btn">{{ strings['report-dash-btn'] }}</button>
 </div>
 {% endblock %} {% block js %}
 <script src="{{ url_for('admin_service.static', filename='js/admin_service/admin_service.js') }}"></script>

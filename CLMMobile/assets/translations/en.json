@@ -26,7 +26,8 @@
     },
 
     "admin-dash": {
-      "language-lbl": "CLMMobile - Language"
+      "language-lbl": "CLMMobile - Language",
+      "report-dash-btn": "Meeting Reports"
     }
   }
 }
