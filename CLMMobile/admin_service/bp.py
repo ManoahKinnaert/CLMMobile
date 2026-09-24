@@ -26,6 +26,7 @@ class AdminService:
     def register_endpoints(self):
         self.bp.add_url_rule("/login", "login", self.login, methods=["POST", "GET"])
         self.bp.add_url_rule("/", "dashboard", role_required("admin", "admin_service.login")(self.dashboard), methods=["GET"])
+        self.bp.add_url_rule("/reports", "reports", role_required("admin", 'admin_service.login')(self.reports_dashboard), methods=["GET"])
         self.bp.add_url_rule("/set_language", "set_language", role_required("admin", "admin_service.login")(self.set_language), methods=["POST"])
 
     def login(self):
@@ -41,6 +42,9 @@ class AdminService:
 
     def dashboard(self):
         return render_template("admin_service/index.html", langs=self.trans.get_languages(), current_lang=self.trans.language, strings=self.trans.get_ui_strings()["admin-dash"])
+
+    def reports_dashboard(self):
+        return render_template("admin_service/reports.html", strings=self.trans.get_ui_strings()["admin-dash-reports"])
 
     def set_language(self):
         data = request.get_json(silent=True)

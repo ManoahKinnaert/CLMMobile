@@ -28,6 +28,9 @@
     "admin-dash": {
       "language-lbl": "CLMMobile - Taal",
       "report-dash-btn": "Rapporten"
+    },
+
+    "admin-dash-reports": {
     }
   }
 }

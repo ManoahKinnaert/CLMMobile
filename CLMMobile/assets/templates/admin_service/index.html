@@ -55,7 +55,7 @@
       </div>
     </div>
   </div>
-  <button id="report-dash-btn">{{ strings['report-dash-btn'] }}</button>
+  <a id="report-dash-btn" href="{{ url_for('admin_service.reports') }}">{{ strings['report-dash-btn'] }}</a>
 </div>
 {% endblock %} {% block js %}
 <script src="{{ url_for('admin_service.static', filename='js/admin_service/admin_service.js') }}"></script>
