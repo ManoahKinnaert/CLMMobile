@@ -12,7 +12,9 @@ class Generator:
     def __init__(self, meeting_data: dict):
         """
         Meeting data must have the following format:
-            - intro: {time_limit: int -> in minutes, time_used: int -> in seconds} -> can also be None
+            - pre-talks: [
+                        {name: str, time_limit: int -> minutes, time_used: int -> seconds}
+                ]
             - meeting-parts: [{
                 "name": str, -> used for the title text content
                 "color": str, -> is used for the title color
