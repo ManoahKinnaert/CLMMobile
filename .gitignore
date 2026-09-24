@@ -3,3 +3,5 @@
 .venv 
 # macos stuff
 *.DS_Store
+# pdf's
+*.pdf
