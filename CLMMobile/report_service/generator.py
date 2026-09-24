@@ -17,7 +17,7 @@ class Generator:
                 ]
             - meeting-parts: [{
                 "name": str, -> used for the title text content
-                "color": str, -> is used for the title color
+                "color": tuple, -> is used for the title color
                 "talks": [
                     {"name": str, time_limit: int -> in minutes, time_used: int -> in seconds},
                     ...
