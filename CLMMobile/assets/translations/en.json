@@ -1,32 +1,32 @@
 {
-    "name": "English",
+  "name": "English",
 
-    "meeting_codes": {
-        "OPENING_COMMENTS": "Opening Comments",
-        "TREASURES_TALK" : "Treasures Talk",
-        "SPIRITUAL_GEMS" : "Spiritual Gems",
-        "BIBLE_READING" : "Bible Reading",
-        "MINISTRY_TALK" : "Ministry - Talk",
-        "LIVING_TALK" : "Living - Talk",
-        "CONGREGATION_BIBLE_STUDY" : "Congregation Bible Study",
-        "CLOSING_COMMENTS" : "Closing Comments",
-        "PUBLIC_TALK": "Public Talk",
-        "WATCHTOWER_STUDY": "Watchtower Study"
+  "meeting_codes": {
+    "OPENING_COMMENTS": "Opening Comments",
+    "TREASURES_TALK": "Treasures Talk",
+    "SPIRITUAL_GEMS": "Spiritual Gems",
+    "BIBLE_READING": "Bible Reading",
+    "MINISTRY_TALK": "Ministry - Talk",
+    "LIVING_TALK": "Living - Talk",
+    "CONGREGATION_BIBLE_STUDY": "Congregation Bible Study",
+    "CLOSING_COMMENTS": "Closing Comments",
+    "PUBLIC_TALK": "Public Talk",
+    "WATCHTOWER_STUDY": "Watchtower Study"
+  },
+
+  "ui": {
+    "home": {
+      "overview-lbl": "Overview - How to connect",
+      "ip_local": "IP local",
+      "local_addr": "Local address",
+      "ip_global": "IP global",
+      "global_addr": "Global adress",
+      "scan_webclock": "Scan for webclock",
+      "scan_timer": "Scan for timer"
     },
 
-    "ui": {
-        "home": {
-            "overview-lbl": "Overview - How to connect",
-            "ip_local": "IP local",
-            "local_addr": "Local address",
-            "ip_global": "IP global",
-            "global_addr": "Global adress",
-            "scan_webclock": "Scan for webclock",
-            "scan_timer": "Scan for timer"
-        },
-
-        "admin-dash": {
-            "language-lbl": "CLMMobile - Language"
-        }
+    "admin-dash": {
+      "language-lbl": "CLMMobile - Language"
     }
+  }
 }

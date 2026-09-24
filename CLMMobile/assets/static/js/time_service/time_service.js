@@ -8,7 +8,7 @@ let dropdownContent = document.getElementById("dropdown-content")
 let dropdown = document.getElementById("dropdown")
 let schedule = null
 var currentBtn = null
-var dropdownContentShown = false 
+var dropdownContentShown = false
 
 // button click events
 startStopBtn.onclick = () => {
@@ -73,7 +73,7 @@ function selectCurrent(current) {
     dropdown.innerText = `${current.name} (${current.time}:00)`
     currentBtn = document.getElementById(current.name)
     currentBtn.style.color = "rgb(0, 0, 0)"
-    dropdownContentShown = false 
+    dropdownContentShown = false
     updateDropDownContentAppearance()
 }
 
@@ -82,19 +82,19 @@ function setCurrent(item) {
     schedule.forEach(element => {
         if (element === item) {
             index = schedule.indexOf(element)
-        }   
+        }
     })
-    socket.emit("set_current", {"index": index})
+    socket.emit("set_current", { "index": index })
 }
 
 // Setup all the items in the dropdown
 function setupDropDown(items) {
     schedule = items
     let html = ""
-    items.forEach(element => {  
+    items.forEach(element => {
         html += `<button id="${element.name}">${element.name} (${element.time}:00)</button>`
     })
-    dropdownContent.innerHTML = html 
+    dropdownContent.innerHTML = html
     // setup button onclicks...
     items.forEach(element => {
         let btn = document.getElementById(element.name)

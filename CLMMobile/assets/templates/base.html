@@ -1,17 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('base.static', filename='css/base.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('base.static', filename='css/base.css') }}"
+    />
     {% block css %}{% endblock %}
-</head>
-<body>
+  </head>
+  <body>
     <div class="titlebar">
-        <a href="{{ url_for('base.base') }}">CLM Mobile</a>
+      <a href="{{ url_for('base.base') }}">CLM Mobile</a>
     </div>
-    {% block content %}{% endblock %}
-    {% block js %}{% endblock %}
-</body>
+    {% block content %}{% endblock %} {% block js %}{% endblock %}
+  </body>
 </html>

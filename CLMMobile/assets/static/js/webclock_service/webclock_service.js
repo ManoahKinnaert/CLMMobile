@@ -28,7 +28,7 @@ socket.on("webclockdata", (data) => {
     const secs = totalSeconds - mins * 60
 
     digitalClock.innerText = `${mins}:${String(secs).padStart(2, "0")}`
-    
+
     if (isOvertime) digitalClock.style.color = "red"
     else if (!isOvertime && mins === 0 && secs <= 20) digitalClock.style.color = "orange"
     else digitalClock.style.color = "lime"

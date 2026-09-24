@@ -1,45 +1,61 @@
-{% extends "base.html" %}
-{% block title %}Dashboard{% endblock %}
-{% block css %}
-<link rel="stylesheet" href="{{ url_for('admin_service.static', filename='css/admin_service/dashboard.css') }}">
-{% endblock %}
-{% block content %}
+{% extends "base.html" %} {% block title %}Dashboard{% endblock %} {% block css
+%}
+<link
+  rel="stylesheet"
+  href="{{ url_for('admin_service.static', filename='css/admin_service/dashboard.css') }}"
+/>
+{% endblock %} {% block content %}
 <!-- small switch lang function -->
 <script>
-    function switchLang(lang) {
-        const url = "{{ url_for('admin_service.set_language') }}"
-        const data = {language: lang}
-        fetch(url,
-            {            
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            }  
-        )
-        .catch(error => console.error('Fout:', error));
+  function switchLang(lang) {
+    const url = "{{ url_for('admin_service.set_language') }}"
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ language: lang }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`)
+        }
+
         location.reload()
-    }
+      })
+      .catch((error) => {
+        console.error("Error changing language:", error)
+      })
+  }
 </script>
 <div class="content">
-    <div class="language-selector">
-        <h3>{{ strings['language-lbl'] }}</h3>
-        <div class="dropdown">
-            <button id="dropdown" class="dropbtn">Current: {{ current_lang }}</button>
-            <div id="dropdown-content" class="dropdown-content">
-                {% for lang in langs %}
-                    {% if lang == current_lang %}
-                        <button id="{{ lang }}" style="color: rgb(0, 0, 0)" onclick="switchLang('{{ lang }}')">{{ lang }}</button>
-                    {% else %}
-                        <button id="{{ lang }}" style="color: rgba(0, 0, 0, 0.5)" onclick="switchLang('{{ lang }}')">{{ lang }}</button>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        </div>
+  <div class="language-selector">
+    <h3>{{ strings['language-lbl'] }}</h3>
+    <div class="dropdown">
+      <button id="dropdown" class="dropbtn">Current: {{ current_lang }}</button>
+      <div id="dropdown-content" class="dropdown-content">
+        {% for lang in langs %} {% if lang == current_lang %}
+        <button
+          id="{{ lang }}"
+          style="color: rgb(0, 0, 0)"
+          onclick="switchLang('{{ lang }}')"
+        >
+          {{ lang }}
+        </button>
+        {% else %}
+        <button
+          id="{{ lang }}"
+          style="color: rgba(0, 0, 0, 0.5)"
+          onclick="switchLang('{{ lang }}')"
+        >
+          {{ lang }}
+        </button>
+        {% endif %} {% endfor %}
+      </div>
     </div>
+  </div>
 </div>
-{% endblock %}
-{% block js %}
+{% endblock %} {% block js %}
 <script src="{{ url_for('admin_service.static', filename='js/admin_service/admin_service.js') }}"></script>
 {% endblock %}

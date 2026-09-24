@@ -1,30 +1,37 @@
-{% extends "base.html" %}
-{% block title %}Timer Control{% endblock %}
-{% block css %}
-<link rel="stylesheet" href="{{ url_for('time_service.static', filename='css/time_service/timer.css') }}">
-{% endblock %}
-{% block content %}
+{% extends "base.html" %} {% block title %}Timer Control{% endblock %} {% block
+css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('time_service.static', filename='css/time_service/timer.css') }}"
+/>
+{% endblock %} {% block content %}
 <div class="content">
-    <div class="timer-container">
-        <p id="time-lbl"></p>
-        <button id="start-stop-btn">Start</button>
+  <div class="timer-container">
+    <p id="time-lbl"></p>
+    <button id="start-stop-btn">Start</button>
+  </div>
+  <div class="talk-selector-container">
+    <button id="prev">
+      <img
+        src="{{ url_for('time_service.static', filename='images/backward.png') }}"
+      />
+    </button>
+    <div class="dropdown">
+      <button id="dropdown" class="dropbtn">Dropdown Menu</button>
+      <div id="dropdown-content" class="dropdown-content"></div>
     </div>
-    <div class="talk-selector-container">
-        <button id="prev">
-            <img src="{{ url_for('time_service.static', filename='images/backward.png') }}">
-        </button>
-        <div class="dropdown">
-            <button id="dropdown" class="dropbtn">Dropdown Menu</button>
-            <div id="dropdown-content" class="dropdown-content">
-            </div>
-        </div>
-        <button id="next">
-            <img src="{{ url_for('time_service.static', filename='images/forward.png') }}">
-        </button>
-    </div>
+    <button id="next">
+      <img
+        src="{{ url_for('time_service.static', filename='images/forward.png') }}"
+      />
+    </button>
+  </div>
 </div>
-{% endblock %}
-{% block js %}
- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+{% endblock %} {% block js %}
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+  integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+  crossorigin="anonymous"
+></script>
 <script src="{{ url_for('time_service.static', filename='js/time_service/time_service.js') }}"></script>
 {% endblock %}

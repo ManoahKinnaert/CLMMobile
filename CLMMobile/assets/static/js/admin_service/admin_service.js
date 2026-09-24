@@ -1,6 +1,6 @@
 let dropdown = document.getElementById("dropdown")
 let dropdownContent = document.getElementById("dropdown-content")
-var dropdownContentShown = false 
+var dropdownContentShown = false
 
 dropdown.onclick = () => {
     dropdownContentShown = !dropdownContentShown

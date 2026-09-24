@@ -1,137 +1,137 @@
 @import "../colors.css";
 
 .titlebar {
-    margin: 0;
-    padding: 12px 20px;
-    background-color: var(--title-bar);
+  margin: 0;
+  padding: 12px 20px;
+  background-color: var(--title-bar);
 }
 
 .content {
-    width: min(800px, calc(100% - 24px));
-    margin: 30px auto;
-    padding: 30px;
+  width: min(800px, calc(100% - 24px));
+  margin: 30px auto;
+  padding: 30px;
 }
 
 .overview {
-    max-width: 700px;
-    width: 100%;
-    margin: 40px auto 0;
-    padding: 30px 40px 50px;
-    box-sizing: border-box;
+  max-width: 700px;
+  width: 100%;
+  margin: 40px auto 0;
+  padding: 30px 40px 50px;
+  box-sizing: border-box;
 
-    background-color: var(--secondary-bg);
-    border-radius: 20px;
-    box-shadow: 0 4px 15px rgb(0 0 0 / 20%);
+  background-color: var(--secondary-bg);
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgb(0 0 0 / 20%);
 
-    text-align: center;
+  text-align: center;
 }
 
 .adresscollection {
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-    text-align: left;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
 }
 
 .navigation {
-    max-width: 700px;
-    width: 100%;
-    display: grid;
+  max-width: 700px;
+  width: 100%;
+  display: grid;
 
-    margin: 0 auto;
-    margin-top: 40px;
-    text-align: center;
+  margin: 0 auto;
+  margin-top: 40px;
+  text-align: center;
 
-    background-color: var(--secondary-bg);
-    border-radius: 20px;
-    box-shadow: 0 4px 15px rgb(0 0 0 / 20%);    
-    padding: 20px 0px 20px 0px;
+  background-color: var(--secondary-bg);
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgb(0 0 0 / 20%);
+  padding: 20px 0px 20px 0px;
 }
 
 .navigation a {
-    text-decoration: none;
-    color: white;
-    border: none;
-    padding: 10px 40px 10px 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgb(0 0 0 / 20%);
-    margin: 5px;
+  text-decoration: none;
+  color: white;
+  border: none;
+  padding: 10px 40px 10px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgb(0 0 0 / 20%);
+  margin: 5px;
 }
 
 .navigation a:hover {
-    opacity: 0.4;
-    cursor: pointer;
+  opacity: 0.4;
+  cursor: pointer;
 }
 
 #admin-btn {
-    background-color: red;
+  background-color: red;
 }
 
 #go-to-webclock-btn {
-    background-color: var(--title-bar);
+  background-color: var(--title-bar);
 }
 
 #go-to-timer-btn {
-    background-color: var(--online-text);
+  background-color: var(--online-text);
 }
 
 h1 {
-    margin: 0 0 20px;
-    color: var(--text-highlighted);
-    font-size: clamp(24px, 6vw, 35px);
-    text-align: center;
+  margin: 0 0 20px;
+  color: var(--text-highlighted);
+  font-size: clamp(24px, 6vw, 35px);
+  text-align: center;
 }
 
 p {
-    color: var(--online-text);
+  color: var(--online-text);
 }
 
 .qrcodecollection {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .qr-container {
-    margin-right: 40px;
+  margin-right: 40px;
 }
 
 .qr-image {
-    width: 100px;
-    height: auto;
-    border-radius: 10px;
+  width: 100px;
+  height: auto;
+  border-radius: 10px;
 }
 
 @media (max-width: 600px) {
-    .titlebar {
-        padding: 10px 16px;
-    }
+  .titlebar {
+    padding: 10px 16px;
+  }
 
-    .content {
-        width: calc(100% - 20px);
-        margin: 10px auto;
-        padding: 20px 15px;
-    }
+  .content {
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    padding: 20px 15px;
+  }
 
-    .overview {
-        margin: 20px 12px 0;
-        padding: 24px 20px 32px;
-        border-radius: 16px;
-        width: auto;
-    }
+  .overview {
+    margin: 20px 12px 0;
+    padding: 24px 20px 32px;
+    border-radius: 16px;
+    width: auto;
+  }
 }
 
 @media (max-width: 380px) {
-    .titlebar {
-        padding: 10px 16px;
-    }
+  .titlebar {
+    padding: 10px 16px;
+  }
 
-    .content {
-        width: calc(100% - 12px);
-        padding: 15px 10px;
-    }
+  .content {
+    width: calc(100% - 12px);
+    padding: 15px 10px;
+  }
 
-    .overview {
-        padding: 12px 10px 16px;
-        width: auto;
-    }
+  .overview {
+    padding: 12px 10px 16px;
+    width: auto;
+  }
 }

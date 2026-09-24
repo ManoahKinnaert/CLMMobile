@@ -1,15 +1,15 @@
 @import "../colors.css";
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .content {
-    width: min(600px, calc(100% - 24px));
-    margin: 30px auto;
-    padding: 30px;
-    background-color: var(--secondary-bg);
-    border-radius: 20px;
+  width: min(600px, calc(100% - 24px));
+  margin: 30px auto;
+  padding: 30px;
+  background-color: var(--secondary-bg);
+  border-radius: 20px;
 }
 
 /* =========================
@@ -17,36 +17,36 @@
    ========================= */
 
 .timer-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin: 20px auto 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 20px auto 40px;
 }
 
 #time-lbl {
-    margin: 0 0 45px;
-    font-size: clamp(3.5rem, 15vw, 6rem);
-    font-weight: bold;
-    line-height: 1;
+  margin: 0 0 45px;
+  font-size: clamp(3.5rem, 15vw, 6rem);
+  font-weight: bold;
+  line-height: 1;
 }
 
 #start-stop-btn {
-    display: block;
-    width: 99%;
-    text-align: center;
-    padding: 15px 20px;
-    border: none;
-    border-radius: 10px;
-    background-color: var(--title-bar);
-    color: white;
-    font-size: 26px;
+  display: block;
+  width: 99%;
+  text-align: center;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--title-bar);
+  color: white;
+  font-size: 26px;
 }
 
 #start-stop-btn:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /* =========================
@@ -54,41 +54,41 @@
    ========================= */
 
 .talk-selector-container {
-    width: 100%;
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    gap: 10px;
-    margin: 20px auto;
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px auto;
 }
 
 /* Previous / next buttons */
 #prev,
 #next {
-    flex: 0 0 55px;
-    width: 55px;
-    min-height: 55px;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    background-color: var(--main-bg);
-    cursor: pointer;
+  flex: 0 0 55px;
+  width: 55px;
+  min-height: 55px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--main-bg);
+  cursor: pointer;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #prev:hover,
 #next:hover {
-    opacity: 0.7;
+  opacity: 0.7;
 }
 
 #prev img,
 #next img {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 /* =========================
@@ -96,135 +96,131 @@
    ========================= */
 
 .dropdown {
-    position: relative;
-    flex: 1;
-    min-width: 0;
+  position: relative;
+  flex: 1;
+  min-width: 0;
 }
 
 .dropbtn {
-    width: 100%;
-    min-height: 55px;
-    padding: 15px;
-    background-color: var(--title-bar);
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+  width: 100%;
+  min-height: 55px;
+  padding: 15px;
+  background-color: var(--title-bar);
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 
-    /* Prevent long talk titles from breaking the layout */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  /* Prevent long talk titles from breaking the layout */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .dropbtn:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    z-index: 10;
-    left: 0;
-    right: 0;
-    width: 100%;
-    max-height: 50vh;
-    overflow-y: auto;
+  display: none;
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-height: 50vh;
+  overflow-y: auto;
 
-    background-color: #f9f9f9;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #f9f9f9;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-content button {
-    color: rgba(0, 0, 0, 0.5);
-    padding: 14px 16px;
-    text-decoration: none;
-    display: block;
-    border: none;
-    background-color: #f9f9f9;
-    text-align: left;
-    width: 100%;
+  color: rgba(0, 0, 0, 0.5);
+  padding: 14px 16px;
+  text-decoration: none;
+  display: block;
+  border: none;
+  background-color: #f9f9f9;
+  text-align: left;
+  width: 100%;
 }
 
 .dropdown-content button:hover {
-    background-color: #f1f1f1;
-    cursor: pointer;
+  background-color: #f1f1f1;
+  cursor: pointer;
 }
-
 
 /* =========================
    Mobile
    ========================= */
 
 @media (max-width: 600px) {
+  .content {
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    padding: 20px 15px;
+    border-radius: 15px;
+  }
 
-    .content {
-        width: calc(100% - 20px);
-        margin: 10px auto;
-        padding: 20px 15px;
-        border-radius: 15px;
-    }
+  .timer-container {
+    margin: 15px auto 30px;
+  }
 
-    .timer-container {
-        margin: 15px auto 30px;
-    }
+  #time-lbl {
+    font-size: clamp(3.5rem, 20vw, 5rem);
+    margin-bottom: 20px;
+  }
 
-    #time-lbl {
-        font-size: clamp(3.5rem, 20vw, 5rem);
-        margin-bottom: 20px;
-    }
+  .talk-selector-container {
+    gap: 8px;
+  }
 
-    .talk-selector-container {
-        gap: 8px;
-    }
+  #prev,
+  #next {
+    flex: 0 0 48px;
+    width: 48px;
+    min-height: 48px;
+    padding: 10px;
+  }
 
-    #prev,
-    #next {
-        flex: 0 0 48px;
-        width: 48px;
-        min-height: 48px;
-        padding: 10px;
-    }
+  #prev img,
+  #next img {
+    width: 20px;
+    height: 20px;
+  }
 
-    #prev img,
-    #next img {
-        width: 20px;
-        height: 20px;
-    }
-
-    .dropbtn {
-        min-height: 48px;
-        padding: 12px;
-        font-size: 15px;
-    }
+  .dropbtn {
+    min-height: 48px;
+    padding: 12px;
+    font-size: 15px;
+  }
 }
-
 
 /* =========================
    Very small phones
    ========================= */
 
 @media (max-width: 380px) {
+  .content {
+    width: calc(100% - 12px);
+    padding: 15px 10px;
+  }
 
-    .content {
-        width: calc(100% - 12px);
-        padding: 15px 10px;
-    }
+  .talk-selector-container {
+    gap: 5px;
+  }
 
-    .talk-selector-container {
-        gap: 5px;
-    }
+  #prev,
+  #next {
+    flex-basis: 44px;
+    width: 44px;
+    min-height: 44px;
+  }
 
-    #prev,
-    #next {
-        flex-basis: 44px;
-        width: 44px;
-        min-height: 44px;
-    }
-
-    .dropbtn {
-        font-size: 14px;
-        padding: 10px 8px;
-    }
+  .dropbtn {
+    font-size: 14px;
+    padding: 10px 8px;
+  }
 }

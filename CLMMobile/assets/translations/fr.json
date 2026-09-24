@@ -1,32 +1,32 @@
 {
-    "name": "Français",
+  "name": "Français",
 
-    "meeting_codes": {
-        "OPENING_COMMENTS": "Paroles d'introduction",
-        "TREASURES_TALK" : "Joyaux de la Parole de Dieu - discours",
-        "SPIRITUAL_GEMS" : "Perles spirituelles",
-        "BIBLE_READING" : "Lecture de la Bible",
-        "MINISTRY_TALK" : "Applique-toi ministère",
-        "LIVING_TALK" : "Vie chrétienne",
-        "CONGREGATION_BIBLE_STUDY" : "Étude biblique de l'assemblée",
-        "CLOSING_COMMENTS" : "Paroles de conclusion",
-        "PUBLIC_TALK": "Discours Publique",
-        "WATCHTOWER_STUDY": "Étude de la tour Tour de garde"
+  "meeting_codes": {
+    "OPENING_COMMENTS": "Paroles d'introduction",
+    "TREASURES_TALK": "Joyaux de la Parole de Dieu - discours",
+    "SPIRITUAL_GEMS": "Perles spirituelles",
+    "BIBLE_READING": "Lecture de la Bible",
+    "MINISTRY_TALK": "Applique-toi ministère",
+    "LIVING_TALK": "Vie chrétienne",
+    "CONGREGATION_BIBLE_STUDY": "Étude biblique de l'assemblée",
+    "CLOSING_COMMENTS": "Paroles de conclusion",
+    "PUBLIC_TALK": "Discours Publique",
+    "WATCHTOWER_STUDY": "Étude de la tour Tour de garde"
+  },
+
+  "ui": {
+    "home": {
+      "overview-lbl": "Aperçu - Comment se connecter",
+      "ip_local": "IP locale",
+      "local_addr": "Adresse locale",
+      "ip_global": "IP globale",
+      "global_addr": "Adresse globale",
+      "scan_webclock": "Rechercher l'horloge web",
+      "scan_timer": "Rechercher le minuteur"
     },
 
-    "ui": {
-        "home": {
-            "overview-lbl": "Aperçu - Comment se connecter",
-            "ip_local": "IP locale",
-            "local_addr": "Adresse locale",
-            "ip_global": "IP globale",
-            "global_addr": "Adresse globale",
-            "scan_webclock": "Rechercher l'horloge web",
-            "scan_timer": "Rechercher le minuteur"
-        },
-
-        "admin-dash": {
-            "language-lbl": "CLMMobile - Langue"
-        }
+    "admin-dash": {
+      "language-lbl": "CLMMobile - Langue"
     }
+  }
 }

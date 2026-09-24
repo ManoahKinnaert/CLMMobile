@@ -1,16 +1,16 @@
 @import "../colors.css";
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .content {
-    width: min(600px, calc(100% - 24px));
-    margin: 30px auto;
-    padding: 30px;
-    background-color: var(--secondary-bg);
-    border-radius: 20px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+  width: min(600px, calc(100% - 24px));
+  margin: 30px auto;
+  padding: 30px;
+  background-color: var(--secondary-bg);
+  border-radius: 20px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
 }
 
 /* =========================
@@ -18,85 +18,82 @@
    ========================= */
 
 .dropdown {
-    position: relative;
-    flex: 1;
-    min-width: 0;
+  position: relative;
+  flex: 1;
+  min-width: 0;
 }
 
 .dropbtn {
-    width: 100%;
-    min-height: 55px;
-    padding: 15px;
-    background-color: var(--title-bar);
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+  width: 100%;
+  min-height: 55px;
+  padding: 15px;
+  background-color: var(--title-bar);
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 
-    /* Prevent long names from breaking the layout */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  /* Prevent long names from breaking the layout */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .dropbtn:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    z-index: 10;
-    left: 0;
-    right: 0;
-    width: 100%;
-    max-height: 50vh;
-    overflow-y: auto;
+  display: none;
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-height: 50vh;
+  overflow-y: auto;
 
-    background-color: #f9f9f9;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #f9f9f9;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-content button {
-    color: rgba(0, 0, 0, 0.5);
-    padding: 14px 16px;
-    text-decoration: none;
-    display: block;
-    border: none;
-    background-color: #f9f9f9;
-    text-align: left;
-    width: 100%;
+  color: rgba(0, 0, 0, 0.5);
+  padding: 14px 16px;
+  text-decoration: none;
+  display: block;
+  border: none;
+  background-color: #f9f9f9;
+  text-align: left;
+  width: 100%;
 }
 
 .dropdown-content button:hover {
-    background-color: #f1f1f1;
-    cursor: pointer;
+  background-color: #f1f1f1;
+  cursor: pointer;
 }
-
 
 /* =========================
    Mobile
    ========================= */
 
 @media (max-width: 600px) {
-
-    .content {
-        width: calc(100% - 20px);
-        margin: 10px auto;
-        padding: 20px 15px;
-        border-radius: 15px;
-    }
+  .content {
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    padding: 20px 15px;
+    border-radius: 15px;
+  }
 }
 
 /* =========================
    Very small phones
    ========================= */
-   
-@media (max-width: 380px) {
 
-    .content {
-        width: calc(100% - 12px);
-        padding: 15px 10px;
-    }
+@media (max-width: 380px) {
+  .content {
+    width: calc(100% - 12px);
+    padding: 15px 10px;
+  }
 }

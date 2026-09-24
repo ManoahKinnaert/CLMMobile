@@ -1,32 +1,33 @@
-html, body {
-    background-color: black;
-    margin: 0;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+html,
+body {
+  background-color: black;
+  margin: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .clock-container {
-    margin: 30px auto;
-    padding: 30px;
-    text-align: center;
+  margin: 30px auto;
+  padding: 30px;
+  text-align: center;
 }
 
 #talk-lbl {
-    font-size: 20px;
-    color: white;
-    opacity: 0.8;
+  font-size: 20px;
+  color: white;
+  opacity: 0.8;
 
-    -webkit-user-select: none;
-    -ms-user-select: none;      
-    user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 #digital-clock {
-    font-size: 60px;
-    font-size: 14vw;
-    font-weight: bold;
-    color: white;
+  font-size: 60px;
+  font-size: 14vw;
+  font-weight: bold;
+  color: white;
 
-    -webkit-user-select: none;
-    -ms-user-select: none;      
-    user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
