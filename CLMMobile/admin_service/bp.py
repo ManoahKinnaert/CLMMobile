@@ -44,7 +44,7 @@ class AdminService:
         return render_template("admin_service/index.html", langs=self.trans.get_languages(), current_lang=self.trans.language, strings=self.trans.get_ui_strings()["admin-dash"])
 
     def reports_dashboard(self):
-        return render_template("admin_service/reports.html", strings=self.trans.get_ui_strings()["admin-dash-reports"])
+        return render_template("admin_service/reports.html", strings=self.trans.get_ui_strings()["admin-dash-reports"], meetings=self.dataservice.get_meetings())
 
     def set_language(self):
         data = request.get_json(silent=True)

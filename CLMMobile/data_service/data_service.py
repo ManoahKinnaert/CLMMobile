@@ -55,5 +55,11 @@ class DataService:
         except IntegrityError:
             print("[ERROR]: DB Integrity error")
 
+    def get_meetings(self):
+        meetings = Meeting.select()
+        dates = []
+        for meeting in meetings: dates.append(meeting.date)
+        return [d.strftime("%d/%m/%Y") for d in dates]
+
     def close(self):
         self.db.close()
