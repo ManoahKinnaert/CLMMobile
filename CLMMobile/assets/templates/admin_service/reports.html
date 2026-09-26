@@ -10,7 +10,7 @@ block css %}
   <h1>{{ strings['meetings'] }}</h1>
   <ul>
     {% for meeting in meetings %}
-    <li>{{meeting}}</li>
+    <a class="meeting-btn" href="{{ url_for('admin_service.reports_view', date=meeting) }}"><li>{{meeting}}</li></a>
     {% endfor %}
   </ul>
 </div>

@@ -39,3 +39,11 @@ a {
 a:hover {
   font-weight: bold;
 }
+
+.meeting-btn {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.meeting-btn:hover {
+  color: black;
+}

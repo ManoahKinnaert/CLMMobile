@@ -49,7 +49,9 @@ class AdminService:
 
     def report_view(self):
         # TODO: get the propper data
-        return render_template("admin_serivce/report_view.html", strings=self.trans.get_ui_strings()["admin-dash-report-view"], date="")
+        date = request.args.get("date")
+        print(date)
+        return render_template("admin_service/report_view.html", strings=self.trans.get_ui_strings()["admin-dash-report-view"], date=date)
 
     def set_language(self):
         data = request.get_json(silent=True)
