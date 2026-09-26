@@ -38,8 +38,11 @@
     "admin-dash-report-view": {
       "meeting": "Meeting",
       "back-to-dash": "Back",
-      "delete-meeting": "Delete meeting"
+      "delete-meeting": "Delete meeting",
+      "export": "Export",
+      "treasures": "Treasures from Gods word",
+      "apply-ministry": "Apply yourself to the field ministry",
+      "living-as-christians": "Living as christians"
     }
-    
   }
 }

@@ -38,7 +38,11 @@
     "admin-dash-report-view": {
       "meeting": "Vergadering",
       "back-to-dash": "Terug",
-      "delete-meeting": "Verwijder vergadering"
+      "delete-meeting": "Verwijder vergadering",
+      "export": "Exporteren",
+      "treasures": "Schatten uit Gods woord",
+      "apply-ministry": "Leg je toe op de velddienst",
+      "living-as-christians": "Leven als christenen"
     }
   }
 }

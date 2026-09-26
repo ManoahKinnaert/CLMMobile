@@ -48,11 +48,21 @@ class AdminService:
         return render_template("admin_service/reports.html", strings=self.trans.get_ui_strings()["admin-dash-reports"], meetings=self.dataservice.get_meetings())
 
     def report_view(self):
-        # TODO: get the propper data
         date = request.args.get("date")
-        data = self.dataservice.get_talks(date)  
-        print(data)     
-        return render_template("admin_service/report_view.html", strings=self.trans.get_ui_strings()["admin-dash-report-view"], date=date, data=data)
+        data = self.dataservice.get_talks(date)     
+        codes = {
+            0: "OPENING_COMMENTS",
+            1: "TREASURES_TALK",
+            2: "SPIRITUAL_GEMS",
+            3: "BIBLE_READING",
+            4: "MINISTRY_TALK",
+            5: "LIVING_TALK",
+            6: "CONGREGATION_BIBLE_STUDY",
+            7: "CLOSING_COMMENTS",
+            8: "PUBLIC_TALK",
+            9: "WATCHTOWER_STUDY"
+        }
+        return render_template("admin_service/report_view.html", strings=self.trans.get_ui_strings()["admin-dash-report-view"], date=date, data=data, codes=codes, meeting_codes=self.trans.get_meeting_codes())
 
     def set_language(self):
         data = request.get_json(silent=True)

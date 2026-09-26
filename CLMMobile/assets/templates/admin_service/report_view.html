@@ -6,7 +6,56 @@ block css %}
 />
 {% endblock %} {% block content %}
 <div class="content">
-    <a href="{{ url_for('admin_service.reports')}}">{{ strings['back-to-dash'] }}</a>
+  <a href="{{ url_for('admin_service.reports')}}"
+    >{{ strings['back-to-dash'] }}</a
+  >
   <h1>{{ strings['meeting'] }} {{ date }}</h1>
+  {% for talk in data %} {% if talk['talk_type'] == 0 %}
+  <div class="talk">
+    <p class="talk-title">
+      {{ meeting_codes[codes[talk['talk_type']]] }} ({{ talk['time_limit']}}:00)
+    </p>
+    <p class="talk-time">
+      {{ talk['measured_time'] // 60 }}:{{ talk['measured_time'] % 60 }}
+    </p>
+  </div>
+  <div class="treasures">
+    <p>Spiritual Jewels</p>
+  </div>
+  {% elif talk['talk_type'] == 3 %}
+  <div class="talk">
+    <p class="talk-title">
+      {{ meeting_codes[codes[talk['talk_type']]] }} ({{ talk['time_limit']}}:00)
+    </p>
+    <p class="talk-time">
+      {{ talk['measured_time'] // 60 }}:{{ talk['measured_time'] % 60 }}
+    </p>
+  </div>
+  <div class="apply-to-ministry">
+    <p>Apply yourself to the field ministry</p>
+  </div>
+  {% elif talk['talk_type'] == 5 and talk['sequence_number'] == 0 %}
+  <div class="living-as-christians">
+    <p>Living as christians</p>
+  </div>
+  <div class="talk">
+    <p class="talk-title">
+      {{ meeting_codes[codes[talk['talk_type']]] }} ({{ talk['time_limit']}}:00)
+    </p>
+    <p class="talk-time">
+      {{ talk['measured_time'] // 60 }}:{{ talk['measured_time'] % 60 }}
+    </p>
+  </div>
+  {% else %}
+  <div class="talk">
+    <p class="talk-title">
+      {{ meeting_codes[codes[talk['talk_type']]] }} ({{ talk['time_limit']}}:00)
+    </p>
+    <p class="talk-time">
+      {{ talk['measured_time'] // 60 }}:{{ talk['measured_time'] % 60 }}
+    </p>
+  </div>
+  {% endif %} {% endfor %}
+  <button id="export-btn">{{ strings['export'] }}</button>
 </div>
 {% endblock %}
