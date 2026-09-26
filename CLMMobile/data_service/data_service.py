@@ -61,5 +61,9 @@ class DataService:
         for meeting in meetings: dates.append(meeting.date)
         return [d.strftime("%d/%m/%Y") for d in dates]
 
+    def get_talks(self, date: str):
+        requested_date = datetime.datetime.strptime(date, "%d/%m/%Y").date()
+        return [talk.__data__ for talk in Talk.select().join(Meeting).where(Meeting.date == requested_date)]
+
     def close(self):
         self.db.close()
