@@ -16,3 +16,6 @@ class Talk(BaseModel):
     measured_time = IntegerField()  # in seconds
     time_limit = IntegerField() # in minutes
     sequence_number = IntegerField()
+    
+    class Meta:
+        primary_key = CompositeKey('talk_type', 'sequence_number')
