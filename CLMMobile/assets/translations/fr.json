@@ -31,6 +31,14 @@
     },
 
     "admin-dash-reports": {
+      "meetings": "Réunions",
+      "back": "Retour"
+    },
+
+    "admin-dash-report-view": {
+      "meeting": "Réunion",
+      "back-to-dash": "Retour",
+      "delete-meeting": "Supprimer la réunion"
     }
   }
 }

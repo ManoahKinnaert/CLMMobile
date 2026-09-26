@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block title %}Reporting - Dash{% endblock %} {%
+block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('admin_service.static', filename='css/admin_service/report_view.css') }}"
+/>
+{% endblock %} {% block content %}
+<div class="content">
+  <h1>{{ strings['meeting'] date }}</h1>
+</div>
+{% endblock %}

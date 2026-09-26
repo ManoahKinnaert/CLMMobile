@@ -48,7 +48,8 @@ class AdminService:
         return render_template("admin_service/reports.html", strings=self.trans.get_ui_strings()["admin-dash-reports"], meetings=self.dataservice.get_meetings())
 
     def report_view(self):
-        pass
+        # TODO: get the propper data
+        return render_template("admin_serivce/report_view.html", strings=self.trans.get_ui_strings()["admin-dash-report-view"], date="")
 
     def set_language(self):
         data = request.get_json(silent=True)

@@ -31,6 +31,15 @@
     },
 
     "admin-dash-reports": {
+      "meetings": "Meetings",
+      "back": "Back"
+    },
+
+    "admin-dash-report-view": {
+      "meeting": "Meeting",
+      "back-to-dash": "Back to dash",
+      "delete-meeting": "Delete meeting"
     }
+    
   }
 }
