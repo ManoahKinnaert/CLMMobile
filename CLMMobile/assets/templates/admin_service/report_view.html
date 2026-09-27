@@ -56,6 +56,6 @@ block css %}
     </p>
   </div>
   {% endif %} {% endfor %}
-  <button id="export-btn">{{ strings['export'] }}</button>
+  <a href="{{ url_for('admin_service.download_report') }}" id="export-btn">{{ strings['export'] }}</a>
 </div>
 {% endblock %}

@@ -1,4 +1,5 @@
 from fpdf import FPDF
+from io import BytesIO
 
 class Generator:
     FONT_FAMILY = "Helvetica"
@@ -9,7 +10,7 @@ class Generator:
     TALK_FILL_COLOR = (230, 230, 230)
     DEFAULT_TEXT_COLOR = (0, 0, 0)
 
-    def __init__(self, meeting_data: dict):
+    def __init__(self, meeting_data: dict | None=None):
         """
         Meeting data must have the following format:
             - pre-talks: [
@@ -24,9 +25,16 @@ class Generator:
                 ]
             }]
         """
-        self._data: dict = meeting_data
+        self._data: dict | None = meeting_data
 
         self.pdf: FPDF = FPDF(orientation="P", unit="mm", format="A4")
+
+    @property
+    def report_data(self): return self._data.copy()
+
+    @report_data.setter 
+    def report_data(self, new_data: dict | None):
+        self._data = new_data.copy() if new_data is not None else None
 
     def generate(self):
         self.pdf.add_page()
@@ -53,6 +61,7 @@ class Generator:
 
     def _render_talk_items(self, talks: dict):
         for talk in talks:
+            print(talk)
             self._render_talk(name=talk["name"], time_used=talk["time_used"], time_limit=talk["time_limit"])
 
     def _render_talk(self, name: str, time_used: int, time_limit: int):
@@ -66,6 +75,14 @@ class Generator:
     def save(self, location: str, name: str):
         self.pdf.output(f"{location}/{name}")
 
+    def reset(self):
+        self.pdf = FPDF(orientation="P", unit="mm", format="A4")
+        self.report_data = None
+
+    def get_pdf_bytes(self):
+        pdf_bytes = BytesIO(self.pdf.output())
+        pdf_bytes.seek(0)
+        return pdf_bytes
 
 if __name__ == "__main__":
     import os

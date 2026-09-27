@@ -74,6 +74,7 @@ p {
 
 #export-btn {
   width: 50%;
+  text-decoration: none;
   display: flex;
   background-color: var(--title-bar);
   color: white;
