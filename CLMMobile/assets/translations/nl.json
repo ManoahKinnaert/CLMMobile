@@ -30,7 +30,12 @@
       "reports-lbl": "CLMMobile - Rapporten",
       "report-dash-btn": "Rapporten",
       "security-lbl": "Beveiliging",
-      "change-passwords-btn": "Wachtwoorden veranderen"
+      "change-passwords-btn": "Wachtwoorden veranderen",
+      "change-password-btn": "Wachtwoord veranderen",
+      "user-password-lbl": "Gebruikerswachtwoord",
+      "admin-password-lbl": "Adminwachtwoord",
+      "password-placeholder": "Nieuw wachtwoord",
+      "repeat-password-placeholder": "Herhaal nieuw wachtwoord"
     },
 
     "admin-dash-reports": {

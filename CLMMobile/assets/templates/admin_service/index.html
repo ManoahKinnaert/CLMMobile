@@ -5,7 +5,7 @@
   href="{{ url_for('admin_service.static', filename='css/admin_service/dashboard.css') }}"
 />
 {% endblock %} {% block content %}
-<!-- small switch lang function -->
+<!-- javascript requests -->
 <script>
   function switchLang(lang) {
     const url = "{{ url_for('admin_service.set_language') }}"
@@ -59,6 +59,20 @@
   <a id="report-dash-btn" href="{{ url_for('admin_service.reports') }}">{{ strings['report-dash-btn'] }}</a>
   <h4>{{ strings['security-lbl'] }}</h4>
   <button id="change-passwords-btn">{{ strings['change-passwords-btn'] }}</button>
+  <div id="passwords-container">
+    <form class="user-password-form" action="" method="post">
+        <h5>{{ strings['user-password-lbl'] }}</h5>
+        <input type="password" name="" id="" placeholder="{{ strings['password-placeholder'] }}">
+        <input type="password" name="" id="" placeholder="{{ strings['repeat-password-placeholder'] }}">
+        <button class="submit-btn" type="submit">{{ strings['change-password-btn'] }}</button>
+    </form>
+    <form class="admin-password-form" action="" method="post">
+      <h5>{{ strings['admin-password-lbl'] }}</h5>
+        <input type="password" name="" id="" placeholder="{{ strings['password-placeholder'] }}">
+        <input type="password" name="" id="" placeholder="{{ strings['repeat-password-placeholder'] }}">
+        <button class="submit-btn" type="submit">{{ strings['change-password-btn'] }}</button>
+    </form>
+  </div>
 </div>
 {% endblock %} {% block js %}
 <script src="{{ url_for('admin_service.static', filename='js/admin_service/admin_service.js') }}"></script>

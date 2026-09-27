@@ -30,7 +30,12 @@
       "reports-lbl": "CLMMobile - Reports",
       "report-dash-btn": "Meeting Reports",
       "security-lbl": "Security",
-      "change-passwords-btn": "Change passwords"
+      "change-passwords-btn": "Change passwords",
+      "change-password-btn": "Change password",
+      "user-password-lbl": "User password",
+      "admin-password-lbl": "Admin password",
+      "password-placeholder": "New password",
+      "repeat-password-placeholder": "Repeat new password"
     },
 
     "admin-dash-reports": {
