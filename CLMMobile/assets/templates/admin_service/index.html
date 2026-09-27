@@ -55,7 +55,10 @@
       </div>
     </div>
   </div>
+  <h2>{{ strings['reports-lbl'] }}</h2>
   <a id="report-dash-btn" href="{{ url_for('admin_service.reports') }}">{{ strings['report-dash-btn'] }}</a>
+  <h4>{{ strings['security-lbl'] }}</h4>
+  <button id="change-passwords-btn">{{ strings['change-passwords-btn'] }}</button>
 </div>
 {% endblock %} {% block js %}
 <script src="{{ url_for('admin_service.static', filename='js/admin_service/admin_service.js') }}"></script>

@@ -27,7 +27,10 @@
 
     "admin-dash": {
       "language-lbl": "CLMMobile - Langue",
-      "report-dash-btn": "Rapportage"
+      "reports-lbl": "CLMMobile - Rapportage",
+      "report-dash-btn": "Rapportage",
+      "security-lbl": "Securité",
+      "change-passwords-btn": "Changer les mots de passe"
     },
 
     "admin-dash-reports": {

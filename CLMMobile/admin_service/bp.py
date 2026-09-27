@@ -116,7 +116,6 @@ class AdminService:
         date = request.args.get("date")
         data = self.dataservice.get_talks(date)  
         self.report_gen.report_data = self._construct_report_data(data=[date, data])
-        #print(self.report_gen.report_data)
         return render_template("admin_service/report_view.html", strings=self.trans.get_ui_strings()["admin-dash-report-view"], date=date, data=data, codes=self.CODE_TABLE, meeting_codes=self.trans.get_meeting_codes())
 
     def get_report(self):

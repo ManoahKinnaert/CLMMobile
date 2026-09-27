@@ -27,7 +27,10 @@
 
     "admin-dash": {
       "language-lbl": "CLMMobile - Taal",
-      "report-dash-btn": "Rapporten"
+      "reports-lbl": "CLMMobile - Rapporten",
+      "report-dash-btn": "Rapporten",
+      "security-lbl": "Beveiliging",
+      "change-passwords-btn": "Wachtwoorden veranderen"
     },
 
     "admin-dash-reports": {

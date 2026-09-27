@@ -13,6 +13,21 @@
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
 }
 
+#change-passwords-btn {
+  width: 100%;
+  background-color: var(--main-bg);
+  font-size: 15px;
+  color: rgb(0, 0, 0, 0.5);
+  padding: 15px;
+  border: none;
+  border-radius: 10px;
+}
+
+#change-passwords-btn:hover {
+  cursor: pointer;
+  color: black;
+}
+
 /* =========================
    Dropdown
    ========================= */
@@ -75,21 +90,21 @@
 }
 
 #report-dash-btn {
-    background-color: var(--main-bg);
-    text-decoration: none;
-    text-align: center;
-    color: rgba(0, 0, 0, 0.5);
-    padding: 14px 16px;
-    display: block;
-    border: none;
-    border-radius: 10px;
-    width: 100%;
-    margin-top: 10px;
+  background-color: var(--main-bg);
+  text-decoration: none;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+  padding: 14px 16px;
+  display: block;
+  border: none;
+  border-radius: 10px;
+  width: 100%;
+  margin-top: 10px;
 }
 
 #report-dash-btn:hover {
-    cursor: pointer;
-    color: black;
+  cursor: pointer;
+  color: black;
 }
 
 /* =========================
