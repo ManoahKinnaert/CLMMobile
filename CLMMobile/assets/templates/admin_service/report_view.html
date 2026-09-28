@@ -20,7 +20,7 @@ block css %}
     </p>
   </div>
   <div class="treasures">
-    <p>Spiritual Jewels</p>
+    <p>{{ strings['treasures'] }}</p>
   </div>
   {% elif talk['talk_type'] == 3 %}
   <div class="talk">
@@ -32,11 +32,11 @@ block css %}
     </p>
   </div>
   <div class="apply-to-ministry">
-    <p>Apply yourself to the field ministry</p>
+    <p>{{ strings['apply-ministry'] }}</p>
   </div>
-  {% elif talk['talk_type'] == 5 and talk['sequence_number'] == 0 %}
+  {% elif talk['talk_type'] == 5 and talk['sequence_number'] == 1 %}
   <div class="living-as-christians">
-    <p>Living as christians</p>
+    <p>{{ strings['living-as-christians'] }}</p>
   </div>
   <div class="talk">
     <p class="talk-title">
