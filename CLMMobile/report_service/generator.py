@@ -61,7 +61,6 @@ class Generator:
 
     def _render_talk_items(self, talks: dict):
         for talk in talks:
-            print(talk)
             self._render_talk(name=talk["name"], time_used=talk["time_used"], time_limit=talk["time_limit"])
 
     def _render_talk(self, name: str, time_used: int, time_limit: int):
