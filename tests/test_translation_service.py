@@ -74,10 +74,15 @@ class TestTranslationService(unittest.TestCase):
 
     def test_section_codes_follow_real_content(self):
         svc_en, _ = _make_svc("en")
+        svc_fr, _ = _make_svc("fr")
         svc_nl, _ = _make_svc("nl")
         self.assertEqual(
             svc_en.get_meeting_section_codes()["TREASURES_FROM_GODS_WORD"],
             "Treasures from Gods word",
+        )
+        self.assertEqual(
+            svc_fr.get_meeting_section_codes()["TREASURES_FROM_GODS_WORD"],
+            "Joyaux de la parole de dieu",
         )
         self.assertEqual(
             svc_nl.get_meeting_section_codes()["TREASURES_FROM_GODS_WORD"],
