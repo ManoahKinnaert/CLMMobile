@@ -40,7 +40,7 @@ block css %}
   </div>
   <div class="talk">
     <p class="talk-title">
-      {{ meeting_codes[codes[talk['talk_type']]] }} ({{ talk['time_limit']}}:00)
+      {{ meeting_codes[codes[talk['talk_type']]] }} {% if talk['sequence_number'] > 0%} - {{ talk['sequence_number'] }} {% endif %} ({{ talk['time_limit']}}:00)
     </p>
     <p class="talk-time">
       {{ talk['measured_time'] // 60 }}:{{ talk['measured_time'] % 60 }}
@@ -49,7 +49,7 @@ block css %}
   {% else %}
   <div class="talk">
     <p class="talk-title">
-      {{ meeting_codes[codes[talk['talk_type']]] }} ({{ talk['time_limit']}}:00)
+      {{ meeting_codes[codes[talk['talk_type']]] }} {% if talk['sequence_number'] > 0%} - {{ talk['sequence_number'] }} {% endif %} ({{ talk['time_limit']}}:00)
     </p>
     <p class="talk-time">
       {{ talk['measured_time'] // 60 }}:{{ talk['measured_time'] % 60 }}
