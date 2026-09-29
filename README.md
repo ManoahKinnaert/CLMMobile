@@ -1,5 +1,8 @@
 # CLMMobile
 
+[![tests](https://github.com/ManoahKinnaert/CLMMobile/actions/workflows/testing.yml/badge.svg)](https://github.com/ManoahKinnaert/CLMMobile/actions/workflows/testing.yml)
+
+
 ## Running tests
 There is a testing suite (in progress), to run it do this:
 ```bash
