@@ -53,7 +53,7 @@ class DataService:
         if self.meeting is None: print("[ERROR]: meeting is None"); return
         try:
             with self.db.atomic():
-                section = MeetingSection.get_or_create(
+                section, _ = MeetingSection.get_or_create(
                     meeting=self.meeting,
                     section_type = meeting_section
                 )

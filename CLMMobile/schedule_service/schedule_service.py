@@ -36,6 +36,9 @@ class MeetingSection(enum.Enum):
     LIVING_AS_CHRISTIANS = 3
     WEEKEND = 4
 
+    def __repr__(self):
+        return self.name
+
 class Talk:
     def __init__(self, talk_type: TalkType, meeting_section: MeetingSection, time_limit: int, num: int=0):
         self.talk_type: TalkType = talk_type
@@ -50,7 +53,7 @@ class Talk:
         meeting_codes = trans.get_meeting_codes()
         return {
             "talktype": self.talk_type.__repr__(), 
-            "meeting section": self.meeting_section,
+            "meeting section": self.meeting_section.__repr__(),
             "name": f"{meeting_codes[str(self.talk_type.__repr__())]} {self.num if self.num != 0 else ""}", 
             "time": self.time_limit, 
             "num": self.num
