@@ -1,5 +1,6 @@
 from fpdf import FPDF
 from io import BytesIO
+from translation_service import TranslationService
 
 class Generator:
     FONT_FAMILY = "Helvetica"
@@ -10,22 +11,16 @@ class Generator:
     TALK_FILL_COLOR = (230, 230, 230)
     DEFAULT_TEXT_COLOR = (0, 0, 0)
 
-    def __init__(self, meeting_data: dict | None=None):
-        """
-        Meeting data must have the following format:
-            - pre-talks: [
-                        {name: str, time_limit: int -> minutes, time_used: int -> seconds}
-                ]
-            - meeting-parts: [{
-                "name": str, -> used for the title text content
-                "color": tuple, -> is used for the title color
-                "talks": [
-                    {"name": str, time_limit: int -> in minutes, time_used: int -> in seconds},
-                    ...
-                ]
-            }]
-        """
+    COLOR_TABLE = {
+        "INTRO": None,
+        "TREASURES_FROM_GODS_WORD": (52, 116, 128),
+        "APPLY_YOURSELF_TO_THE_FIELDMINISTRY": (208, 132, 4),
+        "LIVING_AS_CHRISTIANS": (183, 41, 20)
+    }
+
+    def __init__(self, trans: TranslationService, meeting_data: dict | None=None):
         self._data: dict | None = meeting_data
+        self.trans = trans
 
         self.pdf: FPDF = FPDF(orientation="P", unit="mm", format="A4")
 
@@ -34,8 +29,8 @@ class Generator:
 
     @report_data.setter 
     def report_data(self, new_data: dict | None):
-        self._data = new_data.copy() if new_data is not None else None
-
+        self._data = new_data if new_data is None else new_data.copy()
+    
     def generate(self):
         self.pdf.add_page()
         self.pdf.set_font(self.FONT_FAMILY, size=self.TITLE_SIZE, style="B")
@@ -43,31 +38,30 @@ class Generator:
         # generate the meeting header
         self.pdf.cell(0, 10, text=f"Meeting {self._data["date"]}", new_x="LMARGIN", new_y="NEXT", align="L")
         self.pdf.ln(3)
-        # generate pre-talks
-        self._render_talk_items(talks=self._data["pre-talks"])
         # generate stuff for meeting parts
         for part in self._data["meeting-parts"]:
             self._gen_meeting_part(part)
 
-    def _gen_meeting_part(self, part: dict):
+    def _gen_meeting_part(self, key: str, data: dict):
         self.pdf.ln(3)
         # generate the title
-        self.pdf.set_fill_color(part["color"])
-        self.pdf.set_text_color(255, 255, 255)
-        self.pdf.cell(0, 7, text=part["name"], new_x="LMARGIN", new_y="NEXT", align="L", fill=True) 
-        self.pdf.ln(3)
+        if self.COLOR_TABLE[key] is not None:
+            self.pdf.set_fill_color(self.COLOR_TABLE[key])
+            self.pdf.set_text_color(255, 255, 255)
+            self.pdf.cell(0, 7, text=self.trans[key], new_x="LMARGIN", new_y="NEXT", align="L", fill=True) 
+            self.pdf.ln(3)
         # generate the items
-        self._render_talk_items(talks=part["talks"])
+        self._render_talk_items(talks=data)
 
-    def _render_talk_items(self, talks: dict):
+    def _render_talk_items(self, talks: list):
         for talk in talks:
-            self._render_talk(name=talk["name"], time_used=talk["time_used"], time_limit=talk["time_limit"])
+            self._render_talk(name=f"{self.trans[talk["talk_type"]]} {talk["sequence_number"] if talk["sequence_number"] > 0 else ""}", time_used=talk["measured_time"], time_limit=talk["time_limit"])
 
     def _render_talk(self, name: str, time_used: int, time_limit: int):
         self.pdf.set_fill_color(self.TALK_FILL_COLOR)
         self.pdf.set_text_color(self.DEFAULT_TEXT_COLOR)
         self.pdf.set_font(self.FONT_FAMILY, size=self.NORMAL_SIZE)
-        self.pdf.cell(0, 6, text=f"{name} ({time_limit}:00)", align="L", fill=True)
+        self.pdf.cell(0, 6, text=f"{name}({time_limit}:00)", align="L", fill=True)
         self.pdf.cell(0, 6, text=f"{time_used // 60}:{time_used % 60}", align="R", new_x="LMARGIN", new_y="NEXT", fill=True)
         self.pdf.ln(1)
         
@@ -82,28 +76,3 @@ class Generator:
         pdf_bytes = BytesIO(self.pdf.output())
         pdf_bytes.seek(0)
         return pdf_bytes
-
-if __name__ == "__main__":
-    import os
-    dummy_data = {
-        "date": "24/10/2026",
-        "pre-talks": [
-            {"name": "Intro", "time_limit": 1, "time_used": 40}
-        ],
-        "meeting-parts": [
-            {"name": "Treasures", "color": (80, 180, 200), "talks": [
-                {"name": "Talk", "time_limit": 10, "time_used": 23},
-                {"name": "Treasures", "time_limit": 10, "time_used": 100},
-                {"name": "Bible Reading", "time_limit": 4, "time_used": 140}
-            ]},
-
-            {"name": "Apply yourself to the field ministry", "color": (200, 110, 20), "talks": [
-                {"name": "Talk - 1", "time_limit": 2, "time_used": 100}
-            ]}
-        ]
-    }
-
-    gen = Generator(dummy_data)
-    gen.generate()
-    gen.save(location=os.getenv("LOCATION"), name="test.pdf")
- 

@@ -7,6 +7,14 @@ class DataService:
     HOME_PATH = pathlib.Path.home().joinpath(".clmtimer")
     DB_PATH =  HOME_PATH.joinpath("db/database.db")
 
+    _SECTION_TABLE = [
+        "INTRO", 
+        "TREASURES_FROM_GODS_WORD", 
+        "APPLY_YOURSELF_TO_THE_FIELDMINISTRY", 
+        "LIVING_AS_CHRISTIANS",
+        "WEEKEND"
+    ]
+
     def __init__(self):
         # check if the DB exists, if it doesnt we want to create it
         self.db: SqliteDatabase | None = None
@@ -66,9 +74,18 @@ class DataService:
         for meeting in meetings: dates.append(meeting.date)
         return [d.strftime("%d/%m/%Y") for d in dates]
 
-    def get_meeting_sections(self, date: str):
+    def _get_meeting_sections(self, date: str):
         requested_date = datetime.datetime.strptime(date, "%d/%m/%Y").date()
-        return [section.__data__ for section in MeetingSection.select().join(Meeting).where(Meeting.date == requested_date)]
+        return [section for section in MeetingSection.select().join(Meeting).where(Meeting.date == requested_date)]
+
+    # TODO: Implement 'custom' section table for some custom meeting schedules
+    def get_meeting_data(self, date: str, section_table: list=None):
+        sections = self._get_meeting_sections(date)
+        data = {"date": date, "meeting-sections": {}}
+        for section in sections:
+            talks = [talk.__data__ for talk in Talk.select().join(MeetingSection).where(Talk.meeting_section == section)]
+            data["meeting-sections"][self._SECTION_TABLE[section.select(MeetingSection.section_type)]] = talks
+        return data 
 
     def close(self):
         self.db.close()
