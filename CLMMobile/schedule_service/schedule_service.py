@@ -54,7 +54,7 @@ class Talk:
         return {
             "talktype": self.talk_type.__repr__(), 
             "meeting section": self.meeting_section.__repr__(),
-            "name": f"{meeting_codes[str(self.talk_type.__repr__())]} {self.num if self.num != 0 else ""}", 
+            "name": f"{meeting_codes[str(self.talk_type.__repr__())]} {self.num if self.num != 0 else ''}", 
             "time": self.time_limit, 
             "num": self.num
         }
