@@ -2,6 +2,7 @@
   "name": "Français",
 
   "meeting_codes": {
+    "MEETING": "Réunion",
     "OPENING_COMMENTS": "Paroles d'introduction",
     "TREASURES_TALK": "Joyaux de la Parole de Dieu - discours",
     "SPIRITUAL_GEMS": "Perles spirituelles",
@@ -12,6 +13,14 @@
     "CLOSING_COMMENTS": "Paroles de conclusion",
     "PUBLIC_TALK": "Discours Publique",
     "WATCHTOWER_STUDY": "Étude de la tour Tour de garde"
+  },
+
+  "meeting_section_codes": {
+    "INTRO": null,
+    "TREASURES_FROM_GODS_WORD": "Joyaux de la parole de dieu",
+    "APPLY_YOURSELF_TO_THE_FIELD_MINISTRY": "Applique-toi au ministère",
+    "LIVING_AS_CHRISTIANS": "Vie chrétienne",
+    "WEEKEND": "Weekend"
   },
 
   "ui": {

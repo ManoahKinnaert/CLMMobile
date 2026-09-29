@@ -14,13 +14,15 @@ class Generator:
     COLOR_TABLE = {
         "INTRO": None,
         "TREASURES_FROM_GODS_WORD": (52, 116, 128),
-        "APPLY_YOURSELF_TO_THE_FIELDMINISTRY": (208, 132, 4),
+        "APPLY_YOURSELF_TO_THE_FIELD_MINISTRY": (208, 132, 4),
         "LIVING_AS_CHRISTIANS": (183, 41, 20)
     }
 
     def __init__(self, trans: TranslationService, meeting_data: dict | None=None):
         self._data: dict | None = meeting_data
-        self.trans = trans
+        self._trans = trans
+        self.trans_sections = trans.get_meeting_section_codes()
+        self.trans_talks = trans.get_meeting_codes()
 
         self.pdf: FPDF = FPDF(orientation="P", unit="mm", format="A4")
 
@@ -38,24 +40,24 @@ class Generator:
         # generate the meeting header
         self.pdf.cell(0, 10, text=f"Meeting {self._data["date"]}", new_x="LMARGIN", new_y="NEXT", align="L")
         self.pdf.ln(3)
-        # generate stuff for meeting parts
-        for part in self._data["meeting-parts"]:
-            self._gen_meeting_part(part)
+        # generate stuff for meeting section
+        for part in self._data["meeting-sections"]:
+            self._gen_meeting_section(part)
 
-    def _gen_meeting_part(self, key: str, data: dict):
+    def _gen_meeting_section(self, key: str, data: dict):
         self.pdf.ln(3)
         # generate the title
         if self.COLOR_TABLE[key] is not None:
             self.pdf.set_fill_color(self.COLOR_TABLE[key])
             self.pdf.set_text_color(255, 255, 255)
-            self.pdf.cell(0, 7, text=self.trans[key], new_x="LMARGIN", new_y="NEXT", align="L", fill=True) 
+            self.pdf.cell(0, 7, text=self.trans_sections[key], new_x="LMARGIN", new_y="NEXT", align="L", fill=True) 
             self.pdf.ln(3)
         # generate the items
         self._render_talk_items(talks=data)
 
     def _render_talk_items(self, talks: list):
         for talk in talks:
-            self._render_talk(name=f"{self.trans[talk["talk_type"]]} {talk["sequence_number"] if talk["sequence_number"] > 0 else ""}", time_used=talk["measured_time"], time_limit=talk["time_limit"])
+            self._render_talk(name=f"{self.trans_talks[talk["talk_type"]]} {talk["sequence_number"] if talk["sequence_number"] > 0 else ""}", time_used=talk["measured_time"], time_limit=talk["time_limit"])
 
     def _render_talk(self, name: str, time_used: int, time_limit: int):
         self.pdf.set_fill_color(self.TALK_FILL_COLOR)
@@ -71,6 +73,8 @@ class Generator:
     def reset(self):
         self.pdf = FPDF(orientation="P", unit="mm", format="A4")
         self.report_data = None
+        self.trans_sections = self.trans.get_meeting_section_codes()
+        self.trans_talks = self.trans.get_meeting_codes()
 
     def get_pdf_bytes(self):
         pdf_bytes = BytesIO(self.pdf.output())

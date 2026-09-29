@@ -6,7 +6,7 @@ import enum
 
 
 SOUNDBOX_API_FEED = "https://soundbox.blob.core.windows.net/meeting-feeds/feed.json"
-HOME_PATH = pathlib.Path.home().joinpath(".clmtimer")
+HOME_PATH = pathlib.Path.home().joinpath(".clmmobile")
 FEED_PATH =  HOME_PATH.joinpath("feed/meetingfeed.json")
 
 class TalkType(enum.Enum):

@@ -4,7 +4,7 @@ import pathlib
 import datetime
 
 class DataService:
-    HOME_PATH = pathlib.Path.home().joinpath(".clmtimer")
+    HOME_PATH = pathlib.Path.home().joinpath(".clmmobile")
     DB_PATH =  HOME_PATH.joinpath("db/database.db")
 
     _SECTION_TABLE = [
@@ -37,7 +37,7 @@ class DataService:
         })
         DB_PROXY.initialize(self.db)
         # we also want to create all relevant tables
-        self.db.create_tables([Meeting, Talk])
+        self.db.create_tables([Meeting, Talk, MeetingSection])
 
     def init_meeting(self):
         try:
@@ -60,7 +60,6 @@ class DataService:
                 Talk.get_or_create(
                     meeting_section=section,
                     talk_type=talk_type,
-                    meeting_section=meeting_section,
                     measured_time=time,
                     time_limit=time_limit,
                     sequence_number=seq_num
