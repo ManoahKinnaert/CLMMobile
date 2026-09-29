@@ -23,6 +23,11 @@ a:hover {
   font-weight: bold;
 }
 
+h2 {
+  color: white;
+  font-size: 15px;
+}
+
 .treasures {
   background-color: rgb(52, 116, 128);
   margin: 10px;

@@ -12,22 +12,18 @@ block css %}
   <h1>{{ strings['meeting'] }} {{ data['date'] }}</h1>
   {% for talks in data['meeting-sections'] %}
     {% if talks[0]['meeting_section'] == 1 %}
-    <h1 class="treasures">{{ strings['treasures'] }}</h1>
+    <h2 class="treasures">{{ strings['treasures'] }}</h2>
     {% elif talks[0]['meeting_section'] == 2 %}
-    <h1 class="apply-ministry">{{ strings['apply-ministry'] }}</h1>
+    <h2 class="apply-to-ministry">{{ strings['apply-ministry'] }}</h2>
     {% elif talks[0]['meeting_section'] == 3 %}
-    <h1 class="living-as-christians">{{ strings['living-as-christians'] }}</h1>
+    <h2 class="living-as-christians">{{ strings['living-as-christians'] }}</h2>
     {% elif talks[0]['meeting_section'] == 4 %}
-    <h1 class="weekend">{{ strings['weekend'] }}</h1>
+    <h2 class="weekend">{{ strings['weekend'] }}</h2>
     {% endif%}
     {% for talk in talks %}
     <div class="talk">
-      <p class="talk-title">
-        {{ meeting_codes[codes[talk['talk_type']]] }} ({{ talk['time_limit']}}:00)
-    </p class="talk-time">
-     
-        {{ talk['measured_time'] // 60 }}:{{ talk['measured_time'] % 60 }}
-    </p>
+      <p class="talk-title">{{ meeting_codes[codes[talk['talk_type']]] }} ({{ talk['time_limit']}}:00)</p>
+      <p class="talk-time">{{ talk['measured_time'] // 60 }}:{{ talk['measured_time'] % 60 }}</p>
     </div>
     {% endfor %}
     {% endfor %}
