@@ -14,18 +14,24 @@ class Meeting(BaseModel):
     """
     Meeting data model.
     """
-    date = DateField(default=datetime.date.today, index=True, unique=True)          # the date of the meeting
+    date = DateField(default=datetime.date.today, index=True, unique=True)          # the meeting date
+    
+class MeetingSection(BaseModel):
+    """
+    Meeting section model.          
+    """
+    meeting = ForeignKeyField(Meeting)      # the meeting where this meeting section belongs to -> foreignkey
+    section_type = IntegerField()           # the section type of this meeting section -> see schedule_service for more info
 
 class Talk(BaseModel):
     """
     Talk data model.
     """
-    meeting = ForeignKeyField(Meeting)      # the meeting where this talk belongs to -> foreignkey
-    talk_type = IntegerField()              # the talk type represented as an int -> see schedule_service for more info              
-    meeting_section = IntegerField()        # the meeting section represented as an int -> see schedule_service for more info
-    measured_time = IntegerField()          # the measured time of the talk in seconds
-    time_limit = IntegerField()             # the time limit of the talk in minutes
-    sequence_number = IntegerField()        # the 'count' of the talk (so if this is the first, second, third, ect. talk with this talk type)
+    meeting_section = ForeignKeyField(MeetingSection)   # the meeting where this talk belongs to -> foreignkey
+    talk_type = IntegerField()                          # the talk type represented as an int -> see schedule_service for more info              
+    measured_time = IntegerField()                      # the measured time of the talk in seconds
+    time_limit = IntegerField()                         # the time limit of the talk in minutes
+    sequence_number = IntegerField()                    # the 'count' of the talk (so if this is the first, second, third, ect. talk with this talk type)
     
     class Meta:
         """

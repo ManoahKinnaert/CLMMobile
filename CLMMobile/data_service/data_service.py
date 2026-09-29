@@ -1,4 +1,4 @@
-from .models import DB_PROXY, Meeting, Talk
+from data_service.models import DB_PROXY, Meeting, MeetingSection, Talk
 from peewee import *
 import pathlib
 import datetime
@@ -41,13 +41,18 @@ class DataService:
         except IntegrityError:
             print("[ERROR]: DB Integrity error")
 
-    def add_talk(self, talk_type, time: int, time_limit: int, seq_num: int=0):
+    def add_talk(self, talk_type, meeting_section, time: int, time_limit: int, seq_num: int=0):
         if self.meeting is None: print("[ERROR]: meeting is None"); return
         try:
             with self.db.atomic():
-                Talk.get_or_create(
+                section = MeetingSection.get_or_create(
                     meeting=self.meeting,
+                    section_type = meeting_section
+                )
+                Talk.get_or_create(
+                    meeting_section=section,
                     talk_type=talk_type,
+                    meeting_section=meeting_section,
                     measured_time=time,
                     time_limit=time_limit,
                     sequence_number=seq_num
