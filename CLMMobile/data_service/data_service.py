@@ -83,7 +83,7 @@ class DataService:
         data = {"date": date, "meeting-sections": {}}
         for section in sections:
             talks = [talk.__data__ for talk in Talk.select().join(MeetingSection).where(Talk.meeting_section == section)]
-            data["meeting-sections"][self._SECTION_TABLE[section.select(MeetingSection.section_type)]] = talks
+            data["meeting-sections"][self._SECTION_TABLE[section.section_type]] = talks
         return data 
 
     def close(self):
