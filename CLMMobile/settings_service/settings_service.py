@@ -3,7 +3,7 @@ import pathlib
 from typing import Any
 
 class SettingsService:
-    HOME_PATH = pathlib.Path.home().joinpath(".clmtimer")
+    HOME_PATH = pathlib.Path.home().joinpath(".clmmobile")
     SETTINGS_FILE = HOME_PATH.joinpath("settings.json") 
     # collection of default settings, will be updated in the future
     DEFAULT = {

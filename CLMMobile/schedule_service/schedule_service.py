@@ -6,7 +6,7 @@ import enum
 
 
 SOUNDBOX_API_FEED = "https://soundbox.blob.core.windows.net/meeting-feeds/feed.json"
-HOME_PATH = pathlib.Path.home().joinpath(".clmtimer")
+HOME_PATH = pathlib.Path.home().joinpath(".clmmobile")
 FEED_PATH =  HOME_PATH.joinpath("feed/meetingfeed.json")
 
 class TalkType(enum.Enum):
@@ -29,11 +29,22 @@ class TalkType(enum.Enum):
     def __repr__(self):
         return self.name
 
+class MeetingSection(enum.Enum):
+    INTRO = 0
+    TREASURES = 1
+    APPLY_TO_MINISTRY = 2 
+    LIVING_AS_CHRISTIANS = 3
+    WEEKEND = 4
+
+    def __repr__(self):
+        return self.name
+
 class Talk:
-    def __init__(self, talk_type: TalkType, time_limit: int, num: int=0):
-        self.talk_type = talk_type
-        self.time_limit = time_limit
-        self.num = num
+    def __init__(self, talk_type: TalkType, meeting_section: MeetingSection, time_limit: int, num: int=0):
+        self.talk_type: TalkType = talk_type
+        self.meeting_section: MeetingSection = meeting_section
+        self.time_limit: int = time_limit
+        self.num: int = num
 
     def __repr__(self):
         return f"TalkType: {self.talk_type} / Time limit: {self.time_limit} min."
@@ -42,6 +53,7 @@ class Talk:
         meeting_codes = trans.get_meeting_codes()
         return {
             "talktype": self.talk_type.__repr__(), 
+            "meeting section": self.meeting_section.__repr__(),
             "name": f"{meeting_codes[str(self.talk_type.__repr__())]} {self.num if self.num != 0 else ""}", 
             "time": self.time_limit, 
             "num": self.num
@@ -79,28 +91,28 @@ def get_schedule_data_auto():
 
 def assemble_schedule_midweek():
     talks = [
-        Talk(TalkType.OPENING_COMMENTS, time_limit=1),
-        Talk(TalkType.TREASURES_TALK, time_limit=10),
-        Talk(TalkType.SPIRITUAL_GEMS, time_limit=10),
-        Talk(TalkType.BIBLE_READING, time_limit=4)
+        Talk(TalkType.OPENING_COMMENTS, meeting_section=MeetingSection.INTRO, time_limit=1),
+        Talk(TalkType.TREASURES_TALK, meeting_section=MeetingSection.TREASURES, time_limit=10),
+        Talk(TalkType.SPIRITUAL_GEMS, meeting_section=MeetingSection.TREASURES, time_limit=10),
+        Talk(TalkType.BIBLE_READING, meeting_section=MeetingSection.TREASURES, time_limit=4)
     ]
     remaining = get_schedule_data_auto()
     ministry, living = 1, 1
     for talk in remaining:
         if talk["talkType"] // 100 == 1:
-            talks.append(Talk(talk_type=TalkType.MINISTRY_TALK, time_limit=talk["minutes"], num=ministry))
+            talks.append(Talk(talk_type=TalkType.MINISTRY_TALK, meeting_section=MeetingSection.APPLY_TO_MINISTRY, time_limit=talk["minutes"], num=ministry))
             ministry += 1
         else:
-            talks.append(Talk(talk_type=TalkType.LIVING_TALK, time_limit=talk["minutes"], num=living))
+            talks.append(Talk(talk_type=TalkType.LIVING_TALK, meeting_section=MeetingSection.LIVING_AS_CHRISTIANS, time_limit=talk["minutes"], num=living))
             living += 1
-    talks.append(Talk(TalkType.CONGREGATION_BIBLE_STUDY, time_limit=30))
-    talks.append(Talk(TalkType.CLOSING_COMMENTS, time_limit=3))
+    talks.append(Talk(TalkType.CONGREGATION_BIBLE_STUDY, meeting_section=MeetingSection.LIVING_AS_CHRISTIANS, time_limit=30))
+    talks.append(Talk(TalkType.CLOSING_COMMENTS, meeting_section=MeetingSection.LIVING_AS_CHRISTIANS, time_limit=3))
     return talks
 
 def assemble_schedule_weekend():
     return [
-        Talk(TalkType.PUBLIC_TALK, time_limit=30),
-        Talk(TalkType.WATCHTOWER_STUDY, time_limit=60)
+        Talk(TalkType.PUBLIC_TALK, meeting_section=MeetingSection.WEEKEND, time_limit=30),
+        Talk(TalkType.WATCHTOWER_STUDY, meeting_section=MeetingSection.WEEKEND, time_limit=60)
     ]
 
 def assemble_schedule():

@@ -31,69 +31,11 @@ class AdminService:
         self.trans: TranslationService = trans 
         self.dataservice: DataService = dataservice
         self.auth: AuthService = auth
-        self.report_gen: Generator = Generator()
+        self.report_gen: Generator = Generator(self.trans)
         self.register_endpoints()
 
     def register(self):
         self.app.register_blueprint(self.bp)
-
-    def _construct_report_data(self, data):
-        report_data = {"date": data[0], "pre-talks": [], "meeting-parts": []}
-        meeting_codes = self.trans.get_meeting_codes()
-        strings = self.trans.get_ui_strings()["admin-dash-report-view"]
-        data = sorted(data[1], key=lambda k: (k["talk_type"], k["sequence_number"]))
-        for talk in data:
-            if talk["talk_type"] == 0:
-                report_data["pre-talks"].append({"name": meeting_codes[self.CODE_TABLE[talk["talk_type"]]] + f" {talk['sequence_number'] if talk['sequence_number'] != 0 else ''}",
-                                                 "time_limit": talk["time_limit"],
-                                                 "time_used": talk["measured_time"]})
-                report_data["meeting-parts"].append({"name": strings["treasures"], "color": (52, 116, 128), "talks": []})
-            elif talk["talk_type"] < 3:
-                report_data["meeting-parts"][0]["talks"].append(
-                    {"name": meeting_codes[self.CODE_TABLE[talk["talk_type"]]] + f" {talk['sequence_number'] if talk['sequence_number'] != 0 else ''}",
-                                                 "time_limit": talk["time_limit"],
-                                                 "time_used": talk["measured_time"]}
-                )
-            elif talk["talk_type"] == 3:
-                report_data["meeting-parts"][0]["talks"].append(
-                                    {"name": meeting_codes[self.CODE_TABLE[talk["talk_type"]]] + f"{talk['sequence_number'] if talk['sequence_number'] != 0 else ''}",
-                                                                 "time_limit": talk["time_limit"],
-                                                                 "time_used": talk["measured_time"]}
-                                )
-                report_data["meeting-parts"].append({"name": strings["apply-ministry"], "color": (208, 132, 4), "talks": []})
-            elif talk["talk_type"] < 5:
-                report_data["meeting-parts"][1]["talks"].append(
-                                                    {"name": meeting_codes[self.CODE_TABLE[talk["talk_type"]]] + f" {talk['sequence_number'] if talk['sequence_number'] != 0 else ''}",
-                                                                                 "time_limit": talk["time_limit"],
-                                                                                 "time_used": talk["measured_time"]}
-                                                )  
-            
-            elif talk["talk_type"] == 5 and talk["sequence_number"] == 1:
-                report_data["meeting-parts"].append({"name": strings["living-as-christians"], "color": (183, 41, 20), "talks": []})
-
-                report_data["meeting-parts"][2]["talks"].append(
-                                                    {"name": meeting_codes[self.CODE_TABLE[talk["talk_type"]]] + f" {talk['sequence_number'] if talk['sequence_number'] != 0 else ''}",
-                                                                                 "time_limit": talk["time_limit"],
-                                                                                 "time_used": talk["measured_time"]}
-                                                )
-            elif talk["talk_type"] < 8:
-                report_data["meeting-parts"][2]["talks"].append(
-                                                                    {"name": meeting_codes[self.CODE_TABLE[talk["talk_type"]]] + f" {talk['sequence_number'] if talk['sequence_number'] != 0 else ''}",
-                                                                                                 "time_limit": talk["time_limit"],
-                                                                                                 "time_used": talk["measured_time"]}
-                                                                )
-            elif talk["talk_type"] >= 8:
-                report_data["pre-talks"].append( {"name": meeting_codes[self.CODE_TABLE[talk["talk_type"]]] + f" {talk['sequence_number'] if talk['sequence_number'] != 0 else ''}",
-                                                                                                 "time_limit": talk["time_limit"],
-                                                                                                 "time_used": talk["measured_time"]})
-            else:
-                report_data["meeting-parts"][1]["talks"].append(
-                                                    {"name": meeting_codes[self.CODE_TABLE[talk["talk_type"]]] + f" {talk['sequence_number'] if talk['sequence_number'] != 0 else ''}",
-                                                                                 "time_limit": talk["time_limit"],
-                                                                                 "time_used": talk["measured_time"]}
-                                                )
-        
-        return report_data
         
     def register_endpoints(self):
         self.bp.add_url_rule("/login", "login", self.login, methods=["POST", "GET"])
@@ -122,9 +64,8 @@ class AdminService:
 
     def report_view(self):
         date = request.args.get("date")
-        data = self.dataservice.get_talks(date)  
-        self.report_gen.report_data = self._construct_report_data(data=[date, data])
-        return render_template("admin_service/report_view.html", strings=self.trans.get_ui_strings()["admin-dash-report-view"], date=date, data=data, codes=self.CODE_TABLE, meeting_codes=self.trans.get_meeting_codes())
+        self.report_gen.report_data = self.dataservice.get_meeting_data(date=date)
+        return render_template("admin_service/report_view.html", strings=self.trans.get_ui_strings()["admin-dash-report-view"], date=date, data=self.report_gen.report_data, codes=self.CODE_TABLE, meeting_codes=self.trans.get_meeting_codes())
 
     def get_report(self):
         self.report_gen.generate()
@@ -150,6 +91,7 @@ class AdminService:
             return {"error": f"Unsupported language: {lang}"}, 400
 
         self.trans.language = lang
+        self.report_gen.reset()
         return Response(status=200)
 
     def set_user_password(self):

@@ -2,6 +2,7 @@
   "name": "Nederlands",
 
   "meeting_codes": {
+    "MEETING": "Vergadering",
     "OPENING_COMMENTS": "Inleiding",
     "TREASURES_TALK": "Schatten Lezing",
     "SPIRITUAL_GEMS": "Geestelijke juweeltjes",
@@ -12,6 +13,14 @@
     "CLOSING_COMMENTS": "Slotopmerkingen",
     "PUBLIC_TALK": "Openbare Lezing",
     "WATCHTOWER_STUDY": "Wachttorenstudie"
+  },
+
+  "meeting_section_codes": {
+    "INTRO": null,
+    "TREASURES_FROM_GODS_WORD": "Schatten uit Gods woord",
+    "APPLY_YOURSELF_TO_THE_FIELD_MINISTRY": "Leg je toe op de velddienst",
+    "LIVING_AS_CHRISTIANS": "Leven als christenen",
+    "WEEKEND": "Weekend"
   },
 
   "ui": {

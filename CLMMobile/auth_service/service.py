@@ -37,7 +37,7 @@ def get_secret_key():
     return secrets.token_hex(16)
 
 class AuthService:
-    HOME_PATH = pathlib.Path.home().joinpath(".clmtimer")
+    HOME_PATH = pathlib.Path.home().joinpath(".clmmobile")
     AUTH_DB = HOME_PATH.joinpath(".auth.db")
 
     class Credential(Model):

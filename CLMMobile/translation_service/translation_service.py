@@ -39,6 +39,9 @@ class TranslationService:
             self._cached_meeting_codes = self._get("meeting_codes")
         return self._cached_meeting_codes
 
+    def get_meeting_section_codes(self):
+        return self._get("meeting_section_codes")
+
     def get_ui_strings(self):
         if self._cached_ui_strings is None:
             self._cached_ui_strings = self._get("ui")

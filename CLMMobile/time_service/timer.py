@@ -2,23 +2,24 @@ from flask_socketio import SocketIO
 import threading
 import time 
 
-from .schedule_service import assemble_schedule
+from schedule_service import assemble_schedule
+from data_service import DataService
 
 class Timer:
-    def __init__(self, socketio, db, limit: int=1):
-        self.socket = socketio 
-        self.db = db
+    def __init__(self, socketio: SocketIO, db: DataService, limit: int=1):
+        self.socket: SocketIO = socketio 
+        self.db: DataService = db
 
         self.limit: int = 60 * limit 
         self.remaining: int = self.limit
         self.over_time: int = 0
-        self.end_time = None 
-        self.running = False
+        self.end_time: int | None = None 
+        self.running: bool = False
 
-        self.lock = threading.Lock()
+        self.lock: threading.Lock = threading.Lock()
 
-        self.schedule = assemble_schedule()
-        self.current = 0
+        self.schedule: list = assemble_schedule()
+        self.current: int = 0
 
         self.setup_time()
         self.socket.start_background_task(self._run)
@@ -47,7 +48,7 @@ class Timer:
             self._emit(emit_data)
         # save the data to a database
         talk = self.schedule[self.current]
-        self.db.add_talk(talk.talk_type.value, self.limit - self.remaining + self.over_time, self.limit // 60, talk.num)
+        self.db.add_talk(talk.talk_type.value, talk.meeting_section.value, self.limit - self.remaining + self.over_time, self.limit // 60, talk.num)
         # go to the next talk unless this was the last one, if it is the last one we revert to the first talk
         self.next()
 

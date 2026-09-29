@@ -2,6 +2,7 @@
   "name": "English",
 
   "meeting_codes": {
+    "MEETING": "Meeting",
     "OPENING_COMMENTS": "Opening Comments",
     "TREASURES_TALK": "Treasures Talk",
     "SPIRITUAL_GEMS": "Spiritual Gems",
@@ -12,6 +13,14 @@
     "CLOSING_COMMENTS": "Closing Comments",
     "PUBLIC_TALK": "Public Talk",
     "WATCHTOWER_STUDY": "Watchtower Study"
+  },
+
+  "meeting_section_codes": {
+    "INTRO": null,
+    "TREASURES_FROM_GODS_WORD": "Treasures from Gods word",
+    "APPLY_YOURSELF_TO_THE_FIELD_MINISTRY": "Apply yourself to the field ministry",
+    "LIVING_AS_CHRISTIANS": "Living as christians",
+    "WEEKEND": "Weekend"
   },
 
   "ui": {
