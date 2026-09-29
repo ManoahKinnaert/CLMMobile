@@ -1,8 +1,8 @@
 from flask import Flask, Blueprint, render_template, request, session, redirect, url_for, Response, send_file
-from auth_service import role_required, AuthService
-from translation_service import TranslationService
-from data_service import DataService
-from report_service import Generator
+from CLMMobile.auth_service import role_required, AuthService
+from CLMMobile.translation_service import TranslationService
+from CLMMobile.data_service import DataService
+from CLMMobile.report_service import Generator
 import pathlib
 
 class AdminService:

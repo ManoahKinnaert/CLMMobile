@@ -2,8 +2,8 @@ from flask_socketio import SocketIO
 import threading
 import time 
 
-from schedule_service import assemble_schedule
-from data_service import DataService
+from CLMMobile.schedule_service import assemble_schedule
+from CLMMobile.data_service import DataService
 
 class Timer:
     def __init__(self, socketio: SocketIO, db: DataService, limit: int=1):

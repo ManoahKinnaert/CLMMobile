@@ -1,7 +1,7 @@
 from fpdf import FPDF
 from io import BytesIO
-from translation_service import TranslationService
-from schedule_service.schedule_service import TalkType
+from CLMMobile.translation_service import TranslationService
+from CLMMobile.schedule_service.schedule_service import TalkType
 
 class Generator:
     FONT_FAMILY = "Helvetica"

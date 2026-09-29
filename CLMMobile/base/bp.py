@@ -5,7 +5,7 @@ import qrcode
 import base64
 from io import BytesIO
 
-from translation_service import TranslationService
+from CLMMobile.translation_service import TranslationService
 
 class Base:
     FILE = pathlib.Path(__file__).resolve().parent.parent

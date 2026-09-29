@@ -1,4 +1,4 @@
-from data_service.models import DB_PROXY, Meeting, MeetingSection, Talk
+from CLMMobile.data_service.models import DB_PROXY, Meeting, MeetingSection, Talk
 from peewee import *
 import pathlib
 import datetime

@@ -2,9 +2,9 @@ from flask import Flask, Blueprint, render_template, jsonify, request, session, 
 from flask_socketio import SocketIO
 import pathlib 
 
+from CLMMobile.auth_service import role_required, socket_role_required, AuthService
+from CLMMobile.translation_service import TranslationService
 from .timer import Timer
-from auth_service import role_required, socket_role_required, AuthService
-from translation_service import TranslationService
 
 class TimeService:
     FILE = pathlib.Path(__file__).resolve().parent.parent

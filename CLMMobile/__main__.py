@@ -1,15 +1,15 @@
 from flask import Flask 
 from flask_socketio import SocketIO
 
-from time_service import TimeService
-from time_service.timer import Timer
-from settings_service import SettingsService
-from base import Base
-from webclock_service import WebclockService
-from translation_service import TranslationService
-from data_service import DataService
-from admin_service import AdminService
-from auth_service import get_secret_key, AuthService
+from CLMMobile.time_service import TimeService
+from CLMMobile.time_service.timer import Timer
+from CLMMobile.settings_service import SettingsService
+from CLMMobile.base import Base
+from CLMMobile.webclock_service import WebclockService
+from CLMMobile.translation_service import TranslationService
+from CLMMobile.data_service import DataService
+from CLMMobile.admin_service import AdminService
+from CLMMobile.auth_service import get_secret_key, AuthService
 
 server = Flask(__name__, static_folder=None, template_folder=None)
 server.secret_key = get_secret_key()

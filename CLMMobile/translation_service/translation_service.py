@@ -2,7 +2,7 @@ import json
 import pathlib
 import os 
 
-from settings_service import SettingsService
+from CLMMobile.settings_service import SettingsService
 
 class TranslationService:
     FILE = pathlib.Path(__file__).resolve().parent.parent 
