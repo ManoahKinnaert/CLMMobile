@@ -49,7 +49,7 @@ class DataService:
         except IntegrityError:
             print("[ERROR]: DB Integrity error")
 
-    def add_talk(self, talk_type, meeting_section, time: int, time_limit: int, seq_num: int=0):
+    def add_talk(self, talk_type, meeting_section: int, time: int, time_limit: int, seq_num: int=0):
         if self.meeting is None: print("[ERROR]: meeting is None"); return
         try:
             with self.db.atomic():
@@ -81,8 +81,10 @@ class DataService:
     def get_meeting_data(self, date: str, section_table: list=None):
         sections = self._get_meeting_sections(date)
         data = {"date": date, "meeting-sections": {}}
+        print(sections)
         for section in sections:
             talks = [talk.__data__ for talk in Talk.select().join(MeetingSection).where(Talk.meeting_section == section)]
+            for t in talks: t["meeting_section"] = section.section_type
             data["meeting-sections"][self._SECTION_TABLE[section.section_type]] = talks
         return data 
 

@@ -9,53 +9,29 @@ block css %}
   <a href="{{ url_for('admin_service.reports')}}"
     >{{ strings['back-to-dash'] }}</a
   >
-  <h1>{{ strings['meeting'] }} {{ date }}</h1>
-  {% for talk in data %} {% if talk['talk_type'] == 0 %}
-  <div class="talk">
-    <p class="talk-title">
-      {{ meeting_codes[codes[talk['talk_type']]] }} ({{ talk['time_limit']}}:00)
+  <h1>{{ strings['meeting'] }} {{ data['date'] }}</h1>
+  {% for talks in data['meeting-sections'] %}
+    {% if talks[0]['meeting_section'] == 1 %}
+    <h1 class="treasures">{{ strings['treasures'] }}</h1>
+    {% elif talks[0]['meeting_section'] == 2 %}
+    <h1 class="apply-ministry">{{ strings['apply-ministry'] }}</h1>
+    {% elif talks[0]['meeting_section'] == 3 %}
+    <h1 class="living-as-christians">{{ strings['living-as-christians'] }}</h1>
+    {% elif talks[0]['meeting_section'] == 4 %}
+    <h1 class="weekend">{{ strings['weekend'] }}</h1>
+    {% endif%}
+    {% for talk in talks %}
+    <div class="talk">
+      <p class="talk-title">
+        {{ meeting_codes[codes[talk['talk_type']]] }} ({{ talk['time_limit']}}:00)
+    </p class="talk-time">
+     
+        {{ talk['measured_time'] // 60 }}:{{ talk['measured_time'] % 60 }}
     </p>
-    <p class="talk-time">
-      {{ talk['measured_time'] // 60 }}:{{ talk['measured_time'] % 60 }}
-    </p>
-  </div>
-  <div class="treasures">
-    <p>{{ strings['treasures'] }}</p>
-  </div>
-  {% elif talk['talk_type'] == 3 %}
-  <div class="talk">
-    <p class="talk-title">
-      {{ meeting_codes[codes[talk['talk_type']]] }} ({{ talk['time_limit']}}:00)
-    </p>
-    <p class="talk-time">
-      {{ talk['measured_time'] // 60 }}:{{ talk['measured_time'] % 60 }}
-    </p>
-  </div>
-  <div class="apply-to-ministry">
-    <p>{{ strings['apply-ministry'] }}</p>
-  </div>
-  {% elif talk['talk_type'] == 5 and talk['sequence_number'] == 1 %}
-  <div class="living-as-christians">
-    <p>{{ strings['living-as-christians'] }}</p>
-  </div>
-  <div class="talk">
-    <p class="talk-title">
-      {{ meeting_codes[codes[talk['talk_type']]] }} {% if talk['sequence_number'] > 0%} - {{ talk['sequence_number'] }} {% endif %} ({{ talk['time_limit']}}:00)
-    </p>
-    <p class="talk-time">
-      {{ talk['measured_time'] // 60 }}:{{ talk['measured_time'] % 60 }}
-    </p>
-  </div>
-  {% else %}
-  <div class="talk">
-    <p class="talk-title">
-      {{ meeting_codes[codes[talk['talk_type']]] }} {% if talk['sequence_number'] > 0%} - {{ talk['sequence_number'] }} {% endif %} ({{ talk['time_limit']}}:00)
-    </p>
-    <p class="talk-time">
-      {{ talk['measured_time'] // 60 }}:{{ talk['measured_time'] % 60 }}
-    </p>
-  </div>
-  {% endif %} {% endfor %}
+    </div>
+    {% endfor %}
+    {% endfor %}
+    
   <a href="{{ url_for('admin_service.download_report') }}" id="export-btn">{{ strings['export'] }}</a>
 </div>
 {% endblock %}

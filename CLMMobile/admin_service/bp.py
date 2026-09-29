@@ -65,8 +65,12 @@ class AdminService:
     def report_view(self):
         date = request.args.get("date")
         self.report_gen.report_data = self.dataservice.get_meeting_data(date=date)
-        print(self.report_gen.report_data)
-        return render_template("admin_service/report_view.html", strings=self.trans.get_ui_strings()["admin-dash-report-view"], date=date, data=self.report_gen.report_data, codes=self.CODE_TABLE, meeting_codes=self.trans.get_meeting_codes())
+        # format the data
+        data = self.report_gen.report_data
+        data["meeting-sections"] = sorted(data["meeting-sections"].values(), key=lambda k: k[0]["meeting_section"])
+        for d in data["meeting-sections"]: sorted(d, key= lambda k: (k["talk_type"], k["sequence_number"]))
+        print(data["meeting-sections"])
+        return render_template("admin_service/report_view.html", strings=self.trans.get_ui_strings()["admin-dash-report-view"], date=date, data=data, codes=self.CODE_TABLE, meeting_codes=self.trans.get_meeting_codes())
 
     def get_report(self):
         self.report_gen.generate()
