@@ -2,7 +2,7 @@ from flask_socketio import SocketIO
 import threading
 import time 
 
-from .schedule_service import assemble_schedule
+from schedule_service import assemble_schedule
 
 class Timer:
     def __init__(self, socketio, db, limit: int=1):
