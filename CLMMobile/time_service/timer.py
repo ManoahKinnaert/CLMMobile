@@ -48,7 +48,6 @@ class Timer:
             self._emit(emit_data)
         # save the data to a database
         talk = self.schedule[self.current]
-        print("[DEBUG]:", talk.meeting_section.value)
         self.db.add_talk(talk.talk_type.value, talk.meeting_section.value, self.limit - self.remaining + self.over_time, self.limit // 60, talk.num)
         # go to the next talk unless this was the last one, if it is the last one we revert to the first talk
         self.next()

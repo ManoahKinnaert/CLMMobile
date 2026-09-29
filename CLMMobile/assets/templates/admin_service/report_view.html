@@ -10,24 +10,30 @@ block css %}
     >{{ strings['back-to-dash'] }}</a
   >
   <h1>{{ strings['meeting'] }} {{ data['date'] }}</h1>
-  {% for talks in data['meeting-sections'] %}
-    {% if talks[0]['meeting_section'] == 1 %}
-    <h2 class="treasures">{{ strings['treasures'] }}</h2>
-    {% elif talks[0]['meeting_section'] == 2 %}
-    <h2 class="apply-to-ministry">{{ strings['apply-ministry'] }}</h2>
-    {% elif talks[0]['meeting_section'] == 3 %}
-    <h2 class="living-as-christians">{{ strings['living-as-christians'] }}</h2>
-    {% elif talks[0]['meeting_section'] == 4 %}
-    <h2 class="weekend">{{ strings['weekend'] }}</h2>
-    {% endif%}
-    {% for talk in talks %}
-    <div class="talk">
-      <p class="talk-title">{{ meeting_codes[codes[talk['talk_type']]] }} ({{ talk['time_limit']}}:00)</p>
-      <p class="talk-time">{{ talk['measured_time'] // 60 }}:{{ talk['measured_time'] % 60 }}</p>
-    </div>
-    {% endfor %}
-    {% endfor %}
-    
-  <a href="{{ url_for('admin_service.download_report') }}" id="export-btn">{{ strings['export'] }}</a>
+  {% for talks in data['meeting-sections'] %} {% if talks[0]['meeting_section']
+  == 1 %}
+  <h2 class="treasures">{{ strings['treasures'] }}</h2>
+  {% elif talks[0]['meeting_section'] == 2 %}
+  <h2 class="apply-to-ministry">{{ strings['apply-ministry'] }}</h2>
+  {% elif talks[0]['meeting_section'] == 3 %}
+  <h2 class="living-as-christians">{{ strings['living-as-christians'] }}</h2>
+  {% elif talks[0]['meeting_section'] == 4 %}
+  <h2 class="weekend">{{ strings['weekend'] }}</h2>
+  {% endif%} {% for talk in talks %}
+  <div class="talk">
+    <p class="talk-title">
+      {{ meeting_codes[codes[talk['talk_type']]] }} {% if talk['sequence_number']
+      > 0 %} {{ talk['sequence_number'] }}{% endif %} ({{
+      talk['time_limit']}}:00)
+    </p>
+    <p class="talk-time">
+      {{ talk['measured_time'] // 60 }}:{{ talk['measured_time'] % 60 }}
+    </p>
+  </div>
+  {% endfor %} {% endfor %}
+
+  <a href="{{ url_for('admin_service.download_report') }}" id="export-btn"
+    >{{ strings['export'] }}</a
+  >
 </div>
 {% endblock %}

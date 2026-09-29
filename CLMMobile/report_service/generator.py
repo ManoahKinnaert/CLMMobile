@@ -1,6 +1,7 @@
 from fpdf import FPDF
 from io import BytesIO
 from translation_service import TranslationService
+from schedule_service.schedule_service import TalkType
 
 class Generator:
     FONT_FAMILY = "Helvetica"
@@ -38,11 +39,12 @@ class Generator:
         self.pdf.set_font(self.FONT_FAMILY, size=self.TITLE_SIZE, style="B")
 
         # generate the meeting header
-        self.pdf.cell(0, 10, text=f"Meeting {self._data["date"]}", new_x="LMARGIN", new_y="NEXT", align="L")
+        self.pdf.cell(0, 10, text=f"{self.trans_talks["MEETING"]} {self._data["date"]}", new_x="LMARGIN", new_y="NEXT", align="L")
         self.pdf.ln(3)
         # generate stuff for meeting section
+        keys = list(self.COLOR_TABLE.keys())
         for part in self._data["meeting-sections"]:
-            self._gen_meeting_section(part)
+            self._gen_meeting_section(key=keys[part[0]["meeting_section"]], data=part)
 
     def _gen_meeting_section(self, key: str, data: dict):
         self.pdf.ln(3)
@@ -57,13 +59,13 @@ class Generator:
 
     def _render_talk_items(self, talks: list):
         for talk in talks:
-            self._render_talk(name=f"{self.trans_talks[talk["talk_type"]]} {talk["sequence_number"] if talk["sequence_number"] > 0 else ""}", time_used=talk["measured_time"], time_limit=talk["time_limit"])
+            self._render_talk(name=f"{self.trans_talks[TalkType(talk["talk_type"]).name]} {talk["sequence_number"] if talk["sequence_number"] > 0 else ""}", time_used=talk["measured_time"], time_limit=talk["time_limit"])
 
     def _render_talk(self, name: str, time_used: int, time_limit: int):
         self.pdf.set_fill_color(self.TALK_FILL_COLOR)
         self.pdf.set_text_color(self.DEFAULT_TEXT_COLOR)
         self.pdf.set_font(self.FONT_FAMILY, size=self.NORMAL_SIZE)
-        self.pdf.cell(0, 6, text=f"{name}({time_limit}:00)", align="L", fill=True)
+        self.pdf.cell(0, 6, text=f"{name} ({time_limit}:00)", align="L", fill=True)
         self.pdf.cell(0, 6, text=f"{time_used // 60}:{time_used % 60}", align="R", new_x="LMARGIN", new_y="NEXT", fill=True)
         self.pdf.ln(1)
         
@@ -73,8 +75,8 @@ class Generator:
     def reset(self):
         self.pdf = FPDF(orientation="P", unit="mm", format="A4")
         self.report_data = None
-        self.trans_sections = self.trans.get_meeting_section_codes()
-        self.trans_talks = self.trans.get_meeting_codes()
+        self.trans_sections = self._trans.get_meeting_section_codes()
+        self.trans_talks = self._trans.get_meeting_codes()
 
     def get_pdf_bytes(self):
         pdf_bytes = BytesIO(self.pdf.output())

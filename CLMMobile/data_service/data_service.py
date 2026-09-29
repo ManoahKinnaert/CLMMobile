@@ -81,11 +81,13 @@ class DataService:
     def get_meeting_data(self, date: str, section_table: list=None):
         sections = self._get_meeting_sections(date)
         data = {"date": date, "meeting-sections": {}}
-        print(sections)
         for section in sections:
             talks = [talk.__data__ for talk in Talk.select().join(MeetingSection).where(Talk.meeting_section == section)]
             for t in talks: t["meeting_section"] = section.section_type
             data["meeting-sections"][self._SECTION_TABLE[section.section_type]] = talks
+        # properly sort the data 
+        data["meeting-sections"] = sorted(data["meeting-sections"].values(), key=lambda k: k[0]["meeting_section"])
+        for d in data["meeting-sections"]: sorted(d, key= lambda k: (k["talk_type"], k["sequence_number"]))
         return data 
 
     def close(self):
