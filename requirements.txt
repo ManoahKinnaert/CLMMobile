@@ -3,4 +3,4 @@ flask-socketio==5.6.1
 qrcode==8.2
 Pillow==11.3.0
 peewee==4.5.2
-fpdf2==2.8.9
+fpdf2==2.8.4
