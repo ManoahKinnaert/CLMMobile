@@ -16,7 +16,8 @@ class Generator:
         "INTRO": None,
         "TREASURES_FROM_GODS_WORD": (52, 116, 128),
         "APPLY_YOURSELF_TO_THE_FIELD_MINISTRY": (208, 132, 4),
-        "LIVING_AS_CHRISTIANS": (183, 41, 20)
+        "LIVING_AS_CHRISTIANS": (183, 41, 20),
+        "WEEKEND": (20, 100, 200)
     }
 
     def __init__(self, trans: TranslationService, meeting_data: dict | None=None):
