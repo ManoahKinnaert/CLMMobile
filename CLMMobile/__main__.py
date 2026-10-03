@@ -1,4 +1,4 @@
-from flask import Flask 
+from flask import Flask, render_template 
 from flask_socketio import SocketIO
 
 from CLMMobile.time_service import TimeService
@@ -28,6 +28,15 @@ Base(server, PORT, trans).register()
 TimeService(server, socketio, timer, trans, auth).register()
 WebclockService(server, socketio, timer, trans).register()
 AdminService(server, trans, db, auth).register()
+
+# set basic 404 and 500 screens
+@server.errorhandler(404)
+def handle_404(_):
+    return render_template("base/404.html"), 404
+
+@server.errorhandler(500)
+def handle_500(_):
+    return render_template("base/500.html"), 500
 
 def run_server(debug=False):
     try:

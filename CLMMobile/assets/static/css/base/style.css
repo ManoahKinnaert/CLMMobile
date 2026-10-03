@@ -13,6 +13,8 @@
 }
 
 .overview {
+  display: flex;
+  flex-direction: column;
   max-width: 700px;
   width: 100%;
   margin: 40px auto 0;
@@ -24,6 +26,8 @@
   box-shadow: 0 4px 15px rgb(0 0 0 / 20%);
 
   text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .adresscollection {
@@ -80,6 +84,14 @@ h1 {
   color: var(--text-highlighted);
   font-size: clamp(24px, 6vw, 35px);
   text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+svg {
+  display: block;
 }
 
 p {

@@ -70,31 +70,39 @@ class AdminService:
         return render_template("admin_service/report_view.html", strings=self.trans.get_ui_strings()["admin-dash-report-view"], date=date, data=self.report_gen.report_data, codes=self.CODE_TABLE, meeting_codes=self.trans.get_meeting_codes())
 
     def get_report(self):
-        self.report_gen.generate()
-        pdf_bytes = self.report_gen.get_pdf_bytes()
-        self.report_gen.reset()
-        return send_file(
-            pdf_bytes,
-            mimetype="application/pdf",
-            as_attachment=True,
-            download_name="document.pdf",
-    ) 
+        try:
+            self.report_gen.generate()
+            pdf_bytes = self.report_gen.get_pdf_bytes()
+            self.report_gen.reset()
+            return send_file(
+                pdf_bytes,
+                mimetype="application/pdf",
+                as_attachment=True,
+                download_name="document.pdf",
+            ) 
+        except Exception:
+            return Response(status=500)
         
     def set_language(self):
-        data = request.get_json(silent=True)
-        if not data or "language" not in data:
-            return {"error": "Missing 'lang' in request body"}, 400
+        try:
+            data = request.get_json(silent=True)
+            if not data or "language" not in data:
+                return {"error": "Missing 'lang' in request body"}, 400
 
-        lang = data["language"]
-        if not isinstance(lang, str) or not lang.strip():
-            return {"error": "'language' must be a non-empty string"}, 400
+            lang = data["language"]
+            if not isinstance(lang, str) or not lang.strip():
+                return {"error": "'language' must be a non-empty string"}, 400
 
-        if lang not in self.trans.get_languages():
-            return {"error": f"Unsupported language: {lang}"}, 400
+            if lang not in self.trans.get_languages():
+                return {"error": f"Unsupported language: {lang}"}, 400
 
-        self.trans.language = lang
-        self.report_gen.reset()
-        return Response(status=200)
+            self.trans.language = lang
+            self.report_gen.reset()
+            return Response(status=200)
+        except (TypeError, KeyError, ValueError):
+            return Response(status=400)
+        except Exception:
+            return Response(status=500)
 
     def set_user_password(self):
         try:

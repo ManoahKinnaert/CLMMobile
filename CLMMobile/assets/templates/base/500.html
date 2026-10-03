@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block title %} CLMMobile - 404 {% endblock %} {%
+block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('base.static', filename='css/base/style.css') }}"
+/>
+{% endblock %} {% block content %}
+<div class="content">
+  <div class="overview">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="240"
+      height="240"
+      fill="#ff2626"
+      viewBox="0 0 24 24"
+    >
+      <!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+      <path d="M11 9h2v6h-2zm0 8h2v2h-2z"></path>
+      <path
+        d="M12.87 2.51c-.35-.63-1.4-.63-1.75 0l-9.99 18c-.17.31-.17.69.01.99.18.31.51.49.86.49h20c.35 0 .68-.19.86-.49a1 1 0 0 0 .01-.99zM3.7 20 12 5.06 20.3 20z"
+      ></path>
+    </svg>
+    <h2>Error 500</h2>
+  </div>
+</div>
+{% endblock %}
