@@ -41,7 +41,11 @@ class Base:
             s.close()
         return IP 
 
+    def refresh_ip(self):
+        self._ip = self._get_ip()
+
     def generate_qr_codes(self):
+        self.refresh_ip()
         webclock_adress = f"http://{self._ip}:{self.port}/webclockservice"
         timercontrol_adress = f"http://{self._ip}:{self.port}/timeservice/control"
         webclock_qr = qrcode.make(webclock_adress)
@@ -53,5 +57,6 @@ class Base:
 
     # endpoints
     def base_endpoint(self):
+        self.webclock_qr, self.timer_qr = self.generate_qr_codes()
         return render_template("base/index.html", ip_local=self._local_ip, ip_global=self._ip, port=self.port,
                                webclock_qr=self.webclock_qr, timer_qr=self.timer_qr, strings=self.trans.get_ui_strings()["home"])
