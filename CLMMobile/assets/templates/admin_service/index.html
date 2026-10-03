@@ -28,6 +28,68 @@
         console.error("Error changing language:", error)
       })
   }
+
+  function setAdminPassword(event) {
+    event.preventDefault()
+
+    const url = "{{ url_for('admin_service.change_admin_pass') }}"
+    
+    const box1Pass = document.getElementById("admin-box-1").value
+    const box2Pass = document.getElementById("admin-box-2").value
+
+    if (box1Pass !== box2Pass) {
+      alert("Passwords don't match!")
+      return
+    }
+
+    fetch (url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ admin_password: box1Pass })
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`)
+      }
+      location.reload()
+    })
+    .catch((error) => {
+      console.error("Error setting password: ", error)
+    })
+  }
+
+  function setUserPassword(event) {
+    event.preventDefault()
+
+    const url = "{{ url_for('admin_service.change_user_pass') }}"
+    
+    const box1Pass = document.getElementById("user-box-1").value
+    const box2Pass = document.getElementById("user-box-2").value
+
+    if (box1Pass != box2Pass) {
+      alert("Passwords don't match!")
+      return
+    }
+
+    fetch (url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user_password: box1Pass })
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`)
+      }
+      location.reload()
+    })
+    .catch((error) => {
+      console.error("Error setting password: ", error)
+    })
+  }
 </script>
 <div class="content">
   <div class="language-selector">
@@ -60,16 +122,16 @@
   <h4>{{ strings['security-lbl'] }}</h4>
   <button id="change-passwords-btn">{{ strings['change-passwords-btn'] }}</button>
   <div id="passwords-container">
-    <form class="user-password-form" action="" method="post">
+    <form class="user-password-form" onsubmit="setUserPassword(event)">
         <h5>{{ strings['user-password-lbl'] }}</h5>
-        <input type="password" name="" id="" placeholder="{{ strings['password-placeholder'] }}">
-        <input type="password" name="" id="" placeholder="{{ strings['repeat-password-placeholder'] }}">
+        <input type="password" name="" id="user-box-1" placeholder="{{ strings['password-placeholder'] }}">
+        <input type="password" name="" id="user-box-2" placeholder="{{ strings['repeat-password-placeholder'] }}">
         <button class="submit-btn" type="submit">{{ strings['change-password-btn'] }}</button>
     </form>
-    <form class="admin-password-form" action="" method="post">
+    <form class="admin-password-form" onsubmit="setAdminPassword(event)">
       <h5>{{ strings['admin-password-lbl'] }}</h5>
-        <input type="password" name="" id="" placeholder="{{ strings['password-placeholder'] }}">
-        <input type="password" name="" id="" placeholder="{{ strings['repeat-password-placeholder'] }}">
+        <input type="password" name="" id="admin-box-1" placeholder="{{ strings['password-placeholder'] }}">
+        <input type="password" name="" id="admin-box-2" placeholder="{{ strings['repeat-password-placeholder'] }}">
         <button class="submit-btn" type="submit">{{ strings['change-password-btn'] }}</button>
     </form>
   </div>

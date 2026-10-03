@@ -44,6 +44,8 @@ class AdminService:
         self.bp.add_url_rule("/reports/view", "reports_view", role_required("admin", "admin_service.login")(self.report_view), methods=["GET"])
         self.bp.add_url_rule("/set_language", "set_language", role_required("admin", "admin_service.login")(self.set_language), methods=["POST"])
         self.bp.add_url_rule("/reports/view/download", "download_report", role_required("admin", "admin_service.login")(self.get_report), methods=["GET"])
+        self.bp.add_url_rule("/auth/user_pass", "change_user_pass", role_required("admin", "admin_service.login")(self.set_user_password), methods=["POST"])
+        self.bp.add_url_rule("/auth/admin_pass", "change_admin_pass", role_required("admin", "admin_service.login")(self.set_admin_password), methods=["POST"])
 
     def login(self):
         if request.method == "POST":
@@ -95,7 +97,19 @@ class AdminService:
         return Response(status=200)
 
     def set_user_password(self):
-        pass 
+        try:
+            user_password = request.get_json()["user_password"]
+            self.auth.set_passcode(role="user", passcode=user_password)
+        except (TypeError, KeyError, ValueError):
+            return Response(status=400)
+        except Exception:
+            return Response(status=500)
 
     def set_admin_password(self):
-        pass 
+        try:
+            admin_password = request.get_json()["admin_password"]
+            self.auth.set_passcode(role="admin", passcode=admin_password) 
+        except (TypeError, KeyError, ValueError):
+            return Response(status=400)
+        except Exception:
+            return Response(status=500)
