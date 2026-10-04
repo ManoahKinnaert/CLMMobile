@@ -57,15 +57,19 @@ class DataService:
                     meeting=self.meeting,
                     section_type = meeting_section
                 )
-                Talk.get_or_create(
+                talk, created = Talk.get_or_create(
                     meeting_section=section,
                     talk_type=talk_type,
-                    measured_time=time,
-                    time_limit=time_limit,
-                    sequence_number=seq_num
+                    sequence_number=seq_num,
+                    defaults={'measured_time': time, 'time_limit': time_limit}
                 )
+                if not created:
+                    talk.measured_time = time 
+                    talk.time_limit = time_limit
+                    talk.save()
         except IntegrityError:
             print("[ERROR]: DB Integrity error")
+        except Exception as e: print(e)
 
     def get_meetings(self):
         meetings = Meeting.select()
@@ -87,7 +91,7 @@ class DataService:
             data["meeting-sections"][self._SECTION_TABLE[section.section_type]] = talks
         # properly sort the data 
         data["meeting-sections"] = sorted(data["meeting-sections"].values(), key=lambda k: k[0]["meeting_section"])
-        for d in data["meeting-sections"]: sorted(d, key= lambda k: (k["talk_type"], k["sequence_number"]))
+        for d in data["meeting-sections"]: d.sort(key=lambda k: (k["talk_type"], k["sequence_number"]))
         return data 
 
     def close(self):

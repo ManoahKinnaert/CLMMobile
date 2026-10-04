@@ -29,12 +29,12 @@ class Talk(BaseModel):
     """
     meeting_section = ForeignKeyField(MeetingSection)   # the meeting where this talk belongs to -> foreignkey
     talk_type = IntegerField()                          # the talk type represented as an int -> see schedule_service for more info              
-    measured_time = IntegerField()                      # the measured time of the talk in seconds
-    time_limit = IntegerField()                         # the time limit of the talk in minutes
-    sequence_number = IntegerField()                    # the 'count' of the talk (so if this is the first, second, third, ect. talk with this talk type)
+    measured_time = IntegerField(default=0)                      # the measured time of the talk in seconds
+    time_limit = IntegerField(default=0)                         # the time limit of the talk in minutes
+    sequence_number = IntegerField(default=0)                    # the 'count' of the talk (so if this is the first, second, third, ect. talk with this talk type)
     
     class Meta:
         """
-        Primary key represented as a composite key of talk_type and sequence_number
+        Primary key represented as a composite key of meeting_section, talk_type and sequence_number
         """
-        primary_key = CompositeKey('talk_type', 'sequence_number')
+        primary_key = CompositeKey('meeting_section', 'talk_type', 'sequence_number')
