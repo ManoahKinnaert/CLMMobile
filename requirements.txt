@@ -4,3 +4,5 @@ qrcode==8.2
 Pillow==11.3.0
 peewee==4.5.2
 fpdf2==2.8.4
+pywebview==6.2.1
+gevent

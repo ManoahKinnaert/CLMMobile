@@ -16,7 +16,7 @@ class Base:
                             template_folder=str(self.FILE / "assets/templates"),
                             static_folder=str(self.FILE / "assets/static"))
 
-        self._ip = self._get_ip()
+        self._ip = self.get_ip()
         self._local_ip = "127.0.0.1"
         self.port = port
         self.webclock_qr, self.timer_qr = self.generate_qr_codes()
@@ -29,7 +29,7 @@ class Base:
     def register_endpoints(self):
         self.bp.add_url_rule("/", "base", self.base_endpoint, methods=["GET"])
 
-    def _get_ip(self):
+    def get_ip(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.settimeout(0)
         try:
@@ -42,7 +42,7 @@ class Base:
         return IP 
 
     def refresh_ip(self):
-        self._ip = self._get_ip()
+        self._ip = self.get_ip()
 
     def generate_qr_codes(self):
         self.refresh_ip()
