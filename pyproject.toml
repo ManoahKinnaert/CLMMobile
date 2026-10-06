@@ -16,7 +16,7 @@ dependencies = [
     "peewee==4.5.2",
     "fpdf2==2.8.4",
     "pywebview==6.2.1",
-    "gevent==26.9.0"
+    "gevent"
 ]
 
 [tool.setuptools]
