@@ -29,3 +29,11 @@ include = ["CLMMobile*"]
 CLMMobile = [
     "assets/**/*"
 ]
+
+[tool.coverage.run]
+source = ["CLMMobile"]
+omit = ["tests/*", "*/__init__.py", "*/__main__.py"]
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = ["pragma: no cover", "if TYPE_CHECKING:"]
