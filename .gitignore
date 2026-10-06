@@ -5,3 +5,6 @@
 *.DS_Store
 # pdf's
 *.pdf
+# other stuff
+*.egg-info
+dist
