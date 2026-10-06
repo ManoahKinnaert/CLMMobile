@@ -5,10 +5,6 @@
 *.DS_Store
 # pdf's
 *.pdf
-# coverage stuff
-.coverage*
-coverage.xml
-htmlcov/
 # other stuff
 *.egg-info
 dist

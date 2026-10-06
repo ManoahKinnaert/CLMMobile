@@ -1,7 +1,6 @@
 # CLMMobile
 
 [![tests](https://github.com/ManoahKinnaert/CLMMobile/actions/workflows/testing.yml/badge.svg)](https://github.com/ManoahKinnaert/CLMMobile/actions/workflows/testing.yml)
-![coverage](.github/badges/coverage.svg)
 
 
 ## Running tests
