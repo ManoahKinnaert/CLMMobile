@@ -33,7 +33,7 @@ def run():
         process.terminate()
         process.join()
     except:
-        subprocess.run(["cat", "/dev/location", "&"])   # for ish
+        #subprocess.run(["cat", "/dev/location", "&"])   # for ish
         run_tui()
     
 if __name__ == "__main__":
