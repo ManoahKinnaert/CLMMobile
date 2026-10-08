@@ -20,8 +20,8 @@ class Generator:
         "WEEKEND": (20, 100, 200)
     }
 
-    def __init__(self, trans: TranslationService, meeting_data: dict | None=None):
-        self._data: dict | None = meeting_data
+    def __init__(self, trans: TranslationService, meeting_data: dict=None):
+        self._data: dict = meeting_data
         self._trans = trans
         self.trans_sections = trans.get_meeting_section_codes()
         self.trans_talks = trans.get_meeting_codes()
@@ -32,7 +32,7 @@ class Generator:
     def report_data(self): return self._data.copy()
 
     @report_data.setter 
-    def report_data(self, new_data: dict | None):
+    def report_data(self, new_data: dict):
         self._data = new_data if new_data is None else new_data.copy()
     
     def generate(self):
