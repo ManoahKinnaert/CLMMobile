@@ -40,7 +40,7 @@ class Generator:
         self.pdf.set_font(self.FONT_FAMILY, size=self.TITLE_SIZE, style="B")
 
         # generate the meeting header
-        self.pdf.cell(0, 10, text=f"{self.trans_talks["MEETING"]} {self._data["date"]}", new_x="LMARGIN", new_y="NEXT", align="L")
+        self.pdf.cell(0, 10, text=f'{self.trans_talks["MEETING"]} {self._data["date"]}', new_x="LMARGIN", new_y="NEXT", align="L")
         self.pdf.ln(3)
         # generate stuff for meeting section
         keys = list(self.COLOR_TABLE.keys())
@@ -60,7 +60,7 @@ class Generator:
 
     def _render_talk_items(self, talks: list):
         for talk in talks:
-            self._render_talk(name=f"{self.trans_talks[TalkType(talk["talk_type"]).name]} {talk["sequence_number"] if talk["sequence_number"] > 0 else ""}", time_used=talk["measured_time"], time_limit=talk["time_limit"])
+            self._render_talk(name=f'{self.trans_talks[TalkType(talk["talk_type"]).name]} {talk["sequence_number"] if talk["sequence_number"] > 0 else ""}', time_used=talk["measured_time"], time_limit=talk["time_limit"])
 
     def _render_talk(self, name: str, time_used: int, time_limit: int):
         self.pdf.set_fill_color(self.TALK_FILL_COLOR)
