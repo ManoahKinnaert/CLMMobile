@@ -9,6 +9,32 @@ SOUNDBOX_API_FEED = "https://soundbox.blob.core.windows.net/meeting-feeds/feed.j
 HOME_PATH = pathlib.Path.home().joinpath(".clmmobile")
 FEED_PATH =  HOME_PATH.joinpath("feed/meetingfeed.json")
 
+FALLBACK_FEED = {
+    "date": datetime.datetime.now().isoformat(),
+    "talks": [
+        {
+            "talkType": 100,
+            "minutes": 5,
+            "isStudentTalk": True
+        },
+        {
+            "talkType": 101,
+            "minutes": 5,
+            "isStudentTalk": True
+        },
+        {
+            "talkType": 102,
+            "minutes": 5,
+            "isStudentTalk": True
+        },
+        {
+            "talkType": 103,
+            "minutes": 5,
+            "isStudentTalk": False
+        }
+    ]
+}
+
 class TalkType(enum.Enum):
     # Treasures from Gods word
     OPENING_COMMENTS = 0
@@ -74,8 +100,11 @@ def get_schedule_data_auto():
     # check if meetingfeed.json exists, if not we create it
     if not FEED_PATH.exists(): update_schedule_data_auto()
     # determine the latest meeting day in the feed, so it can be updated if required (therefore avoiding to constantly call the api service)
-    with open(FEED_PATH, "r") as feed:
-        data = json.load(feed)
+    try:
+        with open(FEED_PATH, "r") as feed:
+            data = json.load(feed)
+    except Exception as e:  # TODO: Log the exception
+        data = FALLBACK_FEED    # switch to fallback feed if something goes wrong
     # determine weeknum and year of the current day
     year, weeknum, dayofweek = datetime.datetime.now().isocalendar()
     # determine weeknum and year of the latest meeting in the cached feed
