@@ -15,7 +15,11 @@ def run_tui():
             break
 
 def run():
-    subprocess.Popen("cat /dev/location > /dev/null &", shell=False)   # for ish, exploit location service on ios to keep running in background
+    subprocess.Popen(
+    ["cat", "/dev/location"],
+    stdout=subprocess.DEVNULL,
+    stderr=subprocess.DEVNULL,
+    )   # for ish, exploit location service on ios to keep running in background
     process = multiprocessing.Process(target=run_server)
     process.start()
     run_tui()
