@@ -1,5 +1,5 @@
 # add package dependencies
-apk add git gcc python3 py3-pip zlib-dev jpeg py3-gevent
+apk add git gcc python3 py3-pip zlib-dev jpeg-dev py3-gevent
 # upgrade pip to latest version
 python3 -m pip install --upgrade pip
 # get setuptools and wheel
