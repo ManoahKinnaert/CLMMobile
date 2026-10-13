@@ -1,5 +1,6 @@
 from flask import Flask, render_template 
 from flask_socketio import SocketIO
+from datetime import timedelta
 
 from CLMMobile.time_service import TimeService
 from CLMMobile.time_service.timer import Timer
@@ -11,8 +12,17 @@ from CLMMobile.data_service import DataService
 from CLMMobile.admin_service import AdminService
 from CLMMobile.auth_service import get_secret_key, AuthService
 
+# server
 server = Flask(__name__, static_folder=None, template_folder=None)
 server.secret_key = get_secret_key()
+# configure session stuff
+server.config.update(
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SECURE=False,
+    SESSION_COOKIE_SAMESITE="Lax",
+    PERMANENT_SESSION_LIFETIME=timedelta(minutes=30),
+)
+# server port and socketio
 PORT = 5051
 socketio = SocketIO(server, async_mode="gevent")
 # non-blueprint services
