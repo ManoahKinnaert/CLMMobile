@@ -1,0 +1,16 @@
+/* Define the colorscheme */
+:root {
+    --accent-color: rgb(20, 210, 240);
+
+    /* Background colors */
+    --bg-1: white;
+    --bg-2: rgb(240, 240, 240);
+    --bg-3: rgb(220, 220, 220);
+
+    /* Text colors */
+    --fg-1: black;
+    --fg-1-transparent: rgba(0, 0, 0, 0.5);
+    --fg-2: rgb(30, 30, 30);
+    --fg-2-transparent: rgba(30, 30, 30, 0.5);
+
+}
