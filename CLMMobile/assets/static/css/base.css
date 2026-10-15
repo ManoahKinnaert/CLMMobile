@@ -4,24 +4,24 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+body {
+    background-color: var(--bg-2);
+}
+
 h1 {
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 h2 {
-    font-size: 1.5rem;
-}
-
-h3 {
     font-size: 1rem;
 }
 
-h4 {
+h3 {
     font-size: 0.7rem;
 }
 
 p {
-    font-size: 0.7rem;
+    font-size: 0.5rem;
 }
 
 nav {
@@ -40,4 +40,16 @@ nav a {
 
 nav a:hover {
     color: var(--fg-2-transparent);
+}
+
+section {
+    margin: 0.5rem;
+    height: 50vh;
+    border-radius: 1rem;
+    padding: 0.1rem 0.5rem;
+    background-color: var(--bg-1);   
+}
+
+article {
+    margin: 0;
 }
