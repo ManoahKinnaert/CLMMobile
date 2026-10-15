@@ -8,3 +8,5 @@
 # other stuff
 *.egg-info
 dist
+# jetbrains stuff
+.idea
