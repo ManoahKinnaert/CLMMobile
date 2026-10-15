@@ -1,0 +1,16 @@
+@import '../colors.css';
+
+.info-card {
+    margin: 2rem;
+    height: 50vh;
+    border-radius: 1rem;
+    padding: 0.1rem 0.5rem;
+    background-color: var(--bg-1);   
+    box-shadow: 0 1rem 2rem 0.1rem black;
+}
+
+.info {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}

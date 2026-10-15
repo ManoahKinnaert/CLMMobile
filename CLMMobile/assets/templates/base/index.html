@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}Test{% endblock %}
 {% block css %}
-<link rel="stylesheet" href="{{ url_for('base.static', filename='')}}">
+<link rel="stylesheet" href="{{ url_for('base.static', filename='css/base/style.css') }}">
 {% endblock %}
 {% block content %}
-<section>
-    <article>
+<section class="info-card">
+    <article class="info">
         <h1>Overview - How to connect</h1>
     </article>
 </section>

@@ -42,14 +42,3 @@ nav a:hover {
     color: var(--fg-2-transparent);
 }
 
-section {
-    margin: 0.5rem;
-    height: 50vh;
-    border-radius: 1rem;
-    padding: 0.1rem 0.5rem;
-    background-color: var(--bg-1);   
-}
-
-article {
-    margin: 0;
-}
