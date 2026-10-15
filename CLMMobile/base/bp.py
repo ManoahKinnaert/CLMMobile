@@ -11,19 +11,16 @@ class Base:
 
         self._bp: Blueprint = Blueprint("base",
                                          __name__, 
-                                        template_folder=utils.TEMPLATES_DIR,
-                                        static_folder=utils.STATIC_DIR,
-                                        url_prefix="/base")
+                                        template_folder=utils.TEMPLATES_DIR / "base",
+                                        static_folder=utils.STATIC_DIR)
         
-
     def register(self):
         self.register_endpoints()
         self._server.register_blueprint(self._bp)
         
-
     def register_endpoints(self):
         self._bp.add_url_rule("/", "base", self.index, methods=["GET"])
 
     def index(self):
         print(url_for("base.static", filename="css/base.css"))
-        return render_template("base/index.html")
+        return render_template("index.html")
