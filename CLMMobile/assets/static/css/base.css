@@ -26,8 +26,18 @@ p {
 
 nav {
     margin: 0;
+    background-color: var(--accent-color);
+    padding: 1rem;
+    text-align: center;
 }
 
-nav h1 {
-    text-align: center;
+nav a {
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--fg-2);
+}
+
+nav a:hover {
+    color: var(--fg-2-transparent);
 }
