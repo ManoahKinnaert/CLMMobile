@@ -8,5 +8,5 @@ class Base:
         self._bp: Blueprint = Blueprint("base", __name__, template_folder=utils.TEMPLATES_DIR,
                              static_folder=utils.STATIC_DIR)
 
-
+        
     
