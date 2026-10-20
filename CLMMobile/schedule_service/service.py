@@ -5,13 +5,17 @@ This service has the goal of figuring out the meeting schedules for this week an
 from bs4 import BeautifulSoup
 import requests 
 import datetime 
+import re
 
-BASE_URL = "https://wol.jw.org/en"
-URL = f"{BASE_URL}/wol/meetings/r1/lp-e"
+BASE_URL = "https://wol.jw.org"
+URL = f"{BASE_URL}/en/wol/meetings/r1/lp-e"
+
+def get_content(url: str):
+    res = requests.get(url)
+    return res.content
 
 def get_week_schedule(year: int, week: int):
-    res = requests.get(f"{URL}/{year}/{week}/")
-    soup = BeautifulSoup(res.content, "html.parser")
+    soup = BeautifulSoup(get_content(f"{URL}/{year}/{week}/"), "html.parser")
     link = soup.select_one("a.jwac")["href"]
     obj = soup.find(attrs={"aria-label": "next week"})            
     next_week_data = obj["href"].split("/")[-2:] if obj is not None else None
@@ -26,8 +30,11 @@ def get_week_schedule_links():
         year, week = map(int, next_data)
     return links 
 
-def get_field_ministry_items(content):
-    pid = 20    # we start with pid 20
-     
+def get_ministry_items(content: str):
+    soup = BeautifulSoup(content, "html.parser")
+    links = soup.select("h3.du-fontSize--base.du-color--gold-700.du-margin-top--8.du-margin-bottom--0")
+    links = [(int(link["data-pid"]) + 1, link.select_one("strong").get_text(strip=True).split(" ")[1]) for link in links]
+    return links
 
 print(get_week_schedule_links())
+print(get_ministry_items(get_content(f"{BASE_URL}/en/wol/d/r1/lp-e/202026258")))
