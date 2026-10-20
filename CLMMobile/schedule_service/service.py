@@ -10,6 +10,34 @@ import re
 BASE_URL = "https://wol.jw.org"
 URL = f"{BASE_URL}/en/wol/meetings/r1/lp-e"
 
+TALK_TYPES = {
+    "STARTING A CONVERSATION": {
+        "id": 1,
+        "student": True
+    },
+    "FOLLOWING UP": {
+        "id": 2,
+        "student": True
+    },
+    "WHAT WOULD YOU SAY": {
+        "id": 3,
+        "student": False
+    },
+    "MAKING DISCIPLES": {
+        "id": 4,
+        "student": True
+    },
+    "EXPLAINING YOUR BELIEFS": {
+        "id": 5,
+        "student": True
+    },
+    "TALK": {
+        "id": 6,
+        "student": True
+    },
+}
+
+
 def get_content(url: str):
     res = requests.get(url)
     return res.content
