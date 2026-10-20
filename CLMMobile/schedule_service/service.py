@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 import requests 
 import datetime 
 
-BASE_URL = "https://wol.jw.org"
+BASE_URL = "https://wol.jw.org/en"
 URL = f"{BASE_URL}/wol/meetings/r1/lp-e"
 
 def get_week_schedule(year: int, week: int):
@@ -26,8 +26,8 @@ def get_week_schedule_links():
         year, week = map(int, next_data)
     return links 
 
-def get_week_schedule(link: str):
-    pass 
-
+def get_field_ministry_items(content):
+    pid = 20    # we start with pid 20
+     
 
 print(get_week_schedule_links())
