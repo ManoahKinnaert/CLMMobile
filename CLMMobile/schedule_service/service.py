@@ -33,8 +33,27 @@ def get_week_schedule_links():
 def get_ministry_items(content: str):
     soup = BeautifulSoup(content, "html.parser")
     links = soup.select("h3.du-fontSize--base.du-color--gold-700.du-margin-top--8.du-margin-bottom--0")
-    links = [(int(link["data-pid"]) + 1, link.select_one("strong").get_text(strip=True).split(" ")[1]) for link in links]
-    return links
+    links = [(int(link["data-pid"]) + 1, link.select_one("strong").get_text(strip=True).split(". ")[1]) for link in links]
+    talks = []
+    for (pid, name) in links:
+        limit = int(soup.find(attrs={"data-pid": pid}).get_text(strip=True).replace("(", "").split(" ")[0])
+        talks.append((name.upper(), limit))
+    return talks
 
-print(get_week_schedule_links())
-print(get_ministry_items(get_content(f"{BASE_URL}/en/wol/d/r1/lp-e/202026258")))
+def get_living_items(content: str):
+    soup = BeautifulSoup(content, "html.parser")
+    links = [int(link["data-pid"]) + 1 for link in soup.select("h3.du-fontSize--base.du-color--maroon-600.du-margin-top--8.du-margin-bottom--0")] 
+    limits = []
+    for pid in links[:-1]:
+        limit = int(soup.find(attrs={"data-pid": pid}).get_text(strip=True).replace("(", "").split(" ")[0])
+        limits.append(limit)
+    return limits
+
+def get_variable_items(meeting_url_postfix: str):
+    content = get_content(f"{BASE_URL}{meeting_url_postfix}")
+    ministry_items = get_ministry_items(content)
+    living_items = get_living_items(content)
+    print(living_items)
+
+
+get_variable_items("/en/wol/d/r1/lp-e/202026258")
