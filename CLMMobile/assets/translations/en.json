@@ -1,0 +1,32 @@
+{
+    "talks": {
+        "INTRODUCTION": "Introduction",
+        "treasures from gods word": "Treasures From God's Word",
+        "TREASURES_TALK": "Treasures Talk",
+        "SPIRITUAL GEMS": "Spiritual Gems",
+        "BIBLE READING": "Bible Reading",
+        "apply to ministry": "Apply Yourself To The Field Ministry",
+        "STARTING A CONVERSATION": "Starting a Conversation",
+        "FOLLOWING UP": "Following Up",
+        "WHAT WOULD YOU SAY?": "What Would You Say?",
+        "MAKING DISCIPLES": "Making Disciples",
+        "EXPLAINING YOUR BELIEFS": "Explaining Your Beliefs",
+        "TALK": "Talk",
+        "living as christians": "Living As Christians",
+        "LIVING TALK": "Living Talk",
+        "CONGREGATION BIBLE STUDY": "Congregation Bible Study",
+        "CONCLUDING COMMENTS": "Concluding Comments",
+        "weekend": "Weekend",
+        "PUBLIC TALK": "Public Talk",
+        "WATCHTOWER STUDY": "Watchtower Study"
+    },
+
+    "base": {
+        "how to connect": "How to connect",
+        "localhost": "Localhost: ",
+        "network": "Network: ",
+        "admin": "Admin",
+        "webclock": "Webclock",
+        "timer": "Timer"
+    }
+}
