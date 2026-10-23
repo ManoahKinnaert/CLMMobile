@@ -2,7 +2,7 @@ from flask import Blueprint, Flask, render_template, url_for
 import CLMMobile.utils as utils
 
 class Base:
-    def __init__(self, server: Flask):
+    def __init__(self, server: Flask, ip, port):
         """
         Base blueprint template class.
         It takes the Flask server as argument, and adds the relevant endpoints to it.
@@ -13,6 +13,8 @@ class Base:
                                          __name__, 
                                         template_folder=utils.TEMPLATES_DIR / "base",
                                         static_folder=utils.STATIC_DIR)
+        self._ip = ip
+        self._port = port 
         
     def register(self):
         self.register_endpoints()
@@ -22,5 +24,4 @@ class Base:
         self._bp.add_url_rule("/", "base", self.index, methods=["GET"])
 
     def index(self):
-        print(url_for("base.static", filename="css/base.css"))
-        return render_template("index.html")
+        return render_template("index.html", ip=self._ip, port=self._port)

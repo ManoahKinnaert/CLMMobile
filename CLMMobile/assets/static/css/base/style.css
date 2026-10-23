@@ -2,7 +2,6 @@
 
 .info-card {
     margin: 2rem;
-    height: 50vh;
     border-radius: 1rem;
     padding: 0.1rem 0.5rem;
     background-color: var(--bg-1);   
@@ -11,6 +10,11 @@
 
 .info {
     margin: 0;
+    text-align: center;
+    padding: 1rem 0rem;
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
 }
