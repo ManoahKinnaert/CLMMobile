@@ -3,6 +3,7 @@ from flask_socketio import SocketIO
 import CLMMobile.utils as utils
 
 class TimerBp:
+    NAMESPACE = "/timer"
     def __init__(self, server: Flask, socketio: SocketIO):
         """
         Timer blueprint template class.
@@ -12,7 +13,7 @@ class TimerBp:
                                         __name__,
                                         template_folder=utils.TEMPLATES_DIR / "timer",
                                         static_folder=utils.STATIC_DIR,
-                                        url_prefix="/timer")
+                                        url_prefix=self.NAMESPACE)
         self._socketio: SocketIO = socketio
         
     def register(self):
@@ -23,20 +24,36 @@ class TimerBp:
         self._bp.add_url_rule("/", "timer", self.index, methods=["GET"])
 
     def register_sockets(self):
-        pass 
+        self._socketio.on_event("connect", self.connect, namespace=self.NAMESPACE)
+        self._socketio.on_event("toggle", self.toggle, namespace=self.NAMESPACE)
+        self._socketio.on_event("next", self.next, namespace=self.NAMESPACE)
+        self._socketio.on_event("prev", self.prev, namespace=self.NAMESPACE)
+        self._socketio.on_event("set_current", self.set_current, namespace=self.NAMESPACE)
 
     def connect(self):
         self._socketio.emit("connect_event", {
             "timer_started": True,
             "schedule": [],
             "current": 0
-        }, namespace="/timer")
+        }, namespace=self.NAMESPACE)
 
     def emit_status(self):
         self._socketio.emit("status", {
             "timer_started": True,
             "current": []
         })
+
+    def toggle(self):
+        pass 
+
+    def next(self):
+        pass 
+
+    def prev(self):
+        pass 
+
+    def set_current(self):
+        pass
 
     def login(self):
         pass 
