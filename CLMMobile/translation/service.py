@@ -16,6 +16,7 @@ class Translation:
     def __init__(self):
         self._lang: str = self._get_language() 
         self._cached_strings: dict = {}
+        self._update_cached_strings(self._lang)
 
     @property 
     def language(self):
@@ -27,42 +28,44 @@ class Translation:
         Set the current language by identifier and update cache accordingly.
         Silently returns None if new_lang is invalid.
         """
-        if not pathlib.Path(self.TRANS_DIR / f"{new_lang}.json").exists() or self._lang == new_lang:
+        if not pathlib.Path(self.TRANS_DIR / f"{new_lang}.json").is_file() or self._lang == new_lang:
             return
+        self._set_language(new_lang)
+        self._update_cached_strings(new_lang)
         self._lang = new_lang
-        self._set_language()
-        self._update_cached_strings()
 
     def _get_language(self):
         """
         Get the current user interface language in the settings file.
         """
         try:
-            with open(self.SETTINGS, "r") as settings_file:
+            with open(self.SETTINGS, "r", encoding="utf-8") as settings_file:
                 settings = json.load(settings_file)
             return settings["language"]
         except (FileNotFoundError, json.JSONDecodeError, KeyError) as e:
             print(f"[ERROR]: {e}")
             return None
 
-    def _set_language(self):
+    def _set_language(self, new_lang: str):
         """
         Set the current user interface language in the settings file.
         """
         try:
-            with open(self.SETTINGS, "r+") as settings_file:
+            with open(self.SETTINGS, "r+", encoding="utf-8") as settings_file:
                 settings = json.load(settings_file)
-                settings["language"] = self._lang 
+                settings["language"] = new_lang
+                settings_file.seek(0)
                 json.dump(settings, settings_file, ensure_ascii=False, indent=4)
+                settings_file.truncate()
         except (FileNotFoundError, json.JSONDecodeError) as e:
             print(f"[ERROR]: {e}")
 
-    def _update_cached_strings(self):
+    def _update_cached_strings(self, lang: str):
         """
         Update the translation string cache.
         """
         try:
-            with open(pathlib.Path(self.TRANS_DIR / f"{self._lang}.json")) as translations:
+            with open(pathlib.Path(self.TRANS_DIR / f"{lang}.json"), "r", encoding="utf-8") as translations:
                 self._cached_strings = json.load(translations)
         except (FileNotFoundError, json.JSONDecodeError) as e:
             print(f"[ERROR]: {e}")
