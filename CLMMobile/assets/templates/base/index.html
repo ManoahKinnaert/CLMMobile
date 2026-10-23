@@ -1,14 +1,29 @@
-{% extends 'base.html' %}
-{% block title %}Test{% endblock %}
-{% block css %}
-<link rel="stylesheet" href="{{ url_for('base.static', filename='css/base/style.css') }}">
-{% endblock %}
-{% block content %}
+{% extends 'base.html' %} {% block title %}Test{% endblock %} {% block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('base.static', filename='css/base/style.css') }}"
+/>
+{% endblock %} {% block content %}
 <section class="info-card">
-    <article class="info">
-        <h1>Overview - How to connect</h1>
-        <aside><h2>Local adress</h2><p>http://127.0.0.1:{{ port }}</p></aside>
-        <aside><h2>Global adress</h2><p>http://{{ ip }}:{{ port }}</p></aside>
-    </article>
+  <article class="info">
+    <h1>Overview - How to connect</h1>
+    <aside>
+      <h2>Local adress</h2>
+      <p>http://127.0.0.1:{{ port }}</p>
+    </aside>
+    <aside>
+      <h2>Global adress</h2>
+      <p>http://{{ ip }}:{{ port }}</p>
+    </aside>
+  </article>
 </section>
+<div class="other-card-container">
+  <section class="info-card">
+    <article></article>
+  </section>
+  <section class="info-card">
+    <article></article>
+  </section>
+  <section class="info-card"><article></article></section>
+</div>
 {% endblock %}

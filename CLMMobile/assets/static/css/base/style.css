@@ -1,7 +1,12 @@
 @import '../colors.css';
 
+main {
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+}
+
 .info-card {
-    margin: 2rem;
+    margin: 1rem;
     border-radius: 1rem;
     padding: 0.1rem 0.5rem;
     background-color: var(--bg-1);   
@@ -17,4 +22,9 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+}
+
+.other-card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
