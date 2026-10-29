@@ -42,3 +42,7 @@ nav a:hover {
     color: var(--fg-2-transparent);
 }
 
+button:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}

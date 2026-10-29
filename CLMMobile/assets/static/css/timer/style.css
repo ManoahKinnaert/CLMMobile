@@ -37,11 +37,6 @@ main {
     user-select: none;
 }
 
-#start-stop-btn:hover {
-    opacity: 0.5;
-    cursor: pointer;
-}
-
 .talk-selector-container {
     width: min(500px, 85%);
     display: flex;
