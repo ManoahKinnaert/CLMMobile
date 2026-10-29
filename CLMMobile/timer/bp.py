@@ -21,7 +21,7 @@ class TimerBp:
         self._server.register_blueprint(self._bp)
 
     def register_endpoints(self):
-        self._bp.add_url_rule("/", "timer", self.index, methods=["GET"])
+        self._bp.add_url_rule("/", "control", self.index, methods=["GET"])
 
     def register_sockets(self):
         self._socketio.on_event("connect", self.connect, namespace=self.NAMESPACE)
@@ -59,4 +59,4 @@ class TimerBp:
         pass 
 
     def index(self):
-        return render_template("index.html")
+        return render_template("timer/index.html")
