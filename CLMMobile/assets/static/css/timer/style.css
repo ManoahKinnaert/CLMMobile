@@ -55,6 +55,7 @@ main {
     border: none;
     background-color: var(--bg-3);
     border-radius: 0.5rem;
+    padding: 0 0.5rem;
 }
 
 .dropdown {
