@@ -1,10 +1,25 @@
-{% extends 'base.html' %}
-{% block title %}Timer{% endblock %}
-{% block css %}
+{% extends 'base.html' %} {% block title %}Timer{% endblock %} {% block css %}
 <link
   rel="stylesheet"
   href="{{ url_for('timer.static', filename='css/timer/style.css') }}"
 />
-{% endblock %}
-{% block content %}
+{% endblock %} {% block content %}
+<div class="timer-container">
+  <p class="time-lbl" id="time-lbl">15:00</p>
+  <button id="start-stop-btn">Start</button>
+</div>
+<div class="talk-selector-container">
+  <button id="prev">Prev</button>
+  <div class="dropdown">
+    <button id="dropdown" class="dropbtn">Dropdown Menu</button>
+    <div id="dropdown-content" class="dropdown-content"></div>
+  </div>
+  <button id="next">Next</button>
+</div>
+{% endblock %} {% block js %}
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+  integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+  crossorigin="anonymous"
+></script>
 {% endblock %}

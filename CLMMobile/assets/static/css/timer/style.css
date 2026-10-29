@@ -1,0 +1,52 @@
+@import "../colors.css";
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: min(500px, 85%);
+    margin: 1rem 1rem;
+    padding: 0.8rem;
+    background-color: var(--bg-3);
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 2rem black;;
+}
+
+.time-lbl {
+    color: black;
+    font-weight: bold;
+    font-size: 5rem;
+    user-select: none;
+}
+
+#start-stop-btn {
+    width: 90%;
+    padding: 1.2rem;
+    border: none;
+    background-color: var(--accent-color);
+    border-radius: 1rem;
+    font-size: 1.2rem;
+    color: var(--fg-2);
+    user-select: none;
+}
+
+#start-stop-btn:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+/*
+For mobile phones
+*/
+@media (max-width: 500px) {
+    .time-lbl {
+        font-size: 4rem;
+    }
+}
