@@ -178,3 +178,9 @@ def get_schedule_data_auto():
     if data is None or f"{year}-{weeknum}" not in data:
         data = update_schedule_data()
     return data[f"{year}-{weeknum}"] if dow < 6 else get_weekend_schedule()
+
+def convert(schedule: dict):
+    converted = []
+    for key in schedule.keys():
+        converted += schedule[key]
+    return converted
