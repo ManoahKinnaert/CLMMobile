@@ -26,7 +26,7 @@ def get_ip():
 
 def setup():
     settings = Settings()
-    trans = Translation()
+    trans = Translation(settings)
     # get the schedule for today
     schedule = get_schedule_data_auto()
     converted = convert(schedule)

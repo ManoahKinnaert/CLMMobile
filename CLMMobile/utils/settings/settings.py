@@ -26,7 +26,7 @@ class Settings:
 
     def get(self, key: str) -> Any:
         try:
-            return self._get_all()[key]
+            return self.get_all()[key]
         except KeyError as e:
             print(f"[ERROR]: {e}")
             return None

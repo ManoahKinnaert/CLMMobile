@@ -1,6 +1,7 @@
 import json 
 import pathlib
 from CLMMobile.utils import ASSETS_DIR
+from CLMMobile.utils.settings import Settings
 
 HOME_DIR = pathlib.Path.home().joinpath(".clmmobile")
 
@@ -13,7 +14,8 @@ class Translation:
     TRANS_DIR = ASSETS_DIR / "translations"
     SETTINGS = HOME_DIR / "settings.json"
 
-    def __init__(self):
+    def __init__(self, settings: Settings):
+        self._settings = settings
         self._lang: str = self._get_language() 
         self._cached_strings: dict = {}
         self._update_cached_strings(self._lang)
@@ -38,27 +40,13 @@ class Translation:
         """
         Get the current user interface language in the settings file.
         """
-        try:
-            with open(self.SETTINGS, "r", encoding="utf-8") as settings_file:
-                settings = json.load(settings_file)
-            return settings["language"]
-        except (FileNotFoundError, json.JSONDecodeError, KeyError) as e:
-            print(f"[ERROR]: {e}")
-            return None
+        return self._settings.get("language")
 
     def _set_language(self, new_lang: str):
         """
         Set the current user interface language in the settings file.
         """
-        try:
-            with open(self.SETTINGS, "r+", encoding="utf-8") as settings_file:
-                settings = json.load(settings_file)
-                settings["language"] = new_lang
-                settings_file.seek(0)
-                json.dump(settings, settings_file, ensure_ascii=False, indent=4)
-                settings_file.truncate()
-        except (FileNotFoundError, json.JSONDecodeError) as e:
-            print(f"[ERROR]: {e}")
+        self._settings.set("language", new_lang)
 
     def _update_cached_strings(self, lang: str):
         """
