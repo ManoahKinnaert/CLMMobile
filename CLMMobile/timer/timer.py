@@ -92,3 +92,8 @@ class Timer:
             "remaining": remaining,
             "over_time": overtime
         }, namespace="/timer")
+        # submit data to webclock
+        self.socket.emit("webclockdata", {
+            "remaining": remaining,
+            "over_time": overtime
+        }, namespace="/webclock")

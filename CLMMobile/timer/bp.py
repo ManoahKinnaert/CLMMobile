@@ -24,6 +24,9 @@ class TimerBp:
         # load relevant translation strings
         self._talk_translations = None
         self._talks = None
+
+    @property
+    def clock(self): return self._timer
         
     def setup_schedule(self):
         self._talk_translations = self._trans.get_string_section("talks")
@@ -32,7 +35,6 @@ class TimerBp:
             self._talks.append({**t, "name": self._talk_translations[t["key"]]})
         
     def register(self):
-        self.setup_schedule()
         self.register_endpoints()
         self.register_sockets()
         self._server.register_blueprint(self._bp)
@@ -50,15 +52,19 @@ class TimerBp:
     def connect(self):
         self._socketio.emit("connect_event", {
             "timer_started": self._timer.running,
-            "schedule": self._talks,
-            "current": self._talks[self._timer.current]
+            "schedule": self._timer.schedule,
+            "current": self._timer.schedule[self._timer.current]
         }, namespace=self.NAMESPACE)
 
     def emit_status(self):
         self._socketio.emit("status", {
             "timer_started": self._timer.running,
-            "current": self._talks[self._timer.current]
+            "current": self._timer.schedule[self._timer.current]
         }, namespace=self.NAMESPACE)
+        self._socketio.emit("status", {
+            "timer_started": self._timer.running,
+            "current": self._timer.schedule[self._timer.current]
+        }, namespace="/webclock")
 
     def emit_warning(self, message: str):
         self._socketio.emit("warning", {

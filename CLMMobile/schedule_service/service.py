@@ -175,12 +175,14 @@ def get_schedule_data_auto():
         data = update_schedule_data()
     return data[f"{year}-{weeknum}"] if dow < 6 else get_weekend_schedule()
 
-def convert(schedule: dict):
-    converted = []
+def convert(schedule: dict, translation):
+    temp = []
+    translations = translation.get_string_section("talks")
     for key in schedule.keys():
         s = schedule[key]
         for t in s:
             k = next((key for key, value in TALK_TYPES.items() if value["id"] == t["id"]), None)
             t = {**t, "key": k}
-            converted.append(t)
-    return sorted(converted, key=lambda e: e["id"])
+            temp.append(t)
+    temp = sorted(temp, key=lambda e: e["id"])
+    return [{**t, "name": translations[t["key"]] + f" {t.get("talk num") if t.get("talk num") is not None else ''}"} for t in temp]

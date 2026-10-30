@@ -2,6 +2,7 @@ from flask import Flask, redirect
 from flask_socketio import SocketIO
 from CLMMobile.base import Base 
 from CLMMobile.timer import TimerBp
+from CLMMobile.webclock import Webclock
 from CLMMobile.translation import Translation
 from CLMMobile.schedule_service.service import get_schedule_data_auto, convert
 from CLMMobile.utils import TEMPLATES_DIR, STATIC_DIR
@@ -28,15 +29,17 @@ def setup():
     settings = Settings()
     trans = Translation(settings)
     # get the schedule for today
-    schedule = get_schedule_data_auto()
-    converted = convert(schedule)
+    schedule = convert(get_schedule_data_auto(), trans)
 
     base = Base(server, get_ip(), port)
     base.register()
 
-    timer = TimerBp(server, socketio, trans, converted)
+    timer = TimerBp(server, socketio, trans, schedule)
     timer.register()
-    
+
+    webclock = Webclock(server, socketio, timer=timer.clock)
+    webclock.register()
+
 
 if __name__ == "__main__":
     setup()
