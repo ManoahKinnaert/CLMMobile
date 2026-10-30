@@ -3,12 +3,12 @@ from flask_socketio import SocketIO
 from CLMMobile.timer import Timer
 from CLMMobile.utils import TEMPLATES_DIR, STATIC_DIR
 
-class WebclockService:
+class Webclock:
 
     NAMESPACE = "/webclock"
 
     def __init__(self, server: Flask, socketio: SocketIO, timer: Timer):
-        self._app: Flask = server 
+        self._server: Flask = server 
         self._bp: Blueprint = Blueprint("webclock", __name__,
                                        template_folder=TEMPLATES_DIR / "webclock",
                                        static_folder=STATIC_DIR,
@@ -28,7 +28,7 @@ class WebclockService:
         self._socketio.on_event("connect", self.connect, namespace=self.NAMESPACE)
 
     def webclock_endpoint(self):
-        pass 
+        return render_template("webclock/index.html")
 
     def connect(self):
         self._socketio.emit("status", {

@@ -24,6 +24,9 @@ class TimerBp:
         # load relevant translation strings
         self._talk_translations = None
         self._talks = None
+
+    @property
+    def clock(self): return self._timer
         
     def setup_schedule(self):
         self._talk_translations = self._trans.get_string_section("talks")
