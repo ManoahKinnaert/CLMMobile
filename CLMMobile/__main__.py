@@ -28,13 +28,12 @@ def setup():
     settings = Settings()
     trans = Translation(settings)
     # get the schedule for today
-    schedule = get_schedule_data_auto()
-    converted = convert(schedule)
+    schedule = convert(get_schedule_data_auto(), trans)
 
     base = Base(server, get_ip(), port)
     base.register()
 
-    timer = TimerBp(server, socketio, trans, converted)
+    timer = TimerBp(server, socketio, trans, schedule)
     timer.register()
     
 
