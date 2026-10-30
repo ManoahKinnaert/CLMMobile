@@ -1,0 +1,24 @@
+from functools import wraps 
+from flask import session, redirect, url_for 
+from werkzeug.security import generate_password_hash, check_password_hash
+from peewee import *
+import secrets 
+
+ROLES = {"user": 1, "admin": 2}
+DB_PROXY = Proxy()
+
+def _has_role(min_role):
+    user_role = session.get("role")
+    return bool(user_role) and ROLES.get(user_role, 0) >= ROLES[min_role]
+
+def role_required(min_role, redirect_url: str):
+    def decorator(fn):
+        @wraps(fn)
+        def wrapper(*args, **kwargs):
+            if not _has_role(min_role):
+                return redirect(url_for(redirect_url))
+        return wrapper 
+    return decorator
+
+def socket_role_required(min_role):
+    pass
