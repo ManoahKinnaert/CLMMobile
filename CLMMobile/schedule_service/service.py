@@ -185,4 +185,4 @@ def convert(schedule: dict, translation):
             t = {**t, "key": k}
             temp.append(t)
     temp = sorted(temp, key=lambda e: e["id"])
-    return [{**t, "name": translations[t["key"]]} for t in temp]
+    return [{**t, "name": translations[t["key"]] + f" {t.get("talk num") if t.get("talk num") is not None else ''}"} for t in temp]
