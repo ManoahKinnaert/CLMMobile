@@ -5,6 +5,7 @@ from CLMMobile.timer import TimerBp
 from CLMMobile.translation import Translation
 from CLMMobile.schedule_service.service import get_schedule_data_auto, convert
 from CLMMobile.utils import TEMPLATES_DIR, STATIC_DIR
+from CLMMobile.utils.settings import Settings
 import socket
 
 server = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
@@ -24,7 +25,8 @@ def get_ip():
     return ip
 
 def setup():
-    trans = Translation()
+    settings = Settings()
+    trans = Translation(settings)
     # get the schedule for today
     schedule = get_schedule_data_auto()
     converted = convert(schedule)

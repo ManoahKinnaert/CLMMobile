@@ -1,8 +1,7 @@
 import json 
 import pathlib
-from CLMMobile.utils import ASSETS_DIR
-
-HOME_DIR = pathlib.Path.home().joinpath(".clmmobile")
+from CLMMobile.utils import TRANS_DIR
+from CLMMobile.utils.settings import Settings
 
 class Translation:
     """
@@ -10,10 +9,9 @@ class Translation:
     The purpose of it is to get the current interface language, set the current
     interface language and get the appropriate strings associated with a section of the user interface.
     """
-    TRANS_DIR = ASSETS_DIR / "translations"
-    SETTINGS = HOME_DIR / "settings.json"
 
-    def __init__(self):
+    def __init__(self, settings: Settings):
+        self._settings = settings
         self._lang: str = self._get_language() 
         self._cached_strings: dict = {}
         self._update_cached_strings(self._lang)
@@ -28,7 +26,7 @@ class Translation:
         Set the current language by identifier and update cache accordingly.
         Silently returns None if new_lang is invalid.
         """
-        if not pathlib.Path(self.TRANS_DIR / f"{new_lang}.json").is_file() or self._lang == new_lang:
+        if not pathlib.Path(TRANS_DIR / f"{new_lang}.json").is_file() or self._lang == new_lang:
             return
         self._set_language(new_lang)
         self._update_cached_strings(new_lang)
@@ -38,34 +36,20 @@ class Translation:
         """
         Get the current user interface language in the settings file.
         """
-        try:
-            with open(self.SETTINGS, "r", encoding="utf-8") as settings_file:
-                settings = json.load(settings_file)
-            return settings["language"]
-        except (FileNotFoundError, json.JSONDecodeError, KeyError) as e:
-            print(f"[ERROR]: {e}")
-            return None
+        return self._settings.get("language")
 
     def _set_language(self, new_lang: str):
         """
         Set the current user interface language in the settings file.
         """
-        try:
-            with open(self.SETTINGS, "r+", encoding="utf-8") as settings_file:
-                settings = json.load(settings_file)
-                settings["language"] = new_lang
-                settings_file.seek(0)
-                json.dump(settings, settings_file, ensure_ascii=False, indent=4)
-                settings_file.truncate()
-        except (FileNotFoundError, json.JSONDecodeError) as e:
-            print(f"[ERROR]: {e}")
+        self._settings.set("language", new_lang)
 
     def _update_cached_strings(self, lang: str):
         """
         Update the translation string cache.
         """
         try:
-            with open(pathlib.Path(self.TRANS_DIR / f"{lang}.json"), "r", encoding="utf-8") as translations:
+            with open(pathlib.Path(TRANS_DIR / f"{lang}.json"), "r", encoding="utf-8") as translations:
                 self._cached_strings = json.load(translations)
         except (FileNotFoundError, json.JSONDecodeError) as e:
             print(f"[ERROR]: {e}")

@@ -5,11 +5,10 @@ This service has the goal of figuring out the meeting schedules for this week an
 from bs4 import BeautifulSoup
 import requests 
 import datetime 
-import pathlib
 import json
 
-BASE_URL = "https://wol.jw.org"
-URL = f"{BASE_URL}/en/wol/meetings/r1/lp-e"
+from CLMMobile.utils import BASE_SCRAPE_URL, MEETING_SCRAPE_URL, MEETING_FEED_CACHE
+
 
 TALK_TYPES = {
     "INTRODUCTION": {
@@ -85,7 +84,7 @@ def get_content(url: str):
     return res.content
 
 def get_week_schedule(year: int, week: int):
-    soup = BeautifulSoup(get_content(f"{URL}/{year}/{week}/"), "html.parser")
+    soup = BeautifulSoup(get_content(f"{MEETING_SCRAPE_URL}/{year}/{week}/"), "html.parser")
     link = soup.select_one("a.jwac")["href"]
     obj = soup.find(attrs={"aria-label": "next week"})            
     next_week_data = obj["href"].split("/")[-2:] if obj is not None else None
@@ -120,7 +119,7 @@ def get_living_items(content: str):
     return limits
 
 def get_variable_items(meeting_url_postfix: str):
-    content = get_content(f"{BASE_URL}{meeting_url_postfix}")
+    content = get_content(f"{BASE_SCRAPE_URL}{meeting_url_postfix}")
     ministry_items = get_ministry_items(content)
     living_items = get_living_items(content)
     result = {"apply to ministry": [], "living as christians": []}
@@ -155,14 +154,11 @@ def get_max_schedule():
 ##
 ##
 
-HOME_DIR = pathlib.Path.home().joinpath(".clmmobile")
-CACHE_DIR = pathlib.Path.home().joinpath("feed/meetingfeed.json")
-
 def update_schedule_data():
-    if not CACHE_DIR.parent.exists(): CACHE_DIR.parent.mkdir(parents=True, exist_ok=True)
+    if not MEETING_FEED_CACHE.parent.exists(): MEETING_FEED_CACHE.parent.mkdir(parents=True, exist_ok=True)
     data = get_max_schedule()
     try:
-        with open(CACHE_DIR, "w") as feed:
+        with open(MEETING_FEED_CACHE, "w") as feed:
             json.dump(data, feed, ensure_ascii=False, indent=4)
     except Exception as e:
         print(f"[ERROR]: Something went wrong: {e}")
@@ -170,7 +166,7 @@ def update_schedule_data():
 
 def get_schedule_data_auto():
     try:
-        with open(CACHE_DIR, "r") as feed:
+        with open(MEETING_FEED_CACHE, "r") as feed:
             data = json.load(feed)
     except (FileNotFoundError, json.JSONDecodeError) as e:
         data = update_schedule_data()
