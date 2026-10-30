@@ -14,9 +14,9 @@ main {
     width: min(500px, 85%);
     margin: 1rem 1rem;
     padding: 0.8rem;
-    background-color: var(--bg-1);
     border-radius: 1rem;
-    box-shadow: 0 0.2rem 2rem rgba(0, 0, 0, 0.5);
+    background-color: var(--bg-1);
+    box-shadow: 0rem 0.5rem 1rem black;
 }
 
 .time-lbl {
@@ -54,7 +54,9 @@ main {
 }
 
 .dropdown {
-    flex-grow: 1;
+    position: relative;
+    flex: 1;
+    min-width: 0;
 }
 
 .dropdown button {
@@ -64,6 +66,27 @@ main {
     background-color: var(--accent-color);
     color: var(--fg-2);
 }
+
+#dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 15rem;
+    overflow-y: auto;
+    z-index: 10;
+
+    background-color: var(--bg-3);
+}
+
+#dropdown-content button {
+    width: 100%;
+    height: 1.5rem;
+    background: var(--bg-3);
+    color: rgb(0, 0, 0, 0.5);
+    text-align: left;
+}
+
 
 /*
 For mobile phones
