@@ -4,6 +4,8 @@ let talkLbl = document.getElementById("talk-lbl")
 // socket events
 socket.on("status", (data) => {
     talkLbl.innerText = `${data.current.name}   -   ${String(data.current.time).padStart(2, "0")}:00`
+    clock.innerText = `${String(data.current.time).padStart(2, "0")}:00`
+    clock.style.color = "white"
 })
 socket.on("webclockdata", (data) => {
     const isOvertime = data.remaining <= 0

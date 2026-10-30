@@ -61,6 +61,10 @@ class TimerBp:
             "timer_started": self._timer.running,
             "current": self._timer.schedule[self._timer.current]
         }, namespace=self.NAMESPACE)
+        self._socketio.emit("status", {
+            "timer_started": self._timer.running,
+            "current": self._timer.schedule[self._timer.current]
+        }, namespace="/webclock")
 
     def emit_warning(self, message: str):
         self._socketio.emit("warning", {
