@@ -3,8 +3,6 @@ import pathlib
 from CLMMobile.utils import TRANS_DIR
 from CLMMobile.utils.settings import Settings
 
-HOME_DIR = pathlib.Path.home().joinpath(".clmmobile")
-
 class Translation:
     """
     For this class we assume the settings file already exists.
