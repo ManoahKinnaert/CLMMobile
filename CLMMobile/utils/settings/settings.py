@@ -44,6 +44,5 @@ class Settings:
         self._write(data)
 
     def _create_settings(self):
-        self.SETTINGS_FILE.touch()
+        self.HOMEPATH.mkdir(parents=True, exist_ok=True)
         self._write(self.DEFAULT)
-    

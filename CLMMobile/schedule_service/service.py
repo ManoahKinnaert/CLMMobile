@@ -156,7 +156,7 @@ def get_max_schedule():
 ##
 
 HOME_DIR = pathlib.Path.home().joinpath(".clmmobile")
-CACHE_DIR = pathlib.Path.home().joinpath("feed/meetingfeed.json")
+CACHE_DIR = HOME_DIR.joinpath("feed/meetingfeed.json")
 
 def update_schedule_data():
     if not CACHE_DIR.parent.exists(): CACHE_DIR.parent.mkdir(parents=True, exist_ok=True)
