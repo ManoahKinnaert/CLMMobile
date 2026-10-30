@@ -182,5 +182,9 @@ def get_schedule_data_auto():
 def convert(schedule: dict):
     converted = []
     for key in schedule.keys():
-        converted += schedule[key]
-    return converted
+        s = schedule[key]
+        for t in s:
+            k = next((key for key, value in TALK_TYPES.items() if value["id"] == t["id"]), None)
+            t = {**t, "key": k}
+            converted.append(t)
+    return sorted(converted, key=lambda e: e["id"])
