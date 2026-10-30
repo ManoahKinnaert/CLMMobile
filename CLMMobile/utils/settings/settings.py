@@ -16,7 +16,7 @@ class Settings:
             self._create_settings()
 
 
-    def _get_all(self) -> Any:
+    def get_all(self) -> Any:
         try:
             with open(self.SETTINGS_FILE, "r") as settings_file:
                 return json.load(settings_file)
@@ -24,7 +24,7 @@ class Settings:
             print(f"[ERROR]: {e}")
             return None
 
-    def _get(self, key: str) -> Any:
+    def get(self, key: str) -> Any:
         try:
             return self._get_all()[key]
         except KeyError as e:
@@ -38,7 +38,7 @@ class Settings:
         except FileNotFoundError as e:
             print(f"[ERROR]: {e}")
 
-    def _set(self, key: str, val: Any):
+    def set(self, key: str, val: Any):
         data = self._get_all()
         data[key] = val 
         self._write(data)
