@@ -38,6 +38,17 @@ socket.on("connect_event", (data) => {
     setupDropDown(data.schedule)
     selectCurrent(data.current)
 })
+socket.on("status", (data) => {
+    if (data.timer_started === true) {
+        startStopBtn.textContent = "Stop"
+    } else {
+        startStopBtn.textContent = "Start"
+    }
+
+    timeLbl.innerText = `${data.current.time}:00`
+    timeLbl.style.color = "black"
+    selectCurrent(data.current)
+})
 socket.on("warning", (data) => {
     alert(data.message)
 })
@@ -72,7 +83,7 @@ function setupDropDown(items) {
     schedule = items 
     let html = ""
     items.forEach(element => {
-        html += `<button class="dropdown-btn" id="${element.name}">${element.name} (${String(element.time).padStart(2, "0")}:00)</button>`
+        html += `<button id="${element.name}">${element.name} (${String(element.time).padStart(2, "0")}:00)</button>`
     })
     dropdownContent.innerHTML = html
     items.forEach(element => {

@@ -49,14 +49,14 @@ class TimerBp:
 
     def connect(self):
         self._socketio.emit("connect_event", {
-            "timer_started": True,
+            "timer_started": self._timer.running,
             "schedule": self._talks,
             "current": self._talks[self._timer.current]
         }, namespace=self.NAMESPACE)
 
     def emit_status(self):
         self._socketio.emit("status", {
-            "timer_started": True,
+            "timer_started": self._timer.running,
             "current": self._talks[self._timer.current]
         }, namespace=self.NAMESPACE)
 

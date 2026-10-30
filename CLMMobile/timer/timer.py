@@ -55,7 +55,7 @@ class Timer:
     def next(self):
         with self.lock:
             if self.running: return 
-            if self.current + 1 < len(self._schedule): pass 
+            if self.current + 1 < len(self._schedule): self.current += 1 
             else: self.current = 0
             self.setup_time()
 
