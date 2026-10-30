@@ -21,4 +21,14 @@ def role_required(min_role, redirect_url: str):
     return decorator
 
 def socket_role_required(min_role):
-    pass
+    def decorator(fn):
+        @wraps(fn)
+        def wrapper(self, *args, **kwargs):
+            if not _has_role(min_role):
+                return False  # no-op for normal events, refuses handshake for connect
+            return fn(self, *args, **kwargs)
+        return wrapper
+    return decorator
+
+def get_secret_key():
+    return secrets.token_hex(16)
