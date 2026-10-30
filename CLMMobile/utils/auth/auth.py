@@ -1,11 +1,8 @@
 from functools import wraps 
 from flask import session, redirect, url_for 
-from werkzeug.security import generate_password_hash, check_password_hash
-from peewee import *
 import secrets 
 
 ROLES = {"user": 1, "admin": 2}
-DB_PROXY = Proxy()
 
 def _has_role(min_role):
     user_role = session.get("role")
