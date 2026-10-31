@@ -2,6 +2,7 @@ from flask import Blueprint, Flask, render_template
 from flask_socketio import SocketIO
 import CLMMobile.utils as utils
 from CLMMobile.translation import Translation
+from CLMMobile.utils.auth import role_required, socket_role_required
 from .timer import Timer
 
 class TimerBp:
@@ -40,7 +41,7 @@ class TimerBp:
         self._server.register_blueprint(self._bp)
 
     def register_endpoints(self):
-        self._bp.add_url_rule("/", "control", self.index, methods=["GET"])
+        self._bp.add_url_rule("/", "control", role_required("user", "auth.login", "timer.control")(self.index), methods=["GET"])
 
     def register_sockets(self):
         self._socketio.on_event("connect", self.connect, namespace=self.NAMESPACE)
@@ -72,11 +73,13 @@ class TimerBp:
         },
         namespace=self.NAMESPACE)
 
+    @socket_role_required("user")
     def toggle(self):
         if self._timer.running: self._timer.stop()
         else: self._timer.start()
         self.emit_status()
 
+    @socket_role_required("user")
     def next(self):
         if self._timer.running:
             self.emit_warning("Please make sure the timer is not running!")
@@ -84,6 +87,7 @@ class TimerBp:
             self._timer.next()
             self.emit_status()
 
+    @socket_role_required("user")
     def prev(self):
         if self._timer.running:
             self.emit_warning("Please make sure the timer is not running!")
@@ -91,6 +95,7 @@ class TimerBp:
             self._timer.prev()
             self.emit_status()
 
+    @socket_role_required("user")
     def set_current(self, data):
         if self._timer.running: self.emit_warning("Please make sure the timer is not running!")
         index = data["index"]

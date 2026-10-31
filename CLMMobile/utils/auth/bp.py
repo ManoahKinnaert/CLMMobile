@@ -23,11 +23,14 @@ class AuthBp:
         self._bp.add_url_rule("/login", "login", self.login, methods=["POST", "GET"])
 
     def login(self):
+        next_url = request.args.get("next") or request.form.get("next")
         if request.method == "POST":
             password = request.form.get("password", "")
             role = self.auth.verify_passcode(password)
             if role:
                 session["role"] = role 
-                return redirect(url_for(request.form.get("target")))
-            return render_template("auth/index.html")
-        return render_template("auth/index.html")
+                if next_url:
+                    return redirect(url_for(next_url))
+                return redirect(url_for("base.base"))
+            return render_template("auth/index.html",  error="Wrong password!", url=url_for("auth.login"), next=next_url)
+        return render_template("auth/index.html", url=url_for("auth.login"), next=next_url)

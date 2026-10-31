@@ -4,12 +4,14 @@ from CLMMobile.base import Base
 from CLMMobile.timer import TimerBp
 from CLMMobile.webclock import Webclock
 from CLMMobile.translation import Translation
+from CLMMobile.utils.auth import AuthBp, get_secret_key
 from CLMMobile.schedule_service.service import get_schedule_data_auto, convert
 from CLMMobile.utils import TEMPLATES_DIR, STATIC_DIR
 from CLMMobile.utils.settings import Settings
 import socket
 
 server = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
+server.secret_key = get_secret_key()
 socketio = SocketIO(server, async_mode="threading")
 port = 5051
 
@@ -28,11 +30,15 @@ def get_ip():
 def setup():
     settings = Settings()
     trans = Translation(settings)
+    
     # get the schedule for today
     schedule = convert(get_schedule_data_auto(), trans)
 
     base = Base(server, get_ip(), port)
     base.register()
+
+    auth = AuthBp(server)
+    auth.register()
 
     timer = TimerBp(server, socketio, trans, schedule)
     timer.register()
