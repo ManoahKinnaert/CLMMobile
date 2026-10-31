@@ -1,7 +1,7 @@
 from flask import Blueprint, Flask, render_template
 from flask_socketio import SocketIO
 import CLMMobile.utils as utils
-from CLMMobile.translation import Translation
+from CLMMobile.utils.translation import Translation
 from CLMMobile.utils.auth import role_required, socket_role_required
 from .timer import Timer
 
