@@ -102,9 +102,5 @@ class TimerBp:
         self._timer.set_current(index)
         self.emit_status()
 
-    # TODO: To be implemented
-    def login(self):
-        pass 
-
     def index(self):
         return render_template("timer/index.html")
