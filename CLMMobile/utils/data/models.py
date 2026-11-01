@@ -14,7 +14,7 @@ class Meeting(BaseModel):
     """
     Meeting data model
     """
-    data = DateField(default=datetime.date.today, index=True, unique=True)
+    date = DateField(default=datetime.date.today, index=True, unique=True)
 
 
 class Talk(BaseModel):
