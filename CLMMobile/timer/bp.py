@@ -3,11 +3,12 @@ from flask_socketio import SocketIO
 import CLMMobile.utils as utils
 from CLMMobile.utils.translation import Translation
 from CLMMobile.utils.auth import role_required, socket_role_required
+from CLMMobile.utils.data import DataService
 from .timer import Timer
 
 class TimerBp:
     NAMESPACE = "/timer"
-    def __init__(self, server: Flask, socketio: SocketIO, trans: Translation, schedule):
+    def __init__(self, server: Flask, socketio: SocketIO, trans: Translation, schedule: list, db: DataService):
         """
         Timer blueprint template class.
         """
@@ -19,7 +20,7 @@ class TimerBp:
                                         url_prefix=self.NAMESPACE)
         self._socketio: SocketIO = socketio
         self._trans: Translation = trans
-        self._timer: Timer = Timer(socketio)
+        self._timer: Timer = Timer(socketio, db)
         self._timer.schedule = schedule
 
         # load relevant translation strings
