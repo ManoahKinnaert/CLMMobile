@@ -2,20 +2,23 @@ from flask_socketio import SocketIO
 import threading 
 import time
 
+from CLMMobile.utils.data import DataService
+
 class Timer:
-    def __init__(self, socketio: SocketIO):
+    def __init__(self, socketio: SocketIO, db: DataService):
         self.socket: SocketIO = socketio
 
-        self.limit: int = 60
-        self.remaining: int = self.limit 
-        self.over_time: int = 0
-        self.end_time: int = None 
+        self.limit: int = 60                         # seconds
+        self.remaining: int = self.limit * 60       # seconds
+        self.over_time: int = 0                     # seconds
+        self.end_time: int = None
         self.running: bool = False 
 
         self.lock: threading.Lock = threading.Lock()
 
         self._schedule: list = None 
         self.current: int = 0
+        self._db = db
 
         self.socket.start_background_task(self._run)
 
@@ -49,7 +52,10 @@ class Timer:
             self.running = False 
         if emit_data is not None:
             self._emit(emit_data)
-
+        # save the data to the database
+        talk = self.schedule[self.current]
+        if self._db.meeting is None: self._db.init_meeting()    # create a new meeting if needed
+        self._db.add_talk(talk["id"], self.limit - self.remaining + self.over_time, self.limit)
         self.next()
 
     def next(self):
