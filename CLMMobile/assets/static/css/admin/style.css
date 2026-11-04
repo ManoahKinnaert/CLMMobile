@@ -25,7 +25,6 @@ main {
 }
 
 #dropdown {
-  
   width: 60%;
   min-height: 3rem;
   padding: 0.5rem;
@@ -33,7 +32,7 @@ main {
   color: white;
   font-size: 0.8rem;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -68,4 +67,43 @@ main {
 .dropdown-content button:hover {
   background-color: var(--bg-2);
   cursor: pointer;
+}
+
+.reports-btn {
+  padding: 0.5rem 1rem;
+  width: 60%;
+  background-color: var(--bg-3);
+  border: none;
+  border-radius: 1rem;
+}
+
+#change-passwords-btn {
+  padding: 0.5rem 1rem;
+  width: 60%;
+  background-color: var(--bg-3);
+  border: none;
+  border-radius: 1rem;
+}
+
+.submit-btn {
+  padding: 0.7rem 1rem;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  color: white;
+}
+
+input {
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-3);
+  border: none;
+  border-radius: 1rem;
+}
+
+.user-pass-form, .admin-pass-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 60%;
 }

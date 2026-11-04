@@ -25,9 +25,23 @@
 </article>
 <article>
     <h2>{{ strings['reports'] }}</h2>
+    <button class="reports-btn">Reports</button>
 </article>
 <article>
     <h2>{{ strings['security'] }}</h2>
+    <button id="change-passwords-btn">Change passwords</button>
+    <form class="user-pass-form" onsubmit="setUserPassword(event)">
+        <h3>User password</h3>
+        <input type="password" id="user-box-1" placeholder="new password" required>
+        <input type="password" id="user-box-2" placeholder="repeat new password" required>
+        <button class="submit-btn" type="submit">Change</button>
+    </form>
+    <form class="admin-pass-form" onsubmit="setAdminPassword(event)">
+        <h3>Admin password</h3>
+        <input type="password" id="admin-box-1" placeholder="new password" required>
+        <input type="password" id="admin-box-2" placeholder="repeat new password" required>
+        <button class="submit-btn" type="submit">Change</button>
+    </form>
 </article>
 </section>
 {% endblock %}
