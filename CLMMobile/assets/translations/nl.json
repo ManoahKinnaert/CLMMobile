@@ -27,15 +27,22 @@
 
     "admin": {
         "language": "CLMMobile - Taal",
+        "current": "Huidige",
         "reports": "CLMMobile - Rapporten",
-        "security": "CLMMobile - Beveiliging"
+        "security": "CLMMobile - Beveiliging",
+        "change passwords": "Wijzig wachtwoorden",
+        "user password": "Gebruikerswachtwoord",
+        "new password": "Nieuw wachtwoord",
+        "repeat password": "Herhaal nieuw wachtwoord",
+        "change": "Wijzigen",
+        "admin password": "Beheerderswachtwoord"
     },
 
     "base": {
         "how to connect": "Hoe te verbinden",
         "localhost": "Localhost: ",
         "network": "Netwerk: ",
-        "admin": "Admin",
+        "admin": "Beheerder",
         "webclock": "Webklok",
         "timer": "Timer"
     }

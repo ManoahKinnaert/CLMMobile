@@ -27,8 +27,15 @@
 
     "admin": {
         "language": "CLMMobile - Language",
+        "current": "Current",
         "reports": "CLMMobile - Reports",
-        "security": "CLMMobile - Security"
+        "security": "CLMMobile - Security",
+        "change passwords": "Change passwords",
+        "user password": "User password",
+        "new password": "New password",
+        "repeat password": "Repeat new password",
+        "change": "Change",
+        "admin password": "Admin password"
     },
 
     "base": {

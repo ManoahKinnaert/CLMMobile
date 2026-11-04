@@ -27,8 +27,15 @@
 
     "admin": {
         "language": "CLMMobile - Langue",
+        "current": "Maintenant",
         "reports": "CLMMobile - Rapports",
-        "security": "CLMMobile - Sécurité"
+        "security": "CLMMobile - Sécurité",
+        "change passwords": "Changer les mots de passes",
+        "user password": "Mot de passe utilisateur",
+        "new password": "Nouvelle mot de passe",
+        "repeat password": "Répéter nouvelle mot de passe",
+        "change": "Changer",
+        "admin password": "Mot de passe administrateur"
     },
 
     "base": {

@@ -11,7 +11,7 @@
 <article>
     <h2>{{ strings['language'] }}</h2>
         <div class="dropdown">
-            <button id="dropdown">Current: {{ current_lang }}</button>
+            <button id="dropdown">{{ strings['current'] }}: {{ current_lang }}</button>
             <div class="dropdown-content" id="dropdown-content">
                 {% for lang in langs %}
                 {% if lang == current_lang %}
@@ -29,18 +29,18 @@
 </article>
 <article>
     <h2>{{ strings['security'] }}</h2>
-    <button id="change-passwords-btn">Change passwords</button>
+    <button id="change-passwords-btn">{{ strings['change passwords'] }}</button>
     <form class="user-pass-form" onsubmit="setUserPassword(event)">
-        <h3>User password</h3>
-        <input type="password" id="user-box-1" placeholder="new password" required>
-        <input type="password" id="user-box-2" placeholder="repeat new password" required>
-        <button class="submit-btn" type="submit">Change</button>
+        <h3>{{ strings['user password'] }}</h3>
+        <input type="password" id="user-box-1" placeholder="{{ strings['new password'] }}" required>
+        <input type="password" id="user-box-2" placeholder="{{ strings['repeat password'] }}" required>
+        <button class="submit-btn" type="submit">{{ strings['change'] }}</button>
     </form>
     <form class="admin-pass-form" onsubmit="setAdminPassword(event)">
-        <h3>Admin password</h3>
-        <input type="password" id="admin-box-1" placeholder="new password" required>
-        <input type="password" id="admin-box-2" placeholder="repeat new password" required>
-        <button class="submit-btn" type="submit">Change</button>
+        <h3>{{ strings['admin password'] }}</h3>
+        <input type="password" id="admin-box-1" placeholder="{{ strings['new password'] }}" required>
+        <input type="password" id="admin-box-2" placeholder="{{ strings['repeat password'] }}" required>
+        <button class="submit-btn" type="submit">{{ strings['change'] }}</button>
     </form>
 </article>
 </section>
