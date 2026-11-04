@@ -20,16 +20,16 @@
 <div class="other-card-container">
   <section class="info-card">
     <article>
-      <a href="{{ url_for('timer.control') }}">Timer</a>
+      <a class="timer" href="{{ url_for('timer.control') }}">Timer</a>
     </article>
   </section>
   <section class="info-card">
     <article>
-      <a href="{{ url_for('webclock.webclock') }}">Webclock</a>
+      <a class="webclock" href="{{ url_for('webclock.webclock') }}">Webclock</a>
     </article>
   </section>
   <section class="info-card"><article>
-    <a href="{{ url_for('admin.dash') }}">Admin</a>
+    <a class="admin" href="{{ url_for('admin.dash') }}">Admin</a>
   </article></section>
 </div>
 {% endblock %}
