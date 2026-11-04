@@ -1,6 +1,7 @@
 from flask import Flask, Blueprint, render_template, redirect, request, session, url_for
 from CLMMobile.utils import TEMPLATES_DIR, STATIC_DIR
 from .db import AuthService
+from .auth import ROLES
 
 class AuthBp:
 
@@ -24,13 +25,14 @@ class AuthBp:
 
     def login(self):
         next_url = request.args.get("next") or request.form.get("next")
+        required_role = request.args.get("required_role") or request.form.get("required_role")
         if request.method == "POST":
             password = request.form.get("password", "")
-            role = self.auth.verify_passcode(password)
-            if role:
+            role = self.auth.verify_passcode(password, required_role)
+            if ROLES.get(role, 0) >= ROLES[required_role]:
                 session["role"] = role 
                 if next_url:
                     return redirect(url_for(next_url))
                 return redirect(url_for("base.base"))
-            return render_template("auth/index.html",  error="Wrong password!", url=url_for("auth.login"), next=next_url)
-        return render_template("auth/index.html", url=url_for("auth.login"), next=next_url)
+            return render_template("auth/index.html",  error="Wrong password!", url=url_for("auth.login"), next=next_url, required_role=required_role)
+        return render_template("auth/index.html", url=url_for("auth.login"), next=next_url, required_role=required_role)

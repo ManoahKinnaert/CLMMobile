@@ -5,7 +5,7 @@ import secrets
 
 ROLES = {"user": 1, "admin": 2}
 
-def _has_role(min_role):
+def has_role(min_role):
     user_role = session.get("role")
     return bool(user_role) and ROLES.get(user_role, 0) >= ROLES[min_role]
 
@@ -13,8 +13,8 @@ def role_required(min_role, redirect_url: str, main_point: str):
     def decorator(fn):
         @wraps(fn)
         def wrapper(*args, **kwargs):
-            if not _has_role(min_role):
-                return redirect(url_for(redirect_url, next=main_point))
+            if not has_role(min_role):
+                return redirect(url_for(redirect_url, next=main_point, required_role=min_role))
             return fn(*args, **kwargs)
         return wrapper 
     return decorator
@@ -23,7 +23,7 @@ def socket_role_required(min_role):
     def decorator(fn):
         @wraps(fn)
         def wrapper(self, *args, **kwargs):
-            if not _has_role(min_role):
+            if not has_role(min_role):
                 return False  # no-op for normal events, refuses handshake for connect
             return fn(self, *args, **kwargs)
         return wrapper

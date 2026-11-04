@@ -43,7 +43,7 @@ class AuthService:
         except IntegrityError:
             print("[ERROR]: DB Integrity error")
 
-    def verify_passcode(self, passcode: str):
+    def verify_passcode(self, passcode: str, role: str):
         # return matching role ('user' or 'admin') if passcode matches otherwise None
         for cred in self.Credential.select():
             if check_password_hash(cred.passcode_hash, passcode):

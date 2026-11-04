@@ -11,6 +11,7 @@
     {% endif %}
     <input type="password" name="password" placeholder="password">
     <input type="hidden" name="next" value="{{ next or '' }}">
+    <input type="hidden" name="required_role", value="{{ required_role or '' }}">
     <button type="submit">Login</button>
 </form>
 {% endblock %}
