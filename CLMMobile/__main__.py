@@ -35,12 +35,12 @@ def setup():
     db = DataService()
     
     # get the schedule for today
-    schedule = convert(get_schedule_data_auto(), trans)
+    schedule = get_schedule_data_auto()
 
-    base = Base(server, get_ip(), port)
+    base = Base(server, trans, get_ip(), port)
     base.register()
 
-    auth = AuthBp(server)
+    auth = AuthBp(server, trans)
     auth.register()
 
     admin = AdminBp(server, trans, auth.auth, db)

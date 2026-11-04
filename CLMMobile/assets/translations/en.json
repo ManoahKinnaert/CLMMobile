@@ -21,6 +21,16 @@
         "WATCHTOWER STUDY": "Watchtower Study"
     },
 
+    "auth": {
+        "error": "Wrong password!"
+    },
+
+    "admin": {
+        "language": "CLMMobile - Language",
+        "reports": "CLMMobile - Reports",
+        "security": "CLMMobile - Security"
+    },
+
     "base": {
         "how to connect": "How to connect",
         "localhost": "Localhost: ",

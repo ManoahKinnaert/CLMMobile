@@ -21,12 +21,22 @@
         "WATCHTOWER STUDY": "Wachttorenstudie"
     },
 
+    "auth": {
+        "error": "Wachtwoord onjuist!"
+    },
+
+    "admin": {
+        "language": "CLMMobile - Taal",
+        "reports": "CLMMobile - Rapporten",
+        "security": "CLMMobile - Beveiliging"
+    },
+
     "base": {
         "how to connect": "Hoe te verbinden",
         "localhost": "Localhost: ",
         "network": "Netwerk: ",
         "admin": "Admin",
-        "webclock": "Webclock",
+        "webclock": "Webklok",
         "timer": "Timer"
     }
 }

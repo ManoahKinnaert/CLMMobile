@@ -8,8 +8,8 @@ class Timer:
     def __init__(self, socketio: SocketIO, db: DataService):
         self.socket: SocketIO = socketio
 
-        self.limit: int = 60                         # seconds
-        self.remaining: int = self.limit * 60       # seconds
+        self.limit: int = None                       # seconds
+        self.remaining: int = None      # seconds
         self.over_time: int = 0                     # seconds
         self.end_time: int = None
         self.running: bool = False 
@@ -19,7 +19,7 @@ class Timer:
         self._schedule: list = None 
         self.current: int = 0
         self._db = db
-
+        
         self.socket.start_background_task(self._run)
 
     @property
