@@ -2,6 +2,7 @@ from flask import Blueprint, Flask, render_template, request, Response
 import CLMMobile.utils as utils
 from CLMMobile.utils.data import DataService
 from CLMMobile.utils.translation import Translation
+from CLMMobile.utils.auth.db import AuthService
 from CLMMobile.utils.auth import role_required, socket_role_required
 
 class AdminBp:
@@ -13,6 +14,7 @@ class AdminBp:
                                         template_folder=utils.TEMPLATES_DIR / "admin",
                                         static_folder=utils.STATIC_DIR,
                                         url_prefix=self.NAMESPACE)
+        self._auth: AuthService = auth
         self._trans: Translation = trans 
         self._db: DataService = db
 
@@ -50,12 +52,20 @@ class AdminBp:
     def set_user_pass(self):
         try:
             user_pass = request.get_json()["user_password"]
-            pass 
-        except:
-            pass 
+            self._auth.set_passcode(role="user", passcode=user_pass)
+        except (TypeError, KeyError, ValueError):
+            return Response(status=400)
+        except Exception:
+            return Response(status=500)
 
     def set_admin_pass(self):
-        pass 
+        try:
+            admin_pass = request.get_json()["admin_password"]
+            self._auth.set_passcode(role="admin", passcode=admin_pass)
+        except (TypeError, KeyError, ValueError):
+            return Response(status=400)
+        except Exception:
+            return Response(status=500)
 
     def dashboard(self):
         return render_template("admin/index.html", current_lang=self._trans.language, langs=self._trans.get_languages(), strings=self._trans.get_string_section("admin"))
