@@ -51,6 +51,7 @@
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}`)
             }
+            location.reload()
         })
         .catch((error) => {
             console.error("Error changing the language:", error)
