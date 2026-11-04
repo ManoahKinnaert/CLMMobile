@@ -1,6 +1,122 @@
 {% extends 'base.html' %}
 {% block title %}Admin - Dashboard{% endblock %}
 {% block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('admin.static', filename='css/admin/style.css') }}"
+/>
 {% endblock %}
 {% block content %}
+<section class="content">
+<article>
+    <h2>CLMMobile - Language</h2>
+    <div class="language-selector">
+        <h3>Language</h3>
+        <div class="dropdown">
+            <button id="dropdown">Current: {{ current_lang }}</button>
+            <div class="dropdown-content" id="dropdown-content">
+                {% for lang in langs %}
+                {% if lang == current_lang %}
+                <button id="{{ lang }}" style="color: rgb(0, 0, 0)" onclick="switchLang('{{ lang }}')">{{ lang }}</button>
+                {% else %}
+                <button id="{{ lang }}" style="color: rgba(0, 0, 0, 0.5)" onclick="switchLang('{{ lang }}')">{{ lang }}</button>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</article>
+<article>
+    <h2>CLMMobile - Reports</h2>
+</article>
+<article>
+    <h2>CLMMobile - Security</h2>
+</article>
+</section>
+{% endblock %}
+{% block js %}
+<script src="{{ url_for('admin.static', filename='js/admin/admin.js') }}"></script>
+<script>
+    function switchLang(lang) {
+        const url = "{{ url_for('admin.set_lang') }}"
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ language: lang }),
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`)
+            }
+        })
+        .catch((error) => {
+            console.error("Error changing the language:", error)
+        })
+    }
+
+  function setAdminPassword(event) {
+    event.preventDefault()
+
+    const url = "{{ url_for('admin.set_admin_pass') }}"
+    
+    const box1Pass = document.getElementById("admin-box-1").value
+    const box2Pass = document.getElementById("admin-box-2").value
+
+    if (box1Pass !== box2Pass) {
+      alert("Passwords don't match!")
+      return
+    }
+
+    fetch (url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ admin_password: box1Pass })
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`)
+      }
+      location.reload()
+    })
+    .catch((error) => {
+      console.error("Error setting password: ", error)
+    })
+  }
+
+  function setUserPassword(event) {
+    event.preventDefault()
+
+    const url = "{{ url_for('admin.set_user_pass') }}"
+    
+    const box1Pass = document.getElementById("user-box-1").value
+    const box2Pass = document.getElementById("user-box-2").value
+
+    if (box1Pass != box2Pass) {
+      alert("Passwords don't match!")
+      return
+    }
+
+    fetch (url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user_password: box1Pass })
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`)
+      }
+      location.reload()
+    })
+    .catch((error) => {
+      console.error("Error setting password: ", error)
+    })
+  }
+</script>
 {% endblock %}

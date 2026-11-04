@@ -40,11 +40,11 @@ def setup():
     base = Base(server, get_ip(), port)
     base.register()
 
-    admin = AdminBp(server, trans, db)
-    admin.register()
-
     auth = AuthBp(server)
     auth.register()
+
+    admin = AdminBp(server, trans, auth.auth, db)
+    admin.register()
 
     timer = TimerBp(server, socketio, trans, schedule, db)
     timer.register()

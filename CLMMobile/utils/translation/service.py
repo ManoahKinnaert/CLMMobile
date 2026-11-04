@@ -32,6 +32,13 @@ class Translation:
         self._update_cached_strings(new_lang)
         self._lang = new_lang
 
+    def get_languages(self):
+        """
+        Get all available languages
+        """
+        import os
+        return [lang.split(".")[0] for lang in os.listdir(str(TRANS_DIR))]
+
     def _get_language(self):
         """
         Get the current user interface language in the settings file.
