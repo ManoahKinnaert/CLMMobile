@@ -9,9 +9,7 @@
 {% block content %}
 <section class="content">
 <article>
-    <h2>CLMMobile - Language</h2>
-    <div class="language-selector">
-        <h3>Language</h3>
+    <h2>{{ strings['language'] }}</h2>
         <div class="dropdown">
             <button id="dropdown">Current: {{ current_lang }}</button>
             <div class="dropdown-content" id="dropdown-content">
@@ -24,13 +22,12 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
 </article>
 <article>
-    <h2>CLMMobile - Reports</h2>
+    <h2>{{ strings['reports'] }}</h2>
 </article>
 <article>
-    <h2>CLMMobile - Security</h2>
+    <h2>{{ strings['security'] }}</h2>
 </article>
 </section>
 {% endblock %}

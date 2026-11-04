@@ -58,4 +58,4 @@ class AdminBp:
         pass 
 
     def dashboard(self):
-        return render_template("admin/index.html", current_lang=self._trans.language, langs=self._trans.get_languages())
+        return render_template("admin/index.html", current_lang=self._trans.language, langs=self._trans.get_languages(), strings=self._trans.get_string_section("admin"))
