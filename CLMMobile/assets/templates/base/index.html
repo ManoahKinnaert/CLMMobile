@@ -6,13 +6,13 @@
 {% endblock %} {% block content %}
 <section class="info-card">
   <article class="info">
-    <h1>Overview - How to connect</h1>
+    <h1>{{ strings['how to connect'] }}</h1>
     <aside>
-      <h2>Local adress</h2>
+      <h2>{{ strings['localhost'] }}</h2>
       <p>http://127.0.0.1:{{ port }}</p>
     </aside>
     <aside>
-      <h2>Global adress</h2>
+      <h2>{{ strings['network'] }}</h2>
       <p>http://{{ ip }}:{{ port }}</p>
     </aside>
   </article>
@@ -20,14 +20,16 @@
 <div class="other-card-container">
   <section class="info-card">
     <article>
-      <a href="{{ url_for('timer.control') }}">Timer</a>
+      <a class="timer" href="{{ url_for('timer.control') }}">{{ strings['timer'] }}</a>
     </article>
   </section>
   <section class="info-card">
     <article>
-      <a href="{{ url_for('webclock.webclock') }}">Webclock</a>
+      <a class="webclock" href="{{ url_for('webclock.webclock') }}">{{ strings['webclock'] }}</a>
     </article>
   </section>
-  <section class="info-card"><article></article></section>
+  <section class="info-card"><article>
+    <a class="admin" href="{{ url_for('admin.dash') }}">{{ strings['admin'] }}</a>
+  </article></section>
 </div>
 {% endblock %}

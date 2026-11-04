@@ -38,7 +38,7 @@ class Settings:
             print(f"[ERROR]: {e}")
 
     def set(self, key: str, val: Any):
-        data = self._get_all()
+        data = self.get_all()
         data[key] = val 
         self._write(data)
 

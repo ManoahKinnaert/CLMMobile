@@ -4,6 +4,7 @@ import CLMMobile.utils as utils
 from CLMMobile.utils.translation import Translation
 from CLMMobile.utils.auth import role_required, socket_role_required
 from CLMMobile.utils.data import DataService
+from CLMMobile.utils.schedule_service.service import convert
 from .timer import Timer
 
 class TimerBp:
@@ -21,7 +22,9 @@ class TimerBp:
         self._socketio: SocketIO = socketio
         self._trans: Translation = trans
         self._timer: Timer = Timer(socketio, db)
-        self._timer.schedule = schedule
+        self._schedule = schedule
+        self._timer.schedule = convert(self._schedule, trans)
+        self._timer.setup_time()
 
         # load relevant translation strings
         self._talk_translations = None
@@ -104,4 +107,5 @@ class TimerBp:
         self.emit_status()
 
     def index(self):
+        self._timer.schedule = convert(self._schedule, self._trans)
         return render_template("timer/index.html")

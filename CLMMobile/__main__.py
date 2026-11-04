@@ -3,6 +3,7 @@ from flask_socketio import SocketIO
 from CLMMobile.base import Base 
 from CLMMobile.timer import TimerBp
 from CLMMobile.webclock import Webclock
+from CLMMobile.admin import AdminBp
 from CLMMobile.utils.translation import Translation
 from CLMMobile.utils.auth import AuthBp, get_secret_key
 from CLMMobile.utils.schedule_service.service import get_schedule_data_auto, convert
@@ -34,13 +35,16 @@ def setup():
     db = DataService()
     
     # get the schedule for today
-    schedule = convert(get_schedule_data_auto(), trans)
+    schedule = get_schedule_data_auto()
 
-    base = Base(server, get_ip(), port)
+    base = Base(server, trans, get_ip(), port)
     base.register()
 
-    auth = AuthBp(server)
+    auth = AuthBp(server, trans)
     auth.register()
+
+    admin = AdminBp(server, trans, auth.auth, db)
+    admin.register()
 
     timer = TimerBp(server, socketio, trans, schedule, db)
     timer.register()

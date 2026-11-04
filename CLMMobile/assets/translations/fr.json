@@ -1,0 +1,49 @@
+{
+    "talks": {
+        "INTRODUCTION": "Paroles d'introduction",
+        "treasures from gods word": "Joyaux de la parole de dieu",
+        "TREASURES TALK": "Discours",
+        "SPIRITUAL GEMS": "Perles spirituelles",
+        "BIBLE READING": "Lecture de la Bible",
+        "apply to ministry": "Applique-toi au ministère",
+        "STARTING A CONVERSATION": "Engage la conversation",
+        "FOLLOWING UP": "Entretiens l'intérêt",
+        "WHAT WOULD YOU SAY?": "Que diriez-vous?",
+        "MAKING DISCIPLES": "Fais des disciples",
+        "EXPLAINING YOUR BELIEFS": "Explique tes croyances",
+        "TALK": "Discours",
+        "living as christians": "Vie Chrétienne",
+        "LIVING TALK": "Vie Chrétienne - Discours",
+        "CONGREGATION BIBLE STUDY": "Étude biblique de l'assemblée",
+        "CONCLUDING COMMENTS": "Paroles de conclusion",
+        "weekend": "Weekend",
+        "PUBLIC TALK": "Dicours Publique",
+        "WATCHTOWER STUDY": "Étude de La Tour de Garde"
+    },
+
+    "auth": {
+        "error": "Mot de passe incorrect!"
+    },
+
+    "admin": {
+        "language": "CLMMobile - Langue",
+        "current": "Maintenant",
+        "reports": "CLMMobile - Rapports",
+        "security": "CLMMobile - Sécurité",
+        "change passwords": "Changer les mots de passes",
+        "user password": "Mot de passe utilisateur",
+        "new password": "Nouvelle mot de passe",
+        "repeat password": "Répéter nouvelle mot de passe",
+        "change": "Changer",
+        "admin password": "Mot de passe administrateur"
+    },
+
+    "base": {
+        "how to connect": "Comment se connecter",
+        "localhost": "Localhost: ",
+        "network": "Résau: ",
+        "admin": "Admin",
+        "webclock": "Horloge en ligne",
+        "timer": "Minuteur"
+    }
+}

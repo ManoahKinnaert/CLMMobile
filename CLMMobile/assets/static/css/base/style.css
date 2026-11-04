@@ -28,3 +28,32 @@ main {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
+
+article {
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    padding: 0.5rem 2rem;
+    color: white;
+    text-align: center;
+    border-radius: 1rem;
+}
+
+a:hover {
+    opacity: 0.5;
+}
+
+.timer {
+    background-color: var(--accent-color);
+}
+
+.webclock {
+    background-color: green;
+}
+
+.admin {
+    background-color: red;
+}

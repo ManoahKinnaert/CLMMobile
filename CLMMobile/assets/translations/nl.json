@@ -1,0 +1,49 @@
+{
+    "talks": {
+        "INTRODUCTION": "Inleiding",
+        "treasures from gods word": "Schatten uit Gods woord",
+        "TREASURES TALK": "Schatten lezing",
+        "SPIRITUAL GEMS": "Geestelijke Juweeltjes",
+        "BIBLE READING": "Bijbellezen",
+        "apply to ministry": "Leg je toe op de velddienst",
+        "STARTING A CONVERSATION": "Begin een gesprek",
+        "FOLLOWING UP": "Ga terug",
+        "WHAT WOULD YOU SAY?": "Wat zou je zeggen?",
+        "MAKING DISCIPLES": "Maak discipelen",
+        "EXPLAINING YOUR BELIEFS": "Leg uit wat je gelooft",
+        "TALK": "Aandeel",
+        "living as christians": "Leven als Christenen",
+        "LIVING TALK": "Leven Aandeel",
+        "CONGREGATION BIBLE STUDY": "Gemeentebijbelstudie",
+        "CONCLUDING COMMENTS": "Slotopmerkingen",
+        "weekend": "Weekend",
+        "PUBLIC TALK": "Openbare lezing",
+        "WATCHTOWER STUDY": "Wachttorenstudie"
+    },
+
+    "auth": {
+        "error": "Wachtwoord onjuist!"
+    },
+
+    "admin": {
+        "language": "CLMMobile - Taal",
+        "current": "Huidige",
+        "reports": "CLMMobile - Rapporten",
+        "security": "CLMMobile - Beveiliging",
+        "change passwords": "Wijzig wachtwoorden",
+        "user password": "Gebruikerswachtwoord",
+        "new password": "Nieuw wachtwoord",
+        "repeat password": "Herhaal nieuw wachtwoord",
+        "change": "Wijzigen",
+        "admin password": "Beheerderswachtwoord"
+    },
+
+    "base": {
+        "how to connect": "Hoe te verbinden",
+        "localhost": "Localhost: ",
+        "network": "Netwerk: ",
+        "admin": "Beheerder",
+        "webclock": "Webklok",
+        "timer": "Timer"
+    }
+}

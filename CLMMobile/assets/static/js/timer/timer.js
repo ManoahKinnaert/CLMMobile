@@ -33,7 +33,7 @@ socket.on("connect_event", (data) => {
     } else {
         startStopBtn.textContent = "Start"
     }
-    timeLbl.innerText = `${data.current.time}:00`
+    timeLbl.innerText = `${String(data.current.time).padStart(2, "0")}:00`
     timeLbl.style.color = "black"
     setupDropDown(data.schedule)
     selectCurrent(data.current)
@@ -45,7 +45,7 @@ socket.on("status", (data) => {
         startStopBtn.textContent = "Start"
     }
 
-    timeLbl.innerText = `${data.current.time}:00`
+    timeLbl.innerText = `${String(data.current.time).padStart(2, "0")}:00`
     timeLbl.style.color = "black"
     selectCurrent(data.current)
 })
@@ -58,7 +58,7 @@ socket.on("clockdata", (data) => {
     const totalSeconds = isOvertime ? data.over_time : data.remaining
     const mins = Math.floor(totalSeconds / 60)
     const secs = totalSeconds - mins * 60
-    timeLbl.innerText = `${mins}:${String(secs).padStart(2, "0")}`
+    timeLbl.innerText = `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`
     if (isOvertime) timeLbl.style.color = "red"
 })
 // functions
