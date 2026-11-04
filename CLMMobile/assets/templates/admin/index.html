@@ -30,13 +30,13 @@
 <article>
     <h2>{{ strings['security'] }}</h2>
     <button id="change-passwords-btn">{{ strings['change passwords'] }}</button>
-    <form class="user-pass-form" onsubmit="setUserPassword(event)">
+    <form id="user-pass-form" class="user-pass-form" onsubmit="setUserPassword(event)">
         <h3>{{ strings['user password'] }}</h3>
         <input type="password" id="user-box-1" placeholder="{{ strings['new password'] }}" required>
         <input type="password" id="user-box-2" placeholder="{{ strings['repeat password'] }}" required>
         <button class="submit-btn" type="submit">{{ strings['change'] }}</button>
     </form>
-    <form class="admin-pass-form" onsubmit="setAdminPassword(event)">
+    <form id="admin-pass-form" class="admin-pass-form" onsubmit="setAdminPassword(event)">
         <h3>{{ strings['admin password'] }}</h3>
         <input type="password" id="admin-box-1" placeholder="{{ strings['new password'] }}" required>
         <input type="password" id="admin-box-2" placeholder="{{ strings['repeat password'] }}" required>
