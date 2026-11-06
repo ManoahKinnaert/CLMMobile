@@ -24,6 +24,7 @@ class AdminBp:
 
     def register_endpoints(self):
         self._bp.add_url_rule("/", "dash", role_required("admin", "auth.login", "admin.dash")(self.dashboard), methods=["GET"])
+        self._bp.add_url_rule("/meetings", "meetings", role_required("admin", "auth.login", "admin.meetings")(self.meetings), methods=["GET"])
         self._bp.add_url_rule("/set_lang", "set_lang", role_required("admin", "auth.login", "admin.set_lang")(self.set_lang), methods=["POST"])
         self._bp.add_url_rule("/user_pass", "set_user_pass", role_required("admin", "auth.login", "admin.set_user_pass")(self.set_user_pass), methods=["POST"])
         self._bp.add_url_rule("/admin_pass", "set_admin_pass", role_required("admin", "auth.login", "admin.set_admin_pass")(self.set_admin_pass), methods=["POST"])
@@ -69,3 +70,6 @@ class AdminBp:
 
     def dashboard(self):
         return render_template("admin/index.html", current_lang=self._trans.language, langs=self._trans.get_languages(), strings=self._trans.get_string_section("admin"))
+
+    def meetings(self):
+        return render_template("admin/meetings.html")

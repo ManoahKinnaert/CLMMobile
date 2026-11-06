@@ -1,0 +1,28 @@
+@import "../colors.css";
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+article {
+    margin: 3rem;
+    width: min(500px, 60%);
+    padding: 1rem;
+    background-color: var(--bg-1);
+    border-radius: 1rem;
+    box-shadow: 0 1rem 2rem 0.1rem black;
+}
+
+.back {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.back:hover {
+    font-style: italic;
+    text-decoration: underline;
+}
