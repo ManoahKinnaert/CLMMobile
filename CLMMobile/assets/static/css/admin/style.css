@@ -75,6 +75,12 @@ main {
   background-color: var(--bg-3);
   border: none;
   border-radius: 1rem;
+  user-select: none;
+}
+
+.reports-btn:hover {
+  opacity: 0.5;
+  cursor: pointer;
 }
 
 #change-passwords-btn {
