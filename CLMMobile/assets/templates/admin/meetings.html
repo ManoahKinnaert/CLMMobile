@@ -9,7 +9,11 @@ block css %}
   <article>
     <a class="back" href="{{ url_for('admin.dash') }}">Back</a>
     <h2>Meetings</h2>
+    <ul>
+    {% for date in dates %}
+    <li class="meeting"><a>{{ date }}</a></li>
+    {% endfor %}
+  </ul>
   </article>
-  <ol></ol>
 </section>
 {% endblock %}
