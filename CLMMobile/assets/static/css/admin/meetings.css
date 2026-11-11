@@ -42,10 +42,11 @@ ul {
     border-radius: 0.5rem;
     user-select: none;
 
-    transition: ease-in 0.3;
+    transition: ease 0.2s;
 }
 .meeting:hover {
     font-weight: bold;
+    cursor: pointer;
     transform: translateY(-0.2rem);
     box-shadow: 0 0.2rem 1rem black;
 }
