@@ -73,3 +73,7 @@ class AdminBp:
 
     def meetings(self):
         return render_template("admin/meetings.html", dates=self._db.get_meeting_dates())
+
+    def report(self):
+        date = request.args.get("date")
+        return render_template("admin/report.html", date=date)

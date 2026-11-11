@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Report{% endblock %}
+{% block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('admin.static', filename='css/admin/meetings.css') }}"
+/>
+{% endblock %}
+{% block content %}
+<section>
+    <article>
+        <a class="back" href="{{ url_for('admin.meetings') }}">Bacl</a>
+    </article>
+</section>
