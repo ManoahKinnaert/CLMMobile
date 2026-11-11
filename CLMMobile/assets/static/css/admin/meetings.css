@@ -36,6 +36,8 @@ ul {
 }
 
 .meeting {
+    text-decoration: none;
+    color: black;
     width: 100%;
     background-color: var(--bg-3);
     padding: 0.5rem;

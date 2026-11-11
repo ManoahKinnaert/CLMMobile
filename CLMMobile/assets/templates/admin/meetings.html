@@ -11,7 +11,7 @@ block css %}
     <h2>Meetings</h2>
     <ul>
     {% for date in dates %}
-    <a class="meeting"><li>{{ date }}</li></a>
+    <a class="meeting" href="{{ url_for('admin.report', date=date)}}"><li>{{ date }}</li></a>
     {% endfor %}
   </ul>
   </article>

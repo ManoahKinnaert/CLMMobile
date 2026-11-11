@@ -1,9 +1,9 @@
-from flask import Blueprint, Flask, render_template, request, Response
+from flask import Blueprint, Flask, render_template, request, Response, redirect, url_for
 import CLMMobile.utils as utils
 from CLMMobile.utils.data import DataService
 from CLMMobile.utils.translation import Translation
 from CLMMobile.utils.auth.db import AuthService
-from CLMMobile.utils.auth import role_required, socket_role_required
+from CLMMobile.utils.auth import role_required
 
 class AdminBp:
     NAMESPACE = "/admin"
@@ -25,6 +25,7 @@ class AdminBp:
     def register_endpoints(self):
         self._bp.add_url_rule("/", "dash", role_required("admin", "auth.login", "admin.dash")(self.dashboard), methods=["GET"])
         self._bp.add_url_rule("/meetings", "meetings", role_required("admin", "auth.login", "admin.meetings")(self.meetings), methods=["GET"])
+        self._bp.add_url_rule("/meetings/report", "report", role_required("admin", "auth.login", "admin.report")(self.report), methods=["GET"])
         self._bp.add_url_rule("/set_lang", "set_lang", role_required("admin", "auth.login", "admin.set_lang")(self.set_lang), methods=["POST"])
         self._bp.add_url_rule("/user_pass", "set_user_pass", role_required("admin", "auth.login", "admin.set_user_pass")(self.set_user_pass), methods=["POST"])
         self._bp.add_url_rule("/admin_pass", "set_admin_pass", role_required("admin", "auth.login", "admin.set_admin_pass")(self.set_admin_pass), methods=["POST"])
@@ -76,4 +77,5 @@ class AdminBp:
 
     def report(self):
         date = request.args.get("date")
+        if date is None: return redirect(url_for("admin.meetings"))
         return render_template("admin/report.html", date=date)
