@@ -9,9 +9,9 @@
 {% block content %}
 <section>
     <article>
-        <a class="back" href="{{ url_for('admin.meetings') }}">Back</a>
+        <a class="back" href="{{ url_for('admin.meetings') }}">{{ strings['back'] }}</a>
         <h2>{{ talk_strings.get('MEETING', 'Meeting') }} {{ date }}</h2>
-        <a class="download" href="{{ url_for('admin.report_download', date=date) }}">Download report</a>
+        <a class="download" href="{{ url_for('admin.report_download', date=date) }}">{{ strings['download'] }}</a>
         {% for section in section_order %}
             {% if section in sections %}
                 {% if section != "introduction" %}

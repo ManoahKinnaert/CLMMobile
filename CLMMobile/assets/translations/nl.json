@@ -30,6 +30,7 @@
         "language": "CLMMobile - Taal",
         "current": "Huidige",
         "reports": "CLMMobile - Rapporten",
+        "reports-btn": "Rapporten",
         "security": "CLMMobile - Beveiliging",
         "change passwords": "Wijzig wachtwoorden",
         "user password": "Gebruikerswachtwoord",
@@ -39,7 +40,18 @@
         "admin password": "Beheerderswachtwoord"
     },
 
+    "meetings": {
+        "back": "Terug",
+        "meetings": "Vergaderingen"
+    },
+
+    "report": {
+        "back": "Terug",
+        "download": "Downloaden"
+    },
+
     "base": {
+        "title": "CLMMobile - Home",
         "how to connect": "Hoe te verbinden",
         "localhost": "Localhost: ",
         "network": "Netwerk: ",

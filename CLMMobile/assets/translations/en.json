@@ -30,6 +30,7 @@
         "language": "CLMMobile - Language",
         "current": "Current",
         "reports": "CLMMobile - Reports",
+        "reports-btn": "Reports",
         "security": "CLMMobile - Security",
         "change passwords": "Change passwords",
         "user password": "User password",
@@ -39,7 +40,18 @@
         "admin password": "Admin password"
     },
 
+    "meetings": {
+        "back": "Back",
+        "meetings": "Meetings"
+    },
+
+    "report": {
+        "back": "Back",
+        "download": "Download"
+    },
+
     "base": {
+        "title": "CLMMobile - Home",
         "how to connect": "How to connect",
         "localhost": "Localhost: ",
         "network": "Network: ",

@@ -75,7 +75,7 @@ class AdminBp:
         return render_template("admin/index.html", current_lang=self._trans.language, langs=self._trans.get_languages(), strings=self._trans.get_string_section("admin"))
 
     def meetings(self):
-        return render_template("admin/meetings.html", dates=self._db.get_meeting_dates())
+        return render_template("admin/meetings.html", dates=self._db.get_meeting_dates(), strings=self._trans.get_string_section("meetings"))
 
     def report(self):
         date = request.args.get("date")
@@ -112,6 +112,7 @@ class AdminBp:
 
         return render_template(
             "admin/report.html",
+            strings=self._trans.get_string_section("report"),
             date=date,
             sections=sections,
             section_order=section_order,

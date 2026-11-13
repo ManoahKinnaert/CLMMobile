@@ -7,8 +7,8 @@ block css %}
 {% endblock %} {% block content %}
 <section>
   <article>
-    <a class="back" href="{{ url_for('admin.dash') }}">Back</a>
-    <h2>Meetings</h2>
+    <a class="back" href="{{ url_for('admin.dash') }}">{{ strings['back'] }}</a>
+    <h2>{{ strings['meetings'] }}</h2>
     <ul>
     {% for date in dates %}
     <a class="meeting" href="{{ url_for('admin.report', date=date)}}"><li>{{ date }}</li></a>
