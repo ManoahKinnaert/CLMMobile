@@ -17,17 +17,6 @@ server.secret_key = get_secret_key()
 socketio = SocketIO(server, async_mode="threading")
 port = 5051
 
-def get_ip():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.settimeout(0)
-    try:
-        s.connect(("10.20.30.40", 1))
-        ip = s.getsockname()[0]
-    except Exception:
-        ip = "127.0.0.1"
-    finally:
-        s.close()
-    return ip
 
 def setup():
     settings = Settings()
@@ -37,7 +26,7 @@ def setup():
     # get the schedule for today
     schedule = get_schedule_data_auto()
 
-    base = Base(server, trans, get_ip(), port)
+    base = Base(server, trans, port)
     base.register()
 
     auth = AuthBp(server, trans)

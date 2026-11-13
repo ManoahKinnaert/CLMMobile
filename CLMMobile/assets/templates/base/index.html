@@ -20,15 +20,18 @@
 <div class="other-card-container">
   <section class="info-card">
     <article>
+      <img src="data:image/png;base64, {{ timer_qr }}" alt="Timer QR Code">
       <a class="timer" href="{{ url_for('timer.control') }}">{{ strings['timer'] }}</a>
     </article>
   </section>
   <section class="info-card">
     <article>
+      <img src="data:image/png;base64, {{ webclock_qr }}" alt="Webclock QR Code">
       <a class="webclock" href="{{ url_for('webclock.webclock') }}">{{ strings['webclock'] }}</a>
     </article>
   </section>
   <section class="info-card"><article>
+    <img src="data:image/png;base64, {{ admin_qr }}" alt="Admin QR Code">
     <a class="admin" href="{{ url_for('admin.dash') }}">{{ strings['admin'] }}</a>
   </article></section>
 </div>
