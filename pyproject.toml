@@ -16,7 +16,8 @@ dependencies = [
     "peewee==4.5.2",
     "fpdf2==2.8.4",
     "gevent",
-    "beautifulsoup4==4.15.0"
+    "beautifulsoup4==4.15.0",
+    "requests==2.34.2"
 ]
 
 [tool.setuptools]
