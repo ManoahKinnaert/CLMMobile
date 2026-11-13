@@ -2,7 +2,8 @@
 
 main {
     display: grid;
-    grid-template-rows: 2fr 1fr;
+    grid-template-rows: auto auto;
+    align-items: start;
 }
 
 .info-card {
@@ -11,6 +12,13 @@ main {
     padding: 0.1rem 0.5rem;
     background-color: var(--bg-1);   
     box-shadow: 0 1rem 2rem 0.1rem black;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+.info p {
+    overflow-wrap: anywhere;
+    margin: 0.25rem 0;
 }
 
 .info {
@@ -25,8 +33,10 @@ main {
 }
 
 .other-card-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
 }
 
 article {
@@ -64,6 +74,7 @@ a:hover {
 }
 
 img {
+    max-width: 100%;
     width: 8rem;
     height: auto;
 }
