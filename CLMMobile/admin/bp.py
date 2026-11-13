@@ -4,6 +4,7 @@ from CLMMobile.utils.data import DataService
 from CLMMobile.utils.translation import Translation
 from CLMMobile.utils.auth.db import AuthService
 from CLMMobile.utils.auth import role_required
+from CLMMobile.utils.reports.generator import Generator
 
 class AdminBp:
     NAMESPACE = "/admin"
@@ -77,5 +78,42 @@ class AdminBp:
 
     def report(self):
         date = request.args.get("date")
-        if date is None: return redirect(url_for("admin.meetings"))
-        return render_template("admin/report.html", date=date)
+        if date is None:
+            return redirect(url_for("admin.meetings"))
+        meeting_data = self._db.get_meeting_data(date)
+        if meeting_data is None:
+            return redirect(url_for("admin.meetings"))
+
+        talk_strings = self._trans.get_string_section("talks") or {}
+        sections = {}
+        for talk in meeting_data:
+            talk_type = talk.get("talk_type")
+            section = None
+            talk_name = str(talk_type)
+            if talk_type is not None:
+                for s, rng in Generator.SECTION_RANGES.items():
+                    if talk_type in rng:
+                        section = s
+                        keys = Generator.TALK_NAME_KEYS.get(s, [])
+                        index = talk_type - rng.start
+                        if 0 <= index < len(keys):
+                            talk_name = talk_strings.get(keys[index], keys[index])
+                        break
+            if section:
+                talk["_section"] = section
+                talk["_name"] = talk_name
+                talk["_time_str"] = f"{talk.get('measured_time', 0) // 60:02d}:{talk.get('measured_time', 0) % 60:02d}"
+                talk["_limit_str"] = f"{talk.get('time_limit', 0) // 60:02d}:00"
+                sections.setdefault(section, []).append(talk)
+
+        section_order = list(Generator.SECTION_RANGES.keys())
+        section_colors = Generator.COLOR_TABLE
+
+        return render_template(
+            "admin/report.html",
+            date=date,
+            sections=sections,
+            section_order=section_order,
+            talk_strings=talk_strings,
+            section_colors=section_colors
+        )

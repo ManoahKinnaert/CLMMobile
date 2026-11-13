@@ -3,14 +3,32 @@
 {% block css %}
 <link
   rel="stylesheet"
-  href="{{ url_for('admin.static', filename='css/admin/meetings.css') }}"
+  href="{{ url_for('admin.static', filename='css/admin/report.css') }}"
 />
 {% endblock %}
 {% block content %}
 <section>
     <article>
         <a class="back" href="{{ url_for('admin.meetings') }}">Back</a>
-        <h2>Meeting {{ date }}</h2>
+        <h2>{{ talk_strings.get('MEETING', 'Meeting') }} {{ date }}</h2>
+        <button class="download" disabled title="Download coming soon">Download report</button>
+        {% for section in section_order %}
+            {% if section in sections %}
+                {% if section != "introduction" %}
+                    <div class="section-title" style="background-color: rgb{{ section_colors[section] }};">
+                        <span class="section-name">{{ talk_strings.get(section, section) }}</span>
+                    </div>
+                {% endif %}
+                <ul class="talk-list">
+                {% for talk in sections[section] %}
+                    <li class="talk">
+                        <span class="talk-name">{{ talk._name }} ({{ talk._limit_str }})</span>
+                        <span class="talk-time">{{ talk._time_str }}</span>
+                    </li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endfor %}
     </article>
 </section>
 {% endblock %}
