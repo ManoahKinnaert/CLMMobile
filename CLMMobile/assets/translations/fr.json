@@ -58,5 +58,12 @@
         "admin": "Admin",
         "webclock": "Horloge en ligne",
         "timer": "Minuteur"
+    },
+
+    "console": {
+        "running": "CLMMobile est en cours d'exécution !",
+        "local": "Exécution locale à",
+        "global": "Exécution sur le réseau à",
+        "close": "Entrez q pour fermer l'application"
     }
 }

@@ -165,15 +165,21 @@ def update_schedule_data():
     return data
 
 def get_schedule_data_auto():
+    data = None
     try:
         with open(MEETING_FEED_CACHE, "r") as feed:
             data = json.load(feed)
-    except (FileNotFoundError, json.JSONDecodeError) as e:
-        data = update_schedule_data()
+    except (FileNotFoundError, json.JSONDecodeError):
+        pass
     year, weeknum, dow = datetime.datetime.now().isocalendar()
     if data is None or f"{year}-{weeknum}" not in data:
-        data = update_schedule_data()
-    return data[f"{year}-{weeknum}"] if dow < 6 else get_weekend_schedule()
+        try:
+            data = update_schedule_data()
+        except Exception:
+            data = None
+    if data and f"{year}-{weeknum}" in data:
+        return data[f"{year}-{weeknum}"]
+    return get_weekend_schedule() if dow >= 6 else {}
 
 def convert(schedule: dict, translation):
     temp = []

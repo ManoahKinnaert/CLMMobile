@@ -58,5 +58,12 @@
         "admin": "Admin",
         "webclock": "Webclock",
         "timer": "Timer"
+    },
+
+    "console": {
+        "running": "CLMMobile is running!",
+        "local": "Running locally at",
+        "global": "Running on network at",
+        "close": "Enter q to close the app"
     }
 }

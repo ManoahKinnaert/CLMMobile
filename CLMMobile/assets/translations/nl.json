@@ -58,5 +58,12 @@
         "admin": "Beheerder",
         "webclock": "Webklok",
         "timer": "Timer"
+    },
+
+    "console": {
+        "running": "CLMMobile is opgestart!",
+        "local": "Lokaal adres",
+        "global": "Extern netwerkadres",
+        "close": "Geef q in om de app af te sluiten"
     }
 }
