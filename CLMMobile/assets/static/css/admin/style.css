@@ -73,9 +73,11 @@ main {
   padding: 0.5rem 1rem;
   width: 60%;
   background-color: var(--bg-3);
+  color: black;
   border: none;
   border-radius: 1rem;
   user-select: none;
+  text-decoration: none;
 }
 
 .reports-btn:hover {
