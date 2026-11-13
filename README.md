@@ -20,9 +20,8 @@ apk add curl && curl -fsSL https://raw.githubusercontent.com/ManoahKinnaert/CLMM
 
 To launch:
 ```bash
-python3 -m CLMMobile
+timer
 ```
-
 
 ## Installation from source
 Clone the repo and navigate to folder:
