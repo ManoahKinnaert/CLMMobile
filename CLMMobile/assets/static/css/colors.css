@@ -1,8 +1,16 @@
+/* Define the colorscheme */
 :root {
-  --main-bg: rgb(200, 200, 210);
-  --secondary-bg: rgb(240, 240, 240);
+    --accent-color: rgb(90, 140, 210);
 
-  --title-bar: rgb(100, 150, 200);
-  --text-highlighted: rgb(250, 220, 120);
-  --online-text: rgb(50, 190, 100);
+    /* Background colors */
+    --bg-1: white;
+    --bg-2: rgb(240, 240, 240);
+    --bg-3: rgb(220, 220, 220);
+
+    /* Text colors */
+    --fg-1: black;
+    --fg-1-transparent: rgba(0, 0, 0, 0.5);
+    --fg-2: white;
+    --fg-2-transparent: rgba(255, 255, 255, 0.5);
+
 }

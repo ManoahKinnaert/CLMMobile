@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Report{% endblock %}
+{% block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('admin.static', filename='css/admin/report.css') }}"
+/>
+{% endblock %}
+{% block content %}
+<section>
+    <article>
+        <a class="back" href="{{ url_for('admin.meetings') }}">{{ strings['back'] }}</a>
+        <h2>{{ talk_strings.get('MEETING', 'Meeting') }} {{ date }}</h2>
+        <a class="download" href="{{ url_for('admin.report_download', date=date) }}">{{ strings['download'] }}</a>
+        {% for section in section_order %}
+            {% if section in sections %}
+                {% if section != "introduction" %}
+                    <div class="section-title" style="background-color: rgb{{ section_colors[section] }};">
+                        <span class="section-name">{{ talk_strings.get(section, section) }}</span>
+                    </div>
+                {% endif %}
+                <ul class="talk-list">
+                {% for talk in sections[section] %}
+                    <li class="talk">
+                        <span class="talk-name">{{ talk._name }} ({{ talk._limit_str }})</span>
+                        <span class="talk-time">{{ talk._time_str }}</span>
+                    </li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endfor %}
+    </article>
+</section>
+{% endblock %}

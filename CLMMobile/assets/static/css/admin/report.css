@@ -1,0 +1,85 @@
+@import "../colors.css";
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+article {
+    margin: 3rem;
+    width: min(600px, 70%);
+    padding: 1rem;
+    background-color: var(--bg-1);
+    border-radius: 1rem;
+    box-shadow: 0 1rem 2rem 0.1rem black;
+}
+
+.back {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.back:hover {
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.section-title {
+    padding: 0.4rem 0.75rem;
+    border-radius: 0.4rem;
+    color: var(--fg-2);
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.section-name {
+    color: inherit;
+}
+
+.talk-list {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+}
+
+.talk {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--bg-2);
+    border-radius: 0.4rem;
+    margin-bottom: 0.35rem;
+    font-size: 0.95rem;
+}
+
+.talk-name {
+    flex: 1;
+}
+
+.talk-time {
+    width: 4rem;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+.download {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    text-decoration: none;
+    color: white;
+    background-color: var(--accent-color);
+    border-radius: 0.4rem;
+    display: inline-block;
+}
+
+.download:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}

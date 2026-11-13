@@ -1,0 +1,54 @@
+@import "../colors.css";
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+article {
+    margin: 3rem;
+    width: min(500px, 60%);
+    padding: 1rem;
+    background-color: var(--bg-1);
+    border-radius: 1rem;
+    box-shadow: 0 1rem 2rem 0.1rem black;
+}
+
+.back {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.back:hover {
+    font-style: italic;
+    text-decoration: underline;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.meeting {
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    background-color: var(--bg-3);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    user-select: none;
+
+    transition: ease 0.2s;
+}
+.meeting:hover {
+    font-weight: bold;
+    cursor: pointer;
+    transform: translateY(-0.2rem);
+    box-shadow: 0 0.2rem 1rem black;
+}

@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% block title %}Admin - Dashboard{% endblock %}
+{% block css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('admin.static', filename='css/admin/style.css') }}"
+/>
+{% endblock %}
+{% block content %}
+<section class="content">
+<article>
+    <h2>{{ strings['language'] }}</h2>
+        <div class="dropdown">
+            <button id="dropdown">{{ strings['current'] }}: {{ current_lang }}</button>
+            <div class="dropdown-content" id="dropdown-content">
+                {% for lang in langs %}
+                {% if lang == current_lang %}
+                <button id="{{ lang }}" style="color: rgb(0, 0, 0)" onclick="switchLang('{{ lang }}')">{{ lang }}</button>
+                {% else %}
+                <button id="{{ lang }}" style="color: rgba(0, 0, 0, 0.5)" onclick="switchLang('{{ lang }}')">{{ lang }}</button>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+</article>
+<article>
+    <h2>{{ strings['reports'] }}</h2>
+    <a href="{{ url_for('admin.meetings') }}" class="reports-btn">{{ strings['reports-btn'] }}</a>
+</article>
+<article>
+    <h2>{{ strings['security'] }}</h2>
+    <button id="change-passwords-btn">{{ strings['change passwords'] }}</button>
+    <form id="user-pass-form" class="user-pass-form" onsubmit="setUserPassword(event)">
+        <h3>{{ strings['user password'] }}</h3>
+        <input type="password" id="user-box-1" placeholder="{{ strings['new password'] }}" required>
+        <input type="password" id="user-box-2" placeholder="{{ strings['repeat password'] }}" required>
+        <button class="submit-btn" type="submit">{{ strings['change'] }}</button>
+    </form>
+    <form id="admin-pass-form" class="admin-pass-form" onsubmit="setAdminPassword(event)">
+        <h3>{{ strings['admin password'] }}</h3>
+        <input type="password" id="admin-box-1" placeholder="{{ strings['new password'] }}" required>
+        <input type="password" id="admin-box-2" placeholder="{{ strings['repeat password'] }}" required>
+        <button class="submit-btn" type="submit">{{ strings['change'] }}</button>
+    </form>
+</article>
+</section>
+{% endblock %}
+{% block js %}
+<script src="{{ url_for('admin.static', filename='js/admin/admin.js') }}"></script>
+<script>
+    function switchLang(lang) {
+        const url = "{{ url_for('admin.set_lang') }}"
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ language: lang }),
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`)
+            }
+            location.reload()
+        })
+        .catch((error) => {
+            console.error("Error changing the language:", error)
+        })
+    }
+
+  function setAdminPassword(event) {
+    event.preventDefault()
+
+    const url = "{{ url_for('admin.set_admin_pass') }}"
+    
+    const box1Pass = document.getElementById("admin-box-1").value
+    const box2Pass = document.getElementById("admin-box-2").value
+
+    if (box1Pass !== box2Pass) {
+      alert("Passwords don't match!")
+      return
+    }
+
+    fetch (url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ admin_password: box1Pass })
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`)
+      }
+      location.reload()
+    })
+    .catch((error) => {
+      console.error("Error setting password: ", error)
+    })
+  }
+
+  function setUserPassword(event) {
+    event.preventDefault()
+
+    const url = "{{ url_for('admin.set_user_pass') }}"
+    
+    const box1Pass = document.getElementById("user-box-1").value
+    const box2Pass = document.getElementById("user-box-2").value
+
+    if (box1Pass != box2Pass) {
+      alert("Passwords don't match!")
+      return
+    }
+
+    fetch (url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user_password: box1Pass })
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`)
+      }
+      location.reload()
+    })
+    .catch((error) => {
+      console.error("Error setting password: ", error)
+    })
+  }
+</script>
+{% endblock %}

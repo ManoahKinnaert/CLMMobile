@@ -1,0 +1,117 @@
+@import "../colors.css";
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: min(600px, 85%);
+  margin: 1rem;
+  padding: 1rem;
+
+  background-color: var(--bg-1);
+  border-radius: 1rem;
+  box-shadow: 0 1rem 2rem 0.1rem black;
+}
+
+.dropdown {
+    position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+#dropdown {
+  width: 60%;
+  min-height: 3rem;
+  padding: 0.5rem;
+  background-color: var(--accent-color);
+  color: white;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 1rem;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdown-content {
+  position: absolute;
+  display: none;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  width: 60%;
+  max-height: 40vh;
+  overflow-y: auto;
+
+  background-color: var(--bg-3);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.2rem 1rem black;
+}
+
+.dropdown-content button {
+  color: rgba(0, 0, 0, 0.5);
+  padding: 0.4rem 0.8rem;
+  display: block;
+  background-color: var(--bg-3);
+  text-align: left;
+  border: none;
+  width: 100%;
+}
+
+.dropdown-content button:hover {
+  background-color: var(--bg-2);
+  cursor: pointer;
+}
+
+.reports-btn {
+  padding: 0.5rem 1rem;
+  width: 60%;
+  background-color: var(--bg-3);
+  color: black;
+  border: none;
+  border-radius: 1rem;
+  user-select: none;
+  text-decoration: none;
+}
+
+.reports-btn:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+#change-passwords-btn {
+  padding: 0.5rem 1rem;
+  width: 60%;
+  background-color: var(--bg-3);
+  border: none;
+  border-radius: 1rem;
+}
+
+.submit-btn {
+  padding: 0.7rem 1rem;
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  color: white;
+}
+
+input {
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-3);
+  border: none;
+  border-radius: 1rem;
+}
+
+.user-pass-form, .admin-pass-form {
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 60%;
+}

@@ -1,19 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('base.static', filename='css/base.css') }}"
-    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     {% block css %}{% endblock %}
-  </head>
-  <body>
-    <div class="titlebar">
-      <a href="{{ url_for('base.base') }}">CLM Mobile</a>
-    </div>
-    {% block content %}{% endblock %} {% block js %}{% endblock %}
-  </body>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('base.base') }}">CLMMobile</a>
+    </nav>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    {% block js %}{% endblock %}
+</body>
 </html>

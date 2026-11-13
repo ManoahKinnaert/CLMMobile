@@ -1,46 +1,38 @@
-{% extends "base.html" %} {% block title %}CLMMobile{% endblock %} {% block css
-%}
+{% extends 'base.html' %} {% block title %}{{ strings['title'] }}{% endblock %} {% block css %}
 <link
   rel="stylesheet"
   href="{{ url_for('base.static', filename='css/base/style.css') }}"
 />
 {% endblock %} {% block content %}
-<div class="content">
-  <div class="overview">
-    <h3>{{ strings['overview-lbl'] }}</h3>
-    <div class="adresscollection">
-      <p>{{ strings['ip_local'] }}: {{ ip_local }}</p>
-      <p>{{ strings['local_addr'] }}: http://{{ ip_local }}:{{ port }}/</p>
-      <p>{{ strings['ip_global'] }}: {{ ip_global }}</p>
-      <p>{{ strings['global_addr']}}: http://{{ ip_global }}:{{ port }}</p>
-    </div>
-    <div class="qrcodecollection">
-      <div class="qr-container">
-        <h4>{{ strings['scan_webclock'] }}:</h4>
-        <img
-          class="qr-image"
-          src="data:image/png;base64, {{ webclock_qr }}"
-          alt="Webclock QR Code"
-        />
-      </div>
-      <div class="qr-container">
-        <h4>{{ strings['scan_timer'] }}:</h4>
-        <img
-          class="qr-image"
-          src="data:image/png;base64, {{ timer_qr }}"
-          alt="Timer QR Code"
-        />
-      </div>
-    </div>
-  </div>
-  <div class="navigation">
-    <a id="admin-btn" href="{{ url_for('admin_service.dashboard') }}">Admin</a>
-    <a id="go-to-webclock-btn" href="{{ url_for('webclock_service.webclock') }}"
-      >Webclock</a
-    >
-    <a id="go-to-timer-btn" href="{{ url_for('time_service.control') }}"
-      >Timer</a
-    >
-  </div>
+<section class="info-card">
+  <article class="info">
+    <h1>{{ strings['how to connect'] }}</h1>
+    <aside>
+      <h2>{{ strings['localhost'] }}</h2>
+      <p>http://127.0.0.1:{{ port }}</p>
+    </aside>
+    <aside>
+      <h2>{{ strings['network'] }}</h2>
+      <p>http://{{ ip }}:{{ port }}</p>
+    </aside>
+  </article>
+</section>
+<div class="other-card-container">
+  <section class="info-card">
+    <article>
+      <img src="data:image/png;base64, {{ timer_qr }}" alt="Timer QR Code">
+      <a class="timer" href="{{ url_for('timer.control') }}">{{ strings['timer'] }}</a>
+    </article>
+  </section>
+  <section class="info-card">
+    <article>
+      <img src="data:image/png;base64, {{ webclock_qr }}" alt="Webclock QR Code">
+      <a class="webclock" href="{{ url_for('webclock.webclock') }}">{{ strings['webclock'] }}</a>
+    </article>
+  </section>
+  <section class="info-card"><article>
+    <img src="data:image/png;base64, {{ admin_qr }}" alt="Admin QR Code">
+    <a class="admin" href="{{ url_for('admin.dash') }}">{{ strings['admin'] }}</a>
+  </article></section>
 </div>
 {% endblock %}

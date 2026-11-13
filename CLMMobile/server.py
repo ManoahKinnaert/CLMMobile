@@ -1,57 +1,57 @@
-from flask import Flask, render_template 
+from flask import Flask
 from flask_socketio import SocketIO
-from datetime import timedelta
+from CLMMobile.base import Base 
+from CLMMobile.timer import TimerBp
+from CLMMobile.webclock import Webclock
+from CLMMobile.admin import AdminBp
+from CLMMobile.utils.translation import Translation
+from CLMMobile.utils.auth import AuthBp, get_secret_key
+from CLMMobile.utils.schedule_service.service import get_schedule_data_auto
+from CLMMobile.utils import TEMPLATES_DIR, STATIC_DIR
+from CLMMobile.utils.settings import Settings
+from CLMMobile.utils.data import DataService
+from CLMMobile.utils.console import *
 
-from CLMMobile.time_service import TimeService
-from CLMMobile.time_service.timer import Timer
-from CLMMobile.settings_service import SettingsService
-from CLMMobile.base import Base
-from CLMMobile.webclock_service import WebclockService
-from CLMMobile.translation_service import TranslationService
-from CLMMobile.data_service import DataService
-from CLMMobile.admin_service import AdminService
-from CLMMobile.auth_service import get_secret_key, AuthService
-
-# server
-server = Flask(__name__, static_folder=None, template_folder=None)
+server = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
 server.secret_key = get_secret_key()
-# configure session stuff
-server.config.update(
-    SESSION_COOKIE_HTTPONLY=True,
-    SESSION_COOKIE_SECURE=False,
-    SESSION_COOKIE_SAMESITE="Lax",
-    PERMANENT_SESSION_LIFETIME=timedelta(minutes=30),
-)
-# server port and socketio
-PORT = 5051
 socketio = SocketIO(server, async_mode="gevent")
-# non-blueprint services
-db = DataService()
-settings = SettingsService()
-trans = TranslationService(settings)
-auth = AuthService()
-timer = Timer(socketio, db=db)
-# init meeting on db
-db.init_meeting()
-# register blueprints
-BASE = Base(server, PORT, trans)
-BASE.register()
-TimeService(server, socketio, timer, trans, auth).register()
-WebclockService(server, socketio, timer, trans).register()
-AdminService(server, trans, db, auth).register()
+port = 5051
 
-# set basic 404 and 500 screens
-@server.errorhandler(404)
-def handle_404(_):
-    return render_template("base/404.html"), 404
+def setup():
+    settings = Settings()
+    trans = Translation(settings)
+    db = DataService()
+    
+    schedule = get_schedule_data_auto()
 
-@server.errorhandler(500)
-def handle_500(_):
-    return render_template("base/500.html"), 500
+    BASE = Base(server, trans, port)
+    BASE.register()
 
-def run_server(debug=False):
-    try:
-        socketio.run(app=server, debug=debug, port=PORT, host="0.0.0.0", allow_unsafe_werkzeug=True) 
-    except KeyboardInterrupt:
-        db.close()
-        auth.close()
+    auth = AuthBp(server, trans)
+    auth.register()
+
+    admin = AdminBp(server, trans, auth.auth, db)
+    admin.register()
+
+    timer = TimerBp(server, socketio, trans, schedule, db)
+    timer.register()
+
+    webclock = Webclock(server, socketio, timer=timer.clock)
+    webclock.register()
+
+    return BASE, trans
+
+def run():
+    setup()
+    socketio.run(app=server, host="0.0.0.0", port=port, debug=True, allow_unsafe_werkzeug=True)
+
+def run_tui(trans, BASE):
+    print(chr(27) + "[2J")
+    strings = trans.get_string_section("console")
+    startup_view(strings=strings, global_ip=BASE.get_ip(), port=port)
+    while True:
+        try:
+            if user_input(f"{strings["close"]}: ").lower() == "q":
+                break
+        except KeyboardInterrupt:
+            break

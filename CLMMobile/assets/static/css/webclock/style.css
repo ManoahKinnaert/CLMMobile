@@ -1,0 +1,36 @@
+* {
+    background-color: black;
+    color: white;
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    overflow: hidden;
+}
+
+.webclock-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+header {
+    text-align: center;
+    font-size: 1.5rem;
+    opacity: 0.7;
+}
+
+main {
+    text-align: center;
+    font-size: 6rem;
+    font-weight: bold;
+}
+
+@media (max-width: 500px) {
+    main {
+        font-size: 4rem;
+    }
+}

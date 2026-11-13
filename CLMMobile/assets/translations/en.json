@@ -1,65 +1,69 @@
 {
-  "name": "English",
-
-  "meeting_codes": {
-    "MEETING": "Meeting",
-    "OPENING_COMMENTS": "Opening Comments",
-    "TREASURES_TALK": "Treasures Talk",
-    "SPIRITUAL_GEMS": "Spiritual Gems",
-    "BIBLE_READING": "Bible Reading",
-    "MINISTRY_TALK": "Ministry - Talk",
-    "LIVING_TALK": "Living - Talk",
-    "CONGREGATION_BIBLE_STUDY": "Congregation Bible Study",
-    "CLOSING_COMMENTS": "Closing Comments",
-    "PUBLIC_TALK": "Public Talk",
-    "WATCHTOWER_STUDY": "Watchtower Study"
-  },
-
-  "meeting_section_codes": {
-    "INTRO": null,
-    "TREASURES_FROM_GODS_WORD": "Treasures from Gods word",
-    "APPLY_YOURSELF_TO_THE_FIELD_MINISTRY": "Apply yourself to the field ministry",
-    "LIVING_AS_CHRISTIANS": "Living as christians",
-    "WEEKEND": "Weekend"
-  },
-
-  "ui": {
-    "home": {
-      "overview-lbl": "Overview - How to connect",
-      "ip_local": "IP local",
-      "local_addr": "Local address",
-      "ip_global": "IP global",
-      "global_addr": "Global adress",
-      "scan_webclock": "Scan for webclock",
-      "scan_timer": "Scan for timer"
+    "talks": {
+        "MEETING": "Meeting",
+        "INTRODUCTION": "Introduction",
+        "treasures from gods word": "Treasures From God's Word",
+        "TREASURES TALK": "Treasures Talk",
+        "SPIRITUAL GEMS": "Spiritual Gems",
+        "BIBLE READING": "Bible Reading",
+        "apply to ministry": "Apply Yourself To The Field Ministry",
+        "STARTING A CONVERSATION": "Starting a Conversation",
+        "FOLLOWING UP": "Following Up",
+        "WHAT WOULD YOU SAY?": "What Would You Say?",
+        "MAKING DISCIPLES": "Making Disciples",
+        "EXPLAINING YOUR BELIEFS": "Explaining Your Beliefs",
+        "TALK": "Talk",
+        "living as christians": "Living As Christians",
+        "LIVING TALK": "Living Talk",
+        "CONGREGATION BIBLE STUDY": "Congregation Bible Study",
+        "CONCLUDING COMMENTS": "Concluding Comments",
+        "weekend": "Weekend",
+        "PUBLIC TALK": "Public Talk",
+        "WATCHTOWER STUDY": "Watchtower Study"
     },
 
-    "admin-dash": {
-      "language-lbl": "CLMMobile - Language",
-      "reports-lbl": "CLMMobile - Reports",
-      "report-dash-btn": "Meeting Reports",
-      "security-lbl": "Security",
-      "change-passwords-btn": "Change passwords",
-      "change-password-btn": "Change password",
-      "user-password-lbl": "User password",
-      "admin-password-lbl": "Admin password",
-      "password-placeholder": "New password",
-      "repeat-password-placeholder": "Repeat new password"
+    "auth": {
+        "error": "Wrong password!"
     },
 
-    "admin-dash-reports": {
-      "meetings": "Meetings",
-      "back": "Back"
+    "admin": {
+        "language": "CLMMobile - Language",
+        "current": "Current",
+        "reports": "CLMMobile - Reports",
+        "reports-btn": "Reports",
+        "security": "CLMMobile - Security",
+        "change passwords": "Change passwords",
+        "user password": "User password",
+        "new password": "New password",
+        "repeat password": "Repeat new password",
+        "change": "Change",
+        "admin password": "Admin password"
     },
 
-    "admin-dash-report-view": {
-      "meeting": "Meeting",
-      "back-to-dash": "Back",
-      "delete-meeting": "Delete meeting",
-      "export": "Export",
-      "treasures": "Treasures from Gods word",
-      "apply-ministry": "Apply yourself to the field ministry",
-      "living-as-christians": "Living as christians"
+    "meetings": {
+        "back": "Back",
+        "meetings": "Meetings"
+    },
+
+    "report": {
+        "back": "Back",
+        "download": "Download"
+    },
+
+    "base": {
+        "title": "CLMMobile - Home",
+        "how to connect": "How to connect",
+        "localhost": "Localhost: ",
+        "network": "Network: ",
+        "admin": "Admin",
+        "webclock": "Webclock",
+        "timer": "Timer"
+    },
+
+    "console": {
+        "running": "CLMMobile is running!",
+        "local": "Running locally at",
+        "global": "Running on network at",
+        "close": "Enter q to close the app"
     }
-  }
 }

@@ -1,149 +1,80 @@
-@import "../colors.css";
+@import '../colors.css';
 
-.titlebar {
-  margin: 0;
-  padding: 12px 20px;
-  background-color: var(--title-bar);
+main {
+    display: grid;
+    grid-template-rows: auto auto;
+    align-items: start;
 }
 
-.content {
-  width: min(800px, calc(100% - 24px));
-  margin: 30px auto;
-  padding: 30px;
+.info-card {
+    margin: 1rem;
+    border-radius: 1rem;
+    padding: 0.1rem 0.5rem;
+    background-color: var(--bg-1);   
+    box-shadow: 0 1rem 2rem 0.1rem black;
+    box-sizing: border-box;
+    max-width: 100%;
 }
 
-.overview {
-  display: flex;
-  flex-direction: column;
-  max-width: 700px;
-  width: 100%;
-  margin: 40px auto 0;
-  padding: 30px 40px 50px;
-  box-sizing: border-box;
-
-  background-color: var(--secondary-bg);
-  border-radius: 20px;
-  box-shadow: 0 4px 15px rgb(0 0 0 / 20%);
-
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+.info p {
+    overflow-wrap: anywhere;
+    margin: 0.25rem 0;
 }
 
-.adresscollection {
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
-  text-align: left;
+.info {
+    margin: 0;
+    text-align: center;
+    padding: 1rem 0rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
-.navigation {
-  max-width: 700px;
-  width: 100%;
-  display: grid;
-
-  margin: 0 auto;
-  margin-top: 40px;
-  text-align: center;
-
-  background-color: var(--secondary-bg);
-  border-radius: 20px;
-  box-shadow: 0 4px 15px rgb(0 0 0 / 20%);
-  padding: 20px 0px 20px 0px;
+.other-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
 }
 
-.navigation a {
-  text-decoration: none;
-  color: white;
-  border: none;
-  padding: 10px 40px 10px 40px;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgb(0 0 0 / 20%);
-  margin: 5px;
+article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.navigation a:hover {
-  opacity: 0.4;
-  cursor: pointer;
+a {
+    text-decoration: none;
+    padding: 0.5rem 2rem;
+    color: white;
+    text-align: center;
+    border-radius: 1rem;
+
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-#admin-btn {
-  background-color: red;
+a:hover {
+    opacity: 0.5;
 }
 
-#go-to-webclock-btn {
-  background-color: var(--title-bar);
+.timer {
+    background-color: var(--accent-color);
 }
 
-#go-to-timer-btn {
-  background-color: var(--online-text);
+.webclock {
+    background-color: green;
 }
 
-h1 {
-  margin: 0 0 20px;
-  color: var(--text-highlighted);
-  font-size: clamp(24px, 6vw, 35px);
-  text-align: center;
+.admin {
+    background-color: red;
 }
 
-h2 {
-  text-align: center;
-}
-
-svg {
-  display: block;
-}
-
-p {
-  color: var(--online-text);
-}
-
-.qrcodecollection {
-  display: flex;
-  flex-direction: row;
-}
-
-.qr-container {
-  margin-right: 40px;
-}
-
-.qr-image {
-  width: 100px;
-  height: auto;
-  border-radius: 10px;
-}
-
-@media (max-width: 600px) {
-  .titlebar {
-    padding: 10px 16px;
-  }
-
-  .content {
-    width: calc(100% - 20px);
-    margin: 10px auto;
-    padding: 20px 15px;
-  }
-
-  .overview {
-    margin: 20px 12px 0;
-    padding: 24px 20px 32px;
-    border-radius: 16px;
-    width: auto;
-  }
-}
-
-@media (max-width: 380px) {
-  .titlebar {
-    padding: 10px 16px;
-  }
-
-  .content {
-    width: calc(100% - 12px);
-    padding: 15px 10px;
-  }
-
-  .overview {
-    padding: 12px 10px 16px;
-    width: auto;
-  }
+img {
+    max-width: 100%;
+    width: 8rem;
+    height: auto;
 }
