@@ -92,10 +92,11 @@ class Generator:
                 continue
             if section != current_section:
                 current_section = section
-                self._render_section_title(
-                    title=self._meeting_codes.get(section, section),
-                    color=self.COLOR_TABLE[section]
-                )
+                if section != "introduction":
+                    self._render_section_title(
+                        title=self._meeting_codes.get(section, section),
+                        color=self.COLOR_TABLE[section]
+                    )
             self._render_talk(
                 name=self._talk_name(talk_type, section),
                 time=talk.get("measured_time", 0),
@@ -123,7 +124,7 @@ class Generator:
         minutes, seconds = divmod(time, 60)
         self._pdf.cell(
             100, 6,
-            text=f"{name} ({limit}:00)",
+            text=f"{name} ({limit // 60:02d}:00)",
             align=Align.L,
             fill=True,
             new_x=XPos.RIGHT,
@@ -137,7 +138,7 @@ class Generator:
             new_x=XPos.LMARGIN,
             new_y=YPos.NEXT,
         )
-        self._pdf.ln(1)
+        self._pdf.ln(2)
 
     def save(self, location: str, name: str):
         self._pdf.output(os.path.join(location, name))

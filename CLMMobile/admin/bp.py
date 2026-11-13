@@ -27,6 +27,7 @@ class AdminBp:
         self._bp.add_url_rule("/", "dash", role_required("admin", "auth.login", "admin.dash")(self.dashboard), methods=["GET"])
         self._bp.add_url_rule("/meetings", "meetings", role_required("admin", "auth.login", "admin.meetings")(self.meetings), methods=["GET"])
         self._bp.add_url_rule("/meetings/report", "report", role_required("admin", "auth.login", "admin.report")(self.report), methods=["GET"])
+        self._bp.add_url_rule("/meetings/report/download", "report_download", role_required("admin", "auth.login", "admin.report_download")(self.report_download), methods=["GET"])
         self._bp.add_url_rule("/set_lang", "set_lang", role_required("admin", "auth.login", "admin.set_lang")(self.set_lang), methods=["POST"])
         self._bp.add_url_rule("/user_pass", "set_user_pass", role_required("admin", "auth.login", "admin.set_user_pass")(self.set_user_pass), methods=["POST"])
         self._bp.add_url_rule("/admin_pass", "set_admin_pass", role_required("admin", "auth.login", "admin.set_admin_pass")(self.set_admin_pass), methods=["POST"])
@@ -116,4 +117,22 @@ class AdminBp:
             section_order=section_order,
             talk_strings=talk_strings,
             section_colors=section_colors
+        )
+
+    def report_download(self):
+        date = request.args.get("date")
+        if date is None:
+            return redirect(url_for("admin.meetings"))
+        meeting_data = self._db.get_meeting_data(date)
+        if meeting_data is None:
+            return redirect(url_for("admin.meetings"))
+
+        gen = Generator(self._trans, {"date": date, "talks": meeting_data})
+        gen.generate()
+        pdf_bytes = gen.get_pdf_bytes().read()
+
+        return Response(
+            pdf_bytes,
+            mimetype="application/pdf",
+            headers={"Content-Disposition": f'attachment; filename="report-{date}.pdf"'}
         )
