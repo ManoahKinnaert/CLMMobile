@@ -37,10 +37,14 @@ class Timer:
         self.end_time = None
 
     def start(self):
+        emit_data = None
         with self.lock:
             if not self.running:
                 self.end_time = round(time.monotonic() + self.remaining) if self.end_time is None else self.end_time
-                self.running = True 
+                self.running = True
+                emit_data = (self.remaining, self.over_time)
+        if emit_data is not None:
+            self._emit(emit_data)
             
     def stop(self):
         with self.lock:
@@ -82,7 +86,7 @@ class Timer:
         while True:
             emit_data = None 
             with self.lock:
-                if self.running:
+                if self.running and self.end_time is not None:
                     self.remaining = max(0, round(self.end_time - time.monotonic()))
                     if self.remaining <= 0:
                         self.over_time = round(time.monotonic() - self.end_time)

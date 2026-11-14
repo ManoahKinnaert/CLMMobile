@@ -42,7 +42,32 @@ nav a:hover {
     color: var(--fg-2-transparent);
 }
 
-button:hover {
-    opacity: 0.5;
+a {
+    text-decoration: none;
+    transition: ease 0.2s;
+}
+
+a:hover {
     cursor: pointer;
+    transform: translateY(-0.2rem);
+}
+
+button {
+    transition: ease 0.2s;
+}
+
+button:hover {
+    cursor: pointer;
+    transform: translateY(-0.2rem);
+
+    box-shadow: 0rem 0.2rem 0.5rem black;
+}
+
+input {
+    transition: ease 0.2s;
+}
+
+input:hover {
+    transform: translateY(-0.2rem);
+    box-shadow: 0rem 0.2rem 0.5rem black;
 }

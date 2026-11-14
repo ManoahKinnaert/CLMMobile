@@ -45,8 +45,10 @@ socket.on("status", (data) => {
         startStopBtn.textContent = "Start"
     }
 
-    timeLbl.innerText = `${String(data.current.time).padStart(2, "0")}:00`
-    timeLbl.style.color = "black"
+    if (!data.timer_started) {
+        timeLbl.innerText = `${String(data.current.time).padStart(2, "0")}:00`
+        timeLbl.style.color = "black"
+    }
     selectCurrent(data.current)
 })
 socket.on("warning", (data) => {
