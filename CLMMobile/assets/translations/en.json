@@ -57,7 +57,8 @@
         "network": "Network: ",
         "admin": "Admin",
         "webclock": "Webclock",
-        "timer": "Timer"
+        "timer": "Timer",
+        "quick access": "Quick Access"
     },
 
     "console": {
