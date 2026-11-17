@@ -1,0 +1,237 @@
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    background-color: var(--accent-color);
+    padding: 1rem 2rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.lang-switcher {
+    display: flex;
+    align-items: center;
+}
+
+.lang-switcher .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.lang-switcher #lang-btn {
+    width: 120px;
+    min-height: 3rem;
+    padding: 0.5rem;
+    background-color: var(--accent-color);
+    color: var(--fg-2);
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+}
+
+.lang-switcher #lang-btn:hover {
+    opacity: 0.8;
+}
+
+.lang-switcher .dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 120px;
+    display: none;
+    z-index: 10;
+    max-height: 40vh;
+    overflow-y: auto;
+
+    background-color: var(--bg-3);
+    border-radius: 0.5rem;
+    box-shadow: 0 0.2rem 1rem black;
+}
+
+.lang-switcher .lang-option {
+    color: rgba(0, 0, 0, 0.5);
+    padding: 0.4rem 0.8rem;
+    display: block;
+    background-color: var(--bg-3);
+    text-align: left;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.lang-switcher .lang-option:hover {
+    background-color: var(--bg-2);
+}
+
+nav a {
+    position: relative;
+    display: inline-block;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--fg-2);
+    padding: 0.25rem 0;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -0.25rem;
+    left: 0;
+    width: 100%;
+    height: 0.2rem;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+}
+
+nav a:hover::after,
+nav a[aria-current="page"]::after {
+    transform: scaleX(1);
+}
+
+/* Colourscheme (matches the app) */
+:root {
+    --accent-color: rgb(90, 140, 210);
+    --bg-1: white;
+    --bg-2: rgb(240, 240, 240);
+    --bg-3: rgb(220, 220, 220);
+    --fg-1: black;
+    --fg-2: white;
+    --fg-2-transparent: rgba(255, 255, 255, 0.5);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg-2);
+    color: var(--fg-1);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--fg-1);
+}
+
+h2 {
+    font-size: 1.75rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--fg-1);
+}
+
+h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--fg-1);
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+ul {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.card {
+    display: block;
+    background-color: var(--bg-1);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-0.2rem);
+    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.15);
+    border-color: var(--accent-color);
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+.card p {
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+}
+
+footer {
+    margin-top: auto;
+    background-color: var(--accent-color);
+    color: var(--fg-2);
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: var(--fg-2);
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .nav-links {
+        gap: 1.5rem;
+    }
+
+    nav a {
+        font-size: 1rem;
+    }
+}
