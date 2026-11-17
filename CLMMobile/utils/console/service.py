@@ -24,7 +24,7 @@ def user_input(message: str=""):
 def startup_view(strings, global_ip, port):
     render_title_logo()
     render_separator()
-    render_markdown(f"{GREEN}**{strings["running"]}**\n{RESET}")
-    render_markdown(f"{YELLOW}{strings["local"]}: **http://127.0.0.1:{port}/**\n{RESET}")
-    render_markdown(f"{YELLOW}{strings["global"]}: **http://{global_ip}:{port}/**\n{RESET}")
+    render_markdown(f"{GREEN}**{strings['running']}**\n{RESET}")
+    render_markdown(f"{YELLOW}{strings['local']}: **http://127.0.0.1:{port}/**\n{RESET}")
+    render_markdown(f"{YELLOW}{strings['global']}: **http://{global_ip}:{port}/**\n{RESET}")
     
