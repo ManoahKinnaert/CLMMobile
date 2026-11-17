@@ -1,9 +1,11 @@
-from CLMMobile.server import run_tui, setup, socketio, server
+from CLMMobile.server import run_tui, setup, socketio, server, _silence_dev_server
 import subprocess
 import threading
 
 
 def run_server():
+    _silence_dev_server()
+
     try:
         subprocess.Popen(
             ["cat", "/dev/location"],

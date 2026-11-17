@@ -1,4 +1,6 @@
-from flask import Flask
+import logging
+
+from flask import Flask, cli as flask_cli
 from flask_socketio import SocketIO
 
 from CLMMobile.base import Base
@@ -30,6 +32,11 @@ socketio = SocketIO(
 port = 5051
 
 
+def _silence_dev_server():
+    flask_cli.show_server_banner = lambda *args, **kwargs: None
+    logging.getLogger("werkzeug").setLevel(logging.ERROR)
+
+
 def setup():
     settings = Settings()
     trans = Translation(settings)
@@ -55,6 +62,7 @@ def setup():
     return BASE, trans
 
 def run():
+    _silence_dev_server()
     setup()
 
     socketio.run(
@@ -63,7 +71,8 @@ def run():
         port=port,
         debug=False,
         use_reloader=False,
-        allow_unsafe_werkzeug=True
+        allow_unsafe_werkzeug=True,
+        log_output=False
     )
 
 def run_tui(trans, BASE):
