@@ -57,7 +57,8 @@
         "network": "Netwerk: ",
         "admin": "Beheerder",
         "webclock": "Webklok",
-        "timer": "Timer"
+        "timer": "Timer",
+        "quick access": "Snelle toegang"
     },
 
     "console": {

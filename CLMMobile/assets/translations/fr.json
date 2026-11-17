@@ -57,7 +57,8 @@
         "network": "Résau: ",
         "admin": "Admin",
         "webclock": "Horloge en ligne",
-        "timer": "Minuteur"
+        "timer": "Minuteur",
+        "quick access": "Accès rapide"
     },
 
     "console": {

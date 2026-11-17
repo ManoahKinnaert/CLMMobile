@@ -4,9 +4,9 @@
   href="{{ url_for('base.static', filename='css/base/style.css') }}"
 />
 {% endblock %} {% block content %}
-<section class="info-card">
-  <article class="info">
-    <h1>{{ strings['how to connect'] }}</h1>
+<section class="hero">
+  <h1>{{ strings['how to connect'] }}</h1>
+  <div class="connect-info">
     <aside>
       <h2>{{ strings['localhost'] }}</h2>
       <p>http://127.0.0.1:{{ port }}</p>
@@ -15,24 +15,30 @@
       <h2>{{ strings['network'] }}</h2>
       <p>http://{{ ip }}:{{ port }}</p>
     </aside>
-  </article>
+  </div>
 </section>
-<div class="other-card-container">
-  <section class="info-card">
-    <article>
-      <img src="data:image/png;base64, {{ timer_qr }}" alt="Timer QR Code">
-      <a class="timer" href="{{ url_for('timer.control') }}">{{ strings['timer'] }}</a>
-    </article>
-  </section>
-  <section class="info-card">
-    <article>
-      <img src="data:image/png;base64, {{ webclock_qr }}" alt="Webclock QR Code">
-      <a class="webclock" href="{{ url_for('webclock.webclock') }}">{{ strings['webclock'] }}</a>
-    </article>
-  </section>
-  <section class="info-card"><article>
-    <img src="data:image/png;base64, {{ admin_qr }}" alt="Admin QR Code">
-    <a class="admin" href="{{ url_for('admin.dash') }}">{{ strings['admin'] }}</a>
-  </article></section>
-</div>
+
+<section class="actions">
+  <h2>{{ strings['quick access'] }}</h2>
+  <div class="card-grid">
+    <section class="info-card">
+      <article>
+        <img src="data:image/png;base64, {{ timer_qr }}" alt="Timer QR Code">
+        <a class="timer" href="{{ url_for('timer.control') }}">{{ strings['timer'] }}</a>
+      </article>
+    </section>
+    <section class="info-card">
+      <article>
+        <img src="data:image/png;base64, {{ webclock_qr }}" alt="Webclock QR Code">
+        <a class="webclock" href="{{ url_for('webclock.webclock') }}">{{ strings['webclock'] }}</a>
+      </article>
+    </section>
+    <section class="info-card">
+      <article>
+        <img src="data:image/png;base64, {{ admin_qr }}" alt="Admin QR Code">
+        <a class="admin" href="{{ url_for('admin.dash') }}">{{ strings['admin'] }}</a>
+      </article>
+    </section>
+  </div>
+</section>
 {% endblock %}
