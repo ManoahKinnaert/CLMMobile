@@ -29,22 +29,20 @@ socketio = SocketIO(
     cors_allowed_origins="*"
 )
 
-port = 5051
-
+PORT = 5051
 
 def _silence_dev_server():
     flask_cli.show_server_banner = lambda *args, **kwargs: None
     logging.getLogger("werkzeug").setLevel(logging.ERROR)
 
-
 def setup():
+    get_schedule_data_auto()    # do this to already have the schedule data properly cached
+
     settings = Settings()
     trans = Translation(settings)
     db = DataService()
 
-    schedule = get_schedule_data_auto()
-
-    BASE = Base(server, trans, port)
+    BASE = Base(server, trans, PORT)
     BASE.register()
 
     auth = AuthBp(server, trans)
@@ -53,7 +51,7 @@ def setup():
     admin = AdminBp(server, trans, auth.auth, db)
     admin.register()
 
-    timer = TimerBp(server, socketio, trans, schedule, db)
+    timer = TimerBp(server, socketio, trans, db)
     timer.register()
 
     webclock = Webclock(server, socketio, timer=timer.clock)
@@ -68,7 +66,7 @@ def run():
     socketio.run(
         app=server,
         host="0.0.0.0",
-        port=port,
+        port=PORT,
         debug=False,
         use_reloader=False,
         allow_unsafe_werkzeug=True,
@@ -83,7 +81,7 @@ def run_tui(trans, BASE):
     startup_view(
         strings=strings,
         global_ip=BASE.get_ip(),
-        port=port
+        port=PORT
     )
 
     while True:

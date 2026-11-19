@@ -4,12 +4,12 @@ import CLMMobile.utils as utils
 from CLMMobile.utils.translation import Translation
 from CLMMobile.utils.auth import role_required, socket_role_required
 from CLMMobile.utils.data import DataService
-from CLMMobile.utils.schedule_service.service import convert
+from CLMMobile.utils.schedule_service.service import get_schedule_data_auto, convert, ciruit_overseer_schedule
 from .timer import Timer
 
 class TimerBp:
     NAMESPACE = "/timer"
-    def __init__(self, server: Flask, socketio: SocketIO, trans: Translation, schedule: list, db: DataService):
+    def __init__(self, server: Flask, socketio: SocketIO, trans: Translation, db: DataService):
         """
         Timer blueprint template class.
         """
@@ -22,23 +22,24 @@ class TimerBp:
         self._socketio: SocketIO = socketio
         self._trans: Translation = trans
         self._timer: Timer = Timer(socketio, db)
-        self._schedule = schedule
-        self._timer.schedule = convert(self._schedule, trans)
-        self._timer.setup_time()
-
-        # load relevant translation strings
-        self._talk_translations = None
-        self._talks = None
+        
+        self.normal_mode()
 
     @property
     def clock(self): return self._timer
-        
-    def setup_schedule(self):
-        self._talk_translations = self._trans.get_string_section("talks")
-        self._talks = []
-        for t in self._timer.schedule:
-            self._talks.append({**t, "name": self._talk_translations[t["key"]]})
-        
+
+    def circuit_overseer_mode(self):
+        if not self._timer.running:
+            ciruit_overseer_schedule(self._timer.schedule, self._trans)
+            if self._timer.current + 1 > len(self._timer.schedule): self._timer.current = self._timer.schedule[-1]
+            self._timer.setup_time()
+
+    def normal_mode(self):
+        if not self._timer.running:
+            self._timer.schedule = convert(get_schedule_data_auto(), self._trans)
+            self._timer.current = 0
+            self._timer.setup_time()
+
     def register(self):
         self.register_endpoints()
         self.register_sockets()
@@ -107,5 +108,4 @@ class TimerBp:
         self.emit_status()
 
     def index(self):
-        self._timer.schedule = convert(self._schedule, self._trans)
         return render_template("timer/index.html")

@@ -1,4 +1,4 @@
-from CLMMobile.server import run_tui, setup, socketio, server, _silence_dev_server
+from CLMMobile.server import run_tui, setup, socketio, server, _silence_dev_server, PORT
 import subprocess
 import threading
 
@@ -21,7 +21,7 @@ def run_server():
         target=lambda: socketio.run(
             app=server,
             host="0.0.0.0",
-            port=5051,
+            port=PORT,
             debug=False,
             allow_unsafe_werkzeug=True,
             use_reloader=False
