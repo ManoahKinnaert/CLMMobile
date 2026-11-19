@@ -19,7 +19,9 @@
         "CONCLUDING COMMENTS": "Paroles de conclusion",
         "weekend": "Weekend",
         "PUBLIC TALK": "Dicours Publique",
-        "WATCHTOWER STUDY": "Étude de La Tour de Garde"
+        "WATCHTOWER STUDY": "Étude de La Tour de Garde",
+        "SERVICE TALK": "Discours de Service",
+        "CIRCUIT OVERSEER TALK": "Discours du responable de circonscription"
     },
 
     "auth": {

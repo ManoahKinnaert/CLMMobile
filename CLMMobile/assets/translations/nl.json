@@ -19,7 +19,9 @@
         "CONCLUDING COMMENTS": "Slotopmerkingen",
         "weekend": "Weekend",
         "PUBLIC TALK": "Openbare lezing",
-        "WATCHTOWER STUDY": "Wachttorenstudie"
+        "WATCHTOWER STUDY": "Wachttorenstudie",
+        "SERVICE TALK": "Dienstlezing",
+        "CIRCUIT OVERSEER TALK": "Slotlezing Kringopziener"
     },
 
     "auth": {

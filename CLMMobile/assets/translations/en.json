@@ -19,7 +19,9 @@
         "CONCLUDING COMMENTS": "Concluding Comments",
         "weekend": "Weekend",
         "PUBLIC TALK": "Public Talk",
-        "WATCHTOWER STUDY": "Watchtower Study"
+        "WATCHTOWER STUDY": "Watchtower Study",
+        "SERVICE TALK": "Service Talk",
+        "CIRCUIT OVERSEER TALK": "Circuit Overseer Talk"
     },
 
     "auth": {

@@ -70,6 +70,10 @@ TALK_TYPES = {
     "WATCHTOWER STUDY": {
         "id": 14,
         "time": 60
+    },
+    "CIRCUIT OVERSEER TALK": {
+        "id": 15,
+        "time": 30
     }
 }
 
@@ -192,3 +196,28 @@ def convert(schedule: dict, translation):
             temp.append(t)
     temp = sorted(temp, key=lambda e: e["id"])
     return [{**t, "name": translations[t["key"]] + f" {t.get('talk num') if t.get('talk num') is not None else ''}"} for t in temp]
+
+def ciruit_overseer_schedule(schedule: list, translation):
+    _, __, dow = datetime.datetime.now().isocalendar()
+    strings = translation.get_string_section("talks")
+    midweek = dow < 6
+    if midweek:
+        for talk in schedule:
+            if talk["id"] == 11:
+                talk["key"] = "SERVICE TALK"
+                talk["name"] = strings["SERVICE TALK"]
+        schedule.pop(-1)
+    else:
+        schedule[-1]["time"] = 30
+        schedule.append(TALK_TYPES["CIRCUIT OVERSEER TALK"])
+
+if __name__ == "__main__":
+    from CLMMobile.utils.settings import Settings
+    from CLMMobile.utils.translation import Translation
+    
+    settings = Settings()
+    trans = Translation(settings)
+    data = convert(get_schedule_data_auto(), trans)
+    print(data)
+    ciruit_overseer_schedule(data, trans)
+    print(data)
