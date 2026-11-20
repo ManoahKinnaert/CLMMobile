@@ -28,7 +28,7 @@ class Generator:
         "treasures from gods word": range(1, 4),
         "apply to ministry": range(4, 10),
         "living as christians": range(10, 13),
-        "weekend": range(13, 15)
+        "weekend": range(13, 16)
     }
 
     TALK_NAME_KEYS = {
@@ -36,7 +36,7 @@ class Generator:
         "treasures from gods word": ["TREASURES TALK", "SPIRITUAL GEMS", "BIBLE READING"],
         "apply to ministry": ["STARTING A CONVERSATION", "FOLLOWING UP", "WHAT WOULD YOU SAY?", "MAKING DISCIPLES", "EXPLAINING YOUR BELIEFS", "TALK"],
         "living as christians": ["LIVING TALK", "CONGREGATION BIBLE STUDY", "CONCLUDING COMMENTS"],
-        "weekend": ["PUBLIC TALK", "WATCHTOWER STUDY"]
+        "weekend": ["PUBLIC TALK", "WATCHTOWER STUDY", "CIRCUIT OVERSEER TALK"]
     }
 
     def __init__(self, trans: Translation, meeting_data: dict = None):
@@ -61,7 +61,12 @@ class Generator:
                 return section
         return None
 
-    def _talk_name(self, talk_type: int, section: str) -> str:
+    def _talk_name(self, talk_type: int, section: str, circuit_overseer: bool = False) -> str:
+        if circuit_overseer:
+            if talk_type == 11:
+                return self._meeting_codes.get("SERVICE TALK", "Service Talk")
+            if talk_type == 15:
+                return self._meeting_codes.get("CIRCUIT OVERSEER TALK", "Circuit Overseer Talk")
         rng = self.SECTION_RANGES[section]
         index = talk_type - rng.start
         keys = self.TALK_NAME_KEYS.get(section, [])
@@ -98,7 +103,7 @@ class Generator:
                         color=self.COLOR_TABLE[section]
                     )
             self._render_talk(
-                name=self._talk_name(talk_type, section),
+                name=self._talk_name(talk_type, section, circuit_overseer=self._data.get("circuit_overseer", False)),
                 time=talk.get("measured_time", 0),
                 limit=talk.get("time_limit", 0)
             )

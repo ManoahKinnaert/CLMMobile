@@ -87,18 +87,25 @@ class AdminBp:
 
         talk_strings = self._trans.get_string_section("talks") or {}
         sections = {}
-        for talk in meeting_data:
+        circuit_overseer = meeting_data.get("circuit_overseer", False)
+        for talk in meeting_data.get("talks", []):
             talk_type = talk.get("talk_type")
             section = None
             talk_name = str(talk_type)
+            if circuit_overseer:
+                if talk_type == 11:
+                    talk_name = talk_strings.get("SERVICE TALK", "Service Talk")
+                elif talk_type == 15:
+                    talk_name = talk_strings.get("CIRCUIT OVERSEER TALK", "Circuit Overseer Talk")
             if talk_type is not None:
                 for s, rng in Generator.SECTION_RANGES.items():
                     if talk_type in rng:
                         section = s
-                        keys = Generator.TALK_NAME_KEYS.get(s, [])
-                        index = talk_type - rng.start
-                        if 0 <= index < len(keys):
-                            talk_name = talk_strings.get(keys[index], keys[index])
+                        if not circuit_overseer or (talk_type not in (11, 15)):
+                            keys = Generator.TALK_NAME_KEYS.get(s, [])
+                            index = talk_type - rng.start
+                            if 0 <= index < len(keys):
+                                talk_name = talk_strings.get(keys[index], keys[index])
                         break
             if section:
                 talk["_section"] = section
@@ -128,7 +135,7 @@ class AdminBp:
         if meeting_data is None:
             return redirect(url_for("admin.meetings"))
 
-        gen = Generator(self._trans, {"date": date, "talks": meeting_data})
+        gen = Generator(self._trans, {"date": date, "talks": meeting_data.get("talks", []), "circuit_overseer": meeting_data.get("circuit_overseer", False)})
         gen.generate()
         pdf_bytes = gen.get_pdf_bytes().read()
 

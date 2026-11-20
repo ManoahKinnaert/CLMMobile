@@ -21,9 +21,11 @@ class TimerBp:
                                         url_prefix=self.NAMESPACE)
         self._socketio: SocketIO = socketio
         self._trans: Translation = trans
+        self._db: DataService = db
         self._timer: Timer = Timer(socketio, db)
         
         self.normal_mode()
+        #self.circuit_overseer_mode()
 
     @property
     def clock(self): return self._timer
@@ -33,12 +35,20 @@ class TimerBp:
             ciruit_overseer_schedule(self._timer.schedule, self._trans)
             if self._timer.current + 1 > len(self._timer.schedule): self._timer.current = self._timer.schedule[-1]
             self._timer.setup_time()
+        self._timer.circuit_overseer = True
+        if self._db.meeting is not None and self._db.meeting.circuit_overseer != True:
+            self._db.meeting.circuit_overseer = True
+            self._db.meeting.save()
 
     def normal_mode(self):
         if not self._timer.running:
             self._timer.schedule = convert(get_schedule_data_auto(), self._trans)
             self._timer.current = 0
             self._timer.setup_time()
+        self._timer.circuit_overseer = False
+        if self._db.meeting is not None and self._db.meeting.circuit_overseer != False:
+            self._db.meeting.circuit_overseer = False
+            self._db.meeting.save()
 
     def register(self):
         self.register_endpoints()

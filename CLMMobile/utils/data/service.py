@@ -14,6 +14,9 @@ class DataService:
         })
         DB_PROXY.initialize(self.db)
         self.db.create_tables([Meeting, Talk], safe=True)
+        columns = [row[1] for row in self.db.execute_sql("PRAGMA table_info(meeting)").fetchall()]
+        if "circuit_overseer" not in columns:
+            self.db.execute_sql("ALTER TABLE meeting ADD COLUMN circuit_overseer BOOLEAN DEFAULT 0")
 
         self.meeting: Meeting | None = None 
 
@@ -56,7 +59,8 @@ class DataService:
     def get_meeting_data(self, date: str):
         meeting = Meeting.get_or_none(Meeting.date == datetime.datetime.strptime(date, "%d/%m/%Y").date())
         if meeting is None: return
-        return sorted([talk.__data__ for talk in Talk.select().where(Talk.meeting == meeting)], key=lambda k: (k["talk_type"], k["sequence_number"]))
+        talks = sorted([talk.__data__ for talk in Talk.select().where(Talk.meeting == meeting)], key=lambda k: (k["talk_type"], k["sequence_number"]))
+        return {"talks": talks, "circuit_overseer": meeting.circuit_overseer}
 
     def close(self):
         self.db.close()

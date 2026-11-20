@@ -15,6 +15,7 @@ class Meeting(BaseModel):
     Meeting data model
     """
     date = DateField(default=datetime.date.today, index=True, unique=True)
+    circuit_overseer = BooleanField(default=False)
 
 
 class Talk(BaseModel):

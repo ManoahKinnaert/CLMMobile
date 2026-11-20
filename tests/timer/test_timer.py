@@ -31,10 +31,20 @@ class DummyDataService:
         self.added_talks = []
 
     def init_meeting(self):
-        self.meeting = object()
+        self.meeting = DummyMeeting()
 
     def add_talk(self, talk_type, measured_time, time_limit, sequence_number=0):
         self.added_talks.append((talk_type, measured_time, time_limit, sequence_number))
+
+
+class DummyMeeting:
+    """Minimal stand-in for peewee Meeting model."""
+
+    def __init__(self):
+        self.circuit_overseer = False
+
+    def save(self):
+        pass
 
 
 SCHEDULE = [
@@ -99,6 +109,12 @@ class TestTimer(unittest.TestCase):
         self.assertEqual(len(self.db.added_talks), 1)
         self.assertEqual(self.db.added_talks[0][0], SCHEDULE[0]["id"])
         self.assertEqual(self.timer.current, 1)
+
+    def test_stop_sets_circuit_overseer_flag_on_meeting(self):
+        self.timer.circuit_overseer = True
+        self.timer.setup_time()
+        self.timer.stop()
+        self.assertTrue(self.db.meeting.circuit_overseer)
 
     def test_stop_saves_and_advances(self):
         self.timer.setup_time()

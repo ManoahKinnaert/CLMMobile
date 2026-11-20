@@ -18,6 +18,7 @@ class Timer:
 
         self._schedule: list = None 
         self.current: int = 0
+        self.circuit_overseer: bool = False
         self._db = db
         
         self.socket.start_background_task(self._run)
@@ -59,6 +60,9 @@ class Timer:
         # save the data to the database
         talk = self.schedule[self.current]
         if self._db.meeting is None: self._db.init_meeting()    # create a new meeting if needed
+        if self._db.meeting.circuit_overseer != self.circuit_overseer:
+            self._db.meeting.circuit_overseer = self.circuit_overseer
+            self._db.meeting.save()
         self._db.add_talk(talk["id"], self.limit - self.remaining + self.over_time, self.limit)
         self.next()
 
