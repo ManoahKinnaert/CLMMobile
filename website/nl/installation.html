@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CLMMobile &mdash; Installatie</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/installation.css" />
+    <!-- PRISM JS stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-night-owl.min.css"
+      integrity="sha512-MXRiGOm1i9a1yooXJgIZhA+q5XHvP+iHXn0ardNqqdE3ixpQBvjR0NCkFTR0Jic6jmhhnpviB87P+tK3zuzuSg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- PRISM JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/prism.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/components/prism-bash.js"
+      integrity="sha512-pmRnchdgH0Bluc59cQnAR9GQNCrcHcL3M6xLLv2Z2ufa09sLzx8C4EEyQMHMgPtbQ0NQk7zGqhZYBQYNzN89vg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script type="module" src="../assets/js/installation.js" defer></script>
+    <script src="../assets/js/lang-switcher.js" defer></script>
+    <!-- Content -->
+    <nav>
+      <div class="nav-links">
+        <a href="index.html">Startpagina</a>
+        <a href="installation.html" aria-current="page">Installatie</a>
+        <a href="#">Gebruikersgids</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="lang-switcher">
+        <div class="dropdown" id="lang-dropdown">
+          <button id="lang-btn" aria-expanded="false" aria-controls="lang-content">Nederlands</button>
+          <div class="dropdown-content" id="lang-content">
+            <a class="lang-option" href="../en/installation.html">English</a>
+            <a class="lang-option" href="../fr/installation.html">Fran&ccedil;ais</a>
+            <a class="lang-option" href="installation.html" aria-current="true">Nederlands</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <h1>Installatie</h1>
+      <section>
+        <h2>iOS</h2>
+        <article>
+          <h3>iSH installeren</h3>
+          <p>
+            Om CLMMobile op iOS te installeren, moet je eerst de iSH-app installeren. Dit is een Linux-emulator waarmee je CLMMobile op de achtergrond kunt laten draaien terwijl je andere apps gebruikt.
+          </p>
+          <p>Je kunt hem downloaden in de App Store van Apple.</p>
+          <a
+            class="get"
+            href="https://apps.apple.com/us/app/ish-shell/id1436902243"
+          >
+            <img src="../assets/img/appstore.svg" alt="App Store-pictogram van Apple" />
+            <p>iSH downloaden in de App Store</p>
+          </a>
+          <p>
+            Nadat je iSH uit de App Store hebt gedownload, moet je locatiediensten inschakelen zodat de app op de achtergrond kan blijven draaien. CLMMobile laat iOS denken dat het je locatie nodig heeft (terwijl het die nergens voor gebruikt) om op de achtergrond actief te blijven terwijl andere apps op de voorgrond staan.
+          </p>
+          <p>
+            Om locatiediensten in te schakelen, open je eerst iSH en plak je de volgende opdracht, gevolgd door Enter of Return:
+          </p>
+          <div class="script-container">
+            <div id="location-script-container"></div>
+            <button id="copy-location-btn" type="button" data-copied-text="Gekopieerd!">&#x1F4CB; Kopiëren</button>
+          </div>
+          <p>
+            iOS vraagt je nu mogelijk om locatiediensten voor iSH in te schakelen. Kies hiervoor Altijd.
+          </p>
+        </article>
+        <article>
+          <h3>CLMMobile installeren op iSH</h3>
+          <p>
+            Om CLMMobile op iSH te installeren, open je iSH en plak je de volgende opdracht, gevolgd door Enter of Return:
+          </p>
+          <div class="script-container">
+            <div id="install-script-container"></div>
+            <button id="copy-install-btn" type="button" data-copied-text="Gekopieerd!">&#x1F4CB; Kopiëren</button>
+          </div>
+          <p>Houd er rekening mee dat dit even kan duren. Dat is niet erg.</p>
+        </article>
+        <article>
+          <h3>CLMMobile starten</h3>
+          <p>Voer tot slot de volgende opdracht uit in iSH om CLMMobile te starten:</p>
+          <div class="script-container">
+            <div id="launch-script-container"></div>
+            <button id="copy-launch-btn" type="button" data-copied-text="Gekopieerd!">&#x1F4CB; Kopiëren</button>
+          </div>
+        </article>
+      </section>
+      <section>
+        <h2>Android</h2>
+        <p>Sorry, dit wordt (nog) niet ondersteund.</p>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2026 Manoah Kinnaert</p>
+    </footer>
+  </body>
+</html>

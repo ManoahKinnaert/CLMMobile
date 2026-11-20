@@ -1,0 +1,10 @@
+/* Colorscheme */
+:root {
+    --accent-color: rgb(90, 140, 210);
+    --bg-1: white;
+    --bg-2: rgb(240, 240, 240);
+    --bg-3: rgb(220, 220, 220);
+    --fg-1: black;
+    --fg-2: white;
+    --fg-2-transparent: rgba(255, 255, 255, 0.5);
+}
