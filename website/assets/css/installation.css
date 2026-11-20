@@ -1,0 +1,28 @@
+@import "colors.css";
+
+.get {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    text-decoration: none;
+    padding: 0.5rem;
+    width: 50%;
+
+    background-color: var(--bg-1);
+    color: var(--fg-1);
+    border-radius: 0.5rem;
+    box-shadow: 0rem 0.5rem 1rem rgba(0, 0, 0, 0.1);
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.get:hover {
+    box-shadow: 0rem 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    transform: translateY(-0.2rem);
+}
+
+.get img {
+    width: 40px;
+    height: auto;
+    border-radius: 9px;
+}
