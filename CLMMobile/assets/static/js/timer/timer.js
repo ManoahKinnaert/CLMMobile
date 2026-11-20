@@ -1,20 +1,26 @@
-var socket = io("/timer")
+const socket = io("/timer")
 // buttons
-let startStopBtn = document.getElementById("start-stop-btn")
-let forwardBtn = document.getElementById("next")
-let backwardBtn = document.getElementById("prev")
+const startStopBtn = document.getElementById("start-stop-btn")
+const modeBtn = document.getElementById("mode-btn")
+const forwardBtn = document.getElementById("next")
+const backwardBtn = document.getElementById("prev")
 // time label
-let timeLbl = document.getElementById("time-lbl")
+const timeLbl = document.getElementById("time-lbl")
 // dropdown
-let dropdownContent = document.getElementById("dropdown-content")
-let dropdown = document.getElementById("dropdown")
+const dropdownContent = document.getElementById("dropdown-content")
+const dropdown = document.getElementById("dropdown")
 // other
 let schedule = null
-var currentBtn = null
-var dropdownContentShown = false
+let currentBtn = null
+let dropdownContentShown = false
+let circuitOverseerMode = null
 // button click events
 startStopBtn.onclick = () => {
     socket.emit("toggle")
+}
+modeBtn.onclick = () => {
+    socket.emit("set_circuitoverseer", { circuit_overseer: !circuitOverseerMode })
+    location.reload()   // Only for updating the modeBtn text
 }
 forwardBtn.onclick = () => {
     socket.emit("next")
@@ -35,6 +41,10 @@ socket.on("connect_event", (data) => {
     }
     timeLbl.innerText = `${String(data.current.time).padStart(2, "0")}:00`
     timeLbl.style.color = "black"
+    
+    circuitOverseerMode = data.circuit_overseer
+})
+socket.on("schedule", (data) => {
     setupDropDown(data.schedule)
     selectCurrent(data.current)
 })
@@ -49,6 +59,10 @@ socket.on("status", (data) => {
         timeLbl.innerText = `${String(data.current.time).padStart(2, "0")}:00`
         timeLbl.style.color = "black"
     }
+    
+    if (circuitOverseerMode != data.circuit_overseer) {
+        circuitOverseerMode = data.circuit_overseer
+    }    
     selectCurrent(data.current)
 })
 socket.on("warning", (data) => {
@@ -65,7 +79,7 @@ socket.on("clockdata", (data) => {
 })
 // functions
 function selectCurrent(current) {
-    if (currentBtn) currentBtn.style.color = "rgba(0, 0, 0, 0.5)"
+    if (currentBtn !== null && currentBtn) currentBtn.style.color = "rgba(0, 0, 0, 0.5)"
     dropdown.innerText = `${current.name} (${String(current.time).padStart(2, "0")}:00)`
     currentBtn = document.getElementById(current.name)
     currentBtn.style.color = "rgb(0, 0, 0)"

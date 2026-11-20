@@ -28,6 +28,12 @@
         "error": "Wachtwoord onjuist!"
     },
 
+    "timer": {
+        "mode": "Modus",
+        "circuit_overseer": "Kringopziener",
+        "normal_mode": "Normaal"
+    },
+
     "admin": {
         "language": "CLMMobile - Taal",
         "current": "Huidige",

@@ -28,6 +28,12 @@
         "error": "Wrong password!"
     },
 
+    "timer": {
+        "mode": "Mode",
+        "circuit_overseer": "Circuit Overseer",
+        "normal_mode": "Normal"
+    },
+
     "admin": {
         "language": "CLMMobile - Language",
         "current": "Current",

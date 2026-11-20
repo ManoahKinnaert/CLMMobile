@@ -28,6 +28,12 @@
         "error": "Mot de passe incorrect!"
     },
 
+    "timer": {
+        "mode": "Mode",
+        "circuit_overseer": "Responable de circonscription",
+        "normal_mode": "Normal"
+    },
+
     "admin": {
         "language": "CLMMobile - Langue",
         "current": "Maintenant",

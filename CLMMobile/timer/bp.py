@@ -25,7 +25,6 @@ class TimerBp:
         self._timer: Timer = Timer(socketio, db)
         
         self.normal_mode()
-        #self.circuit_overseer_mode()
 
     @property
     def clock(self): return self._timer
@@ -35,8 +34,8 @@ class TimerBp:
             ciruit_overseer_schedule(self._timer.schedule, self._trans)
             if self._timer.current + 1 > len(self._timer.schedule): self._timer.current = self._timer.schedule[-1]
             self._timer.setup_time()
-        self._timer.circuit_overseer = True
-        if self._db.meeting is not None and self._db.meeting.circuit_overseer != True:
+            self._timer.circuit_overseer = True
+        if self._db.meeting is not None and not self._db.meeting.circuit_overseer:
             self._db.meeting.circuit_overseer = True
             self._db.meeting.save()
 
@@ -45,8 +44,8 @@ class TimerBp:
             self._timer.schedule = convert(get_schedule_data_auto(), self._trans)
             self._timer.current = 0
             self._timer.setup_time()
-        self._timer.circuit_overseer = False
-        if self._db.meeting is not None and self._db.meeting.circuit_overseer != False:
+            self._timer.circuit_overseer = False
+        if self._db.meeting is not None and self._db.meeting.circuit_overseer:
             self._db.meeting.circuit_overseer = False
             self._db.meeting.save()
 
@@ -64,22 +63,32 @@ class TimerBp:
         self._socketio.on_event("next", self.next, namespace=self.NAMESPACE)
         self._socketio.on_event("prev", self.prev, namespace=self.NAMESPACE)
         self._socketio.on_event("set_current", self.set_current, namespace=self.NAMESPACE)
+        self._socketio.on_event("set_circuitoverseer", self.set_circuit_overseer, namespace=self.NAMESPACE)
 
     def connect(self):
         self._socketio.emit("connect_event", {
             "timer_started": self._timer.running,
-            "schedule": self._timer.schedule,
-            "current": self._timer.schedule[self._timer.current]
+            "current": self._timer.schedule[self._timer.current],
+            "circuit_overseer": self._timer.circuit_overseer
+        }, namespace=self.NAMESPACE)
+        self.emit_schedule()
+
+    def emit_schedule(self):
+        self._socketio.emit("schedule", {
+            "current": self._timer.schedule[self._timer.current],
+            "schedule": self._timer.schedule
         }, namespace=self.NAMESPACE)
 
     def emit_status(self):
         self._socketio.emit("status", {
             "timer_started": self._timer.running,
-            "current": self._timer.schedule[self._timer.current]
+            "current": self._timer.schedule[self._timer.current],
+            "circuit_overseer": self._timer.circuit_overseer
         }, namespace=self.NAMESPACE)
         self._socketio.emit("status", {
             "timer_started": self._timer.running,
-            "current": self._timer.schedule[self._timer.current]
+            "current": self._timer.schedule[self._timer.current],
+            "circuit_overseer": self._timer.circuit_overseer
         }, namespace="/webclock")
 
     def emit_warning(self, message: str):
@@ -116,6 +125,14 @@ class TimerBp:
         index = data["index"]
         self._timer.set_current(index)
         self.emit_status()
+        
+    @socket_role_required("user")
+    def set_circuit_overseer(self, data):
+        mode = data.get("circuit_overseer")
+        if mode: self.circuit_overseer_mode()
+        else: self.normal_mode()
+        self.emit_status()
+        self.emit_schedule()
 
     def index(self):
-        return render_template("timer/index.html")
+        return render_template("timer/index.html", circuit_overseer=self._timer.circuit_overseer, strings=self._trans.get_string_section("timer"))
