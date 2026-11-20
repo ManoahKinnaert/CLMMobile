@@ -79,6 +79,11 @@ nav {
     background-color: var(--bg-2);
 }
 
+.lang-option[aria-current="true"] {
+    color: var(--fg-1);
+    font-weight: 600;
+}
+
 nav a {
     position: relative;
     display: inline-block;

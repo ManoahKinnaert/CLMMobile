@@ -16,38 +16,17 @@
       </div>
       <div class="lang-switcher">
         <div class="dropdown" id="lang-dropdown">
-          <button id="lang-btn">English</button>
+          <button id="lang-btn" aria-expanded="false" aria-controls="lang-content">English</button>
           <div class="dropdown-content" id="lang-content">
-            <a class="lang-option" href="../en/index.html">English</a>
-            <a class="lang-option">Fran&ccedil;ais</a>
-            <a class="lang-option">Nederlands</a>
+            <a class="lang-option" href="index.html" aria-current="true">English</a>
+            <a class="lang-option" href="../fr/index.html">Fran&ccedil;ais</a>
+            <a class="lang-option" href="../nl/index.html">Nederlands</a>
           </div>
         </div>
       </div>
     </nav>
 
-    <script>
-      const btn = document.getElementById('lang-btn')
-      const content = document.getElementById('lang-content')
-      const options = document.querySelectorAll('.lang-option')
-
-      btn.addEventListener('click', () => {
-        content.style.display = content.style.display === 'block' ? 'none' : 'block'
-      })
-
-      options.forEach((opt) => {
-        opt.addEventListener('click', () => {
-          btn.textContent = opt.textContent
-          content.style.display = 'none'
-        })
-      })
-
-      document.addEventListener('click', (e) => {
-        if (!e.target.closest('#lang-dropdown')) {
-          content.style.display = 'none'
-        }
-      })
-    </script>
+    <script src="../assets/js/lang-switcher.js" defer></script>
     <main>
       <h1>CLMMobile</h1>
       <p>

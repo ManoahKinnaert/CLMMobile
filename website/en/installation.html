@@ -36,39 +36,17 @@
       </div>
       <div class="lang-switcher">
         <div class="dropdown" id="lang-dropdown">
-          <button id="lang-btn">English</button>
+          <button id="lang-btn" aria-expanded="false" aria-controls="lang-content">English</button>
           <div class="dropdown-content" id="lang-content">
-            <a class="lang-option" href="../en/installation.html">English</a>
-            <a class="lang-option">Fran&ccedil;ais</a>
-            <a class="lang-option">Nederlands</a>
+            <a class="lang-option" href="installation.html" aria-current="true">English</a>
+            <a class="lang-option" href="../fr/installation.html">Fran&ccedil;ais</a>
+            <a class="lang-option" href="../nl/installation.html">Nederlands</a>
           </div>
         </div>
       </div>
     </nav>
 
-    <script>
-      const btn = document.getElementById("lang-btn");
-      const content = document.getElementById("lang-content");
-      const options = document.querySelectorAll(".lang-option");
-
-      btn.addEventListener("click", () => {
-        content.style.display =
-          content.style.display === "block" ? "none" : "block";
-      });
-
-      options.forEach((opt) => {
-        opt.addEventListener("click", () => {
-          btn.textContent = opt.textContent;
-          content.style.display = "none";
-        });
-      });
-
-      document.addEventListener("click", (e) => {
-        if (!e.target.closest("#lang-dropdown")) {
-          content.style.display = "none";
-        }
-      });
-    </script>
+    <script src="../assets/js/lang-switcher.js" defer></script>
     <main>
       <h1>Installation</h1>
       <section>
@@ -101,7 +79,7 @@
           </p>
           <div class="script-container">
             <div id="location-script-container"></div>
-            <button action="">&#x1F4CB; Copy</button>
+            <button id="copy-location-btn" type="button">&#x1F4CB; Copy</button>
           </div>
           <p>
             iOS may now ask you to enable location services for iSH, set this to
@@ -116,7 +94,7 @@
           </p>
           <div class="script-container">
             <div id="install-script-container"></div>
-            <button action="">&#x1F4CB; Copy</button>
+            <button id="copy-install-btn" type="button">&#x1F4CB; Copy</button>
           </div>
           <p>Please be aware that this process can take a while, so don't be alarmed.</p>
         </article>
@@ -125,7 +103,7 @@
             <p>Finally to run CLMMobile run the following command in iSH:</p>
             <div class="script-container">
             <div id="launch-script-container"></div>
-            <button action="">&#x1F4CB; Copy</button>
+            <button id="copy-launch-btn" type="button">&#x1F4CB; Copy</button>
           </div>
         </article>
       </section>
