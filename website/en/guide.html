@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CLMMobile &mdash; Meeting Timer</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-links">
+        <a href="index.html" >Home</a>
+        <a href="installation.html">Installation</a>
+        <a href="#" aria-current="page">User guide</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="lang-switcher">
+        <div class="dropdown" id="lang-dropdown">
+          <button
+            id="lang-btn"
+            aria-expanded="false"
+            aria-controls="lang-content"
+          >
+            English
+          </button>
+          <div class="dropdown-content" id="lang-content">
+            <a class="lang-option" href="index.html" aria-current="true"
+              >English</a
+            >
+            <a class="lang-option" href="../fr/index.html">Fran&ccedil;ais</a>
+            <a class="lang-option" href="../nl/index.html">Nederlands</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <script src="../assets/js/lang-switcher.js" defer></script>
+    <main>
+      <h1>User Guide</h1>
+      <ul>
+        <li><a href="#timer">Using the timer</a></li>
+        <li><a href="#report">Generate a report</a></li>
+        <li><a href="#webclock">Use the webclock</a></li>
+        <li><a href="#switch">Switch language</a></li>
+      </ul>
+      <section id="timer">
+        <h2>Using the timer</h2>
+        <article>
+          <h3>Normal mode</h3>
+          <p>
+            To use the timer go to the home page and click on the timer button.
+            You will then be asked to log in. Please enter the user password
+            (using the admin password works too).
+          </p>
+          <p>
+            After authenticating you will be presented with the timer. It
+            already contains the meeting schedule for today. And will
+            automatically choose between the midweek and weekend schedules.
+          </p>
+          <p>
+            To start the timer press the blue start button. To stop you press
+            the same button. When stopping the timer you might notice it jumps
+            to the next talk automatically. However it is possible to manually
+            select the current talk. You can do this by clicking the arrows or
+            by clicking on the blue box containing the talk title and selecting
+            the desired talk from there.
+          </p>
+        </article>
+        <article>
+          <h3>Circuit overseer mode</h3>
+          <p>
+            During the visit of the circuit overseer, you can enable circuit
+            overseer mode. This can be accomplished by clicking the blue bottom
+            in the bottom right corner of the screen. It displays the current
+            mode, by clicking it you switch mode to circuit overseer mode. To
+            move back to normal mode, simply click the button again. Operating
+            the timer remains unchanged.
+          </p>
+        </article>
+      </section>
+      <section id="report">
+        <h2>Generating reports</h2>
+      </section>
+      <section id="webclock">
+        <h2>Using the webclock</h2>
+      </section>
+      <section id="switch">
+        <h2>Switching language</h2>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2026 Manoah Kinnaert</p>
+    </footer>
+  </body>
+</html>
