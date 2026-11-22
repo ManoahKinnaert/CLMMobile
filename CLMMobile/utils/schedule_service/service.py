@@ -142,7 +142,7 @@ def get_midweek_schedule(meeting_url_postfix: str):
     return result
 
 def get_weekend_schedule():
-    return {"weekend": [TALK_TYPES["PUBLIC TALK"], TALK_TYPES["WATCHTOWER STUDY"]]}
+    return {"weekend": [{**TALK_TYPES["PUBLIC TALK"], "key": "PUBLIC TALK"}, {**TALK_TYPES["WATCHTOWER STUDY"], "key": "WATCHTOWER STUDY"}]}
 
 def get_max_schedule():
     result = {}
@@ -168,11 +168,15 @@ def update_schedule_data():
         print(f"[ERROR]: Something went wrong: {e}")
     return data
 
+def get_cached_data():
+    with open(MEETING_FEED_CACHE, "r") as feed:
+        data = json.load(feed)
+    return data
+
 def get_schedule_data_auto():
     data = None
     try:
-        with open(MEETING_FEED_CACHE, "r") as feed:
-            data = json.load(feed)
+        data = get_cached_data()
     except (FileNotFoundError, json.JSONDecodeError):
         pass
     year, weeknum, dow = datetime.datetime.now().isocalendar()
@@ -210,7 +214,7 @@ def ciruit_overseer_schedule(schedule: list, translation):
         schedule.pop(-1)
     else:
         schedule[-1]["time"] = 30
-        schedule.append(TALK_TYPES["CIRCUIT OVERSEER TALK"])
+        schedule.append({**TALK_TYPES["CIRCUIT OVERSEER TALK"], "key": "CIRCUIT OVERSEER TALK"})
 
 if __name__ == "__main__":
     from CLMMobile.utils.settings import Settings
