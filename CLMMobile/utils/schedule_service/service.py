@@ -214,7 +214,7 @@ def ciruit_overseer_schedule(schedule: list, translation):
         schedule.pop(-1)
     else:
         schedule[-1]["time"] = 30
-        schedule.append({**TALK_TYPES["CIRCUIT OVERSEER TALK"], "key": "CIRCUIT OVERSEER TALK"})
+        schedule.append({**TALK_TYPES["CIRCUIT OVERSEER TALK"], "key": "CIRCUIT OVERSEER TALK", "name": strings["CIRCUIT OVERSEER TALK"]})
 
 if __name__ == "__main__":
     from CLMMobile.utils.settings import Settings

@@ -25,7 +25,7 @@ class Timer:
 
     @property
     def schedule(self):
-        return self._schedule.copy()
+        return self._schedule
 
     @schedule.setter
     def schedule(self, new_schedule: list):
