@@ -72,13 +72,13 @@ class TestScheduleService(unittest.TestCase):
         {"id": 8, "time": 5, "key": "EXPLAINING YOU BELIEFS", "student": True},
         {"id": 9, "time": 5, "key": "TALK", "student": True},
         {"id": 10, "time": 15, "key": "LIVING TALK"},
-        {"id": 11, "time": 30, "key": "SERVICE TALK", "name": ""},  # add "name" key
+        {"id": 11, "time": 30, "key": "SERVICE TALK", "name": ""}  # add "name" key
     ]
 
     MOCK_WEEKEND_SCHEDULE_CIRCUIT_OVERSEER = [
         {"id": 13, "time": 30, "key": "PUBLIC TALK"},
         {"id": 14, "time": 30, "key": "WATCHTOWER STUDY"},
-        {"id": 15, "time": 30, "key": "CIRCUIT OVERSEER TALK"}
+        {"id": 15, "time": 30, "key": "CIRCUIT OVERSEER TALK", "name": ""}  # add "name" key
     ]
 
     def setUp(self):
