@@ -2,6 +2,7 @@ import unittest
 from unittest.mock import patch
 import datetime
 from CLMMobile.utils.schedule_service.service import get_schedule_data_auto, ciruit_overseer_schedule
+from copy import deepcopy
 
 MODULE = "CLMMobile.utils.schedule_service.service"
 
@@ -74,6 +75,12 @@ class TestScheduleService(unittest.TestCase):
         {"id": 11, "time": 30, "key": "SERVICE TALK", "name": ""},  # add "name" key
     ]
 
+    MOCK_WEEKEND_SCHEDULE_CIRCUIT_OVERSEER = [
+        {"id": 13, "time": 30, "key": "PUBLIC TALK"},
+        {"id": 14, "time": 30, "key": "WATCHTOWER STUDY"},
+        {"id": 15, "time": 30, "key": "CIRCUIT OVERSEER TALK"}
+    ]
+
     def setUp(self):
         self.fixed_midweek = datetime.datetime(2026, 11, 19)
         self.fixed_weekend = datetime.datetime(2026, 11, 22)
@@ -124,3 +131,10 @@ class TestScheduleService(unittest.TestCase):
         schedule = self.MOCK_MIDWEEK_SCHEDULE.copy()
         ciruit_overseer_schedule(schedule, MockTranslation)
         self.assertEqual(self.MOCK_MIDWEEK_SCHEDULE_CIRCUIT_OVERSEER, schedule)
+
+    @patch(f"{MODULE}.datetime.datetime")
+    def test_circuit_overseer_mode_weekend(self, datetime_mock):
+        datetime_mock.now.return_value = self.fixed_weekend
+        schedule = deepcopy(self.MOCK_WEEKEND_SCHEDULE)
+        ciruit_overseer_schedule(schedule, MockTranslation)
+        self.assertEqual(self.MOCK_WEEKEND_SCHEDULE_CIRCUIT_OVERSEER, schedule)
