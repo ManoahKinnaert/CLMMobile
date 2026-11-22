@@ -183,7 +183,7 @@ def get_schedule_data_auto():
             data = None
     if dow >= 6: return get_weekend_schedule()
     else:
-        if data and f"{year}-{weeknum}" in data:
+        if data and f"{year}-{weeknum}" in data: return data[f"{year}-{weeknum}"]
     return {}
 
 def convert(schedule: dict, translation):
