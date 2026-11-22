@@ -55,10 +55,21 @@ class TestScheduleService(unittest.TestCase):
     @patch(f"{MODULE}.datetime.datetime")
     @patch(f"{MODULE}.get_cached_data")
     @patch(f"{MODULE}.update_schedule_data")
-    def test_get_schedule_data_auto_cached_is_None_one_None(self, update_schedule_mock, cached_mock, datetime_mock):
+    def test_get_schedule_data_auto_cached_is_None_midweek(self, update_schedule_mock, cached_mock, datetime_mock):
         datetime_mock.now.return_value = self.fixed_midweek
         cached_mock.return_value = None 
         update_schedule_mock.return_value = self.MOCK_MIDWEEK_SCHEDULE
 
         self.assertEqual(self.MOCK_MIDWEEK_SCHEDULE["2026-47"], get_schedule_data_auto())
+        update_schedule_mock.assert_called_once()
+
+    @patch(f"{MODULE}.datetime.datetime")
+    @patch(f"{MODULE}.get_cached_data")
+    @patch(f"{MODULE}.update_schedule_data")
+    def test_get_schedule_data_auto_cached_is_None_weekend(self, update_schedule_mock, cached_mock, datetime_mock):
+        datetime_mock.now.return_value = self.fixed_weekend
+        cached_mock.return_value = None 
+        update_schedule_mock.return_value = self.MOCK_WEEKEND_SCHEDULE
+
+        self.assertEqual({"weekend": self.MOCK_WEEKEND_SCHEDULE}, get_schedule_data_auto())
         update_schedule_mock.assert_called_once()
