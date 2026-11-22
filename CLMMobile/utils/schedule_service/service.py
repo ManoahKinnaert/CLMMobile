@@ -168,11 +168,15 @@ def update_schedule_data():
         print(f"[ERROR]: Something went wrong: {e}")
     return data
 
+def get_cached_data():
+    with open(MEETING_FEED_CACHE, "r") as feed:
+        data = json.load(feed)
+    return data
+
 def get_schedule_data_auto():
     data = None
     try:
-        with open(MEETING_FEED_CACHE, "r") as feed:
-            data = json.load(feed)
+        data = get_cached_data()
     except (FileNotFoundError, json.JSONDecodeError):
         pass
     year, weeknum, dow = datetime.datetime.now().isocalendar()
