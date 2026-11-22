@@ -142,7 +142,7 @@ def get_midweek_schedule(meeting_url_postfix: str):
     return result
 
 def get_weekend_schedule():
-    return {"weekend": [TALK_TYPES["PUBLIC TALK"], TALK_TYPES["WATCHTOWER STUDY"]]}
+    return {"weekend": [{**TALK_TYPES["PUBLIC TALK"], "key": "PUBLIC TALK"}, {**TALK_TYPES["WATCHTOWER STUDY"], "key": "WATCHTOWER STUDY"}]}
 
 def get_max_schedule():
     result = {}
