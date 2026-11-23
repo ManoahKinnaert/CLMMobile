@@ -19,7 +19,7 @@ main {
 }
 
 .dropdown {
-    position: relative;
+  position: relative;
   flex: 1;
   min-width: 0;
 }
@@ -109,7 +109,8 @@ input {
   border-radius: 1rem;
 }
 
-.user-pass-form, .admin-pass-form {
+.user-pass-form,
+.admin-pass-form {
   display: none;
   flex-direction: column;
   gap: 0.5rem;

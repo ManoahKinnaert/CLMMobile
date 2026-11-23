@@ -3,11 +3,15 @@
 {% block css %}
 <link
   rel="stylesheet"
+  href="{{ url_for('admin.static', filename='css/admin/style.css') }}"
+/>
+<link
+  rel="stylesheet"
   href="{{ url_for('admin.static', filename='css/admin/report.css') }}"
 />
 {% endblock %}
 {% block content %}
-<section>
+<section class="content">
     <article>
         <a class="back" href="{{ url_for('admin.meetings') }}">{{ strings['back'] }}</a>
         <h2>{{ talk_strings.get('MEETING', 'Meeting') }} {{ date }}</h2>
