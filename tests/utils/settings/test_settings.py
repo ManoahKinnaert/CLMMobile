@@ -9,6 +9,10 @@ class TestSettings(unittest.TestCase):
     def setUp(self):
         return super().setUp()
 
+    """
+    Initialization of Settings
+    """
+
     @patch("pathlib.Path.exists")
     @patch(f"{MODULE}.Settings._create_settings")
     def test_init_settings_does_not_exist_create_settings_called(self, create_settings, path_exists):
@@ -56,3 +60,19 @@ class TestSettings(unittest.TestCase):
         create_settings.return_value = None
         Settings()
         create_settings.assert_not_called()
+
+    """
+    Test Settings.get_all
+    """
+
+    """
+    Test Settings.get
+    """
+
+    """
+    Test Settings._write
+    """
+
+    """
+    Test Settings.set
+    """
