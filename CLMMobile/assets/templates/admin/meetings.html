@@ -2,10 +2,14 @@
 block css %}
 <link
   rel="stylesheet"
+  href="{{ url_for('admin.static', filename='css/admin/style.css') }}"
+/>
+<link
+  rel="stylesheet"
   href="{{ url_for('admin.static', filename='css/admin/meetings.css') }}"
 />
 {% endblock %} {% block content %}
-<section>
+<section class="content">
   <article>
     <a class="back" href="{{ url_for('admin.dash') }}">{{ strings['back'] }}</a>
     <h2>{{ strings['meetings'] }}</h2>
