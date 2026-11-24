@@ -20,7 +20,12 @@ startStopBtn.onclick = () => {
 }
 modeBtn.onclick = () => {
     socket.emit("set_circuitoverseer", { circuit_overseer: !circuitOverseerMode })
-    location.reload()   // Only for updating the modeBtn text
+}
+
+function updateModeBtnText() {
+    modeBtn.textContent = circuitOverseerMode
+        ? `${window.timerStrings['mode']}: ${window.timerStrings['circuit_overseer']}`
+        : `${window.timerStrings['mode']}: ${window.timerStrings['normal_mode']}`;
 }
 forwardBtn.onclick = () => {
     socket.emit("next")
@@ -43,6 +48,7 @@ socket.on("connect_event", (data) => {
     timeLbl.style.color = "black"
     
     circuitOverseerMode = data.circuit_overseer
+    updateModeBtnText()
 })
 socket.on("schedule", (data) => {
     setupDropDown(data.schedule)
@@ -62,6 +68,7 @@ socket.on("status", (data) => {
     
     if (circuitOverseerMode != data.circuit_overseer) {
         circuitOverseerMode = data.circuit_overseer
+        updateModeBtnText()
     }    
     selectCurrent(data.current)
 })
