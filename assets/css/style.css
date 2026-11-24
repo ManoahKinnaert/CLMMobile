@@ -8,6 +8,8 @@ nav {
     background-color: var(--accent-color);
     padding: 1rem 2rem;
     position: relative;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .nav-links {
@@ -153,6 +155,9 @@ main {
     max-width: 800px;
     margin: 2rem auto;
     padding: 0 1rem;
+    overflow-wrap: break-word;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 h1 {
@@ -224,11 +229,18 @@ li {
 .script-container {
     display: flex;
     justify-content: space-between;
-
+    flex-wrap: wrap;
+    gap: 0.5rem;
     padding: 0.5rem;
     border-radius: 0.5rem;
     color: var(--fg-2);
     background-color: black;
+}
+
+.script-container > div {
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 .script-container button {
@@ -249,6 +261,8 @@ footer {
     text-align: center;
     padding: 1rem;
     font-size: 0.9rem;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 footer a {
@@ -316,5 +330,14 @@ footer a {
 
     .nav-toggle[aria-expanded="true"] .bar:nth-child(3) {
         transform: translateY(-0.45rem) rotate(-45deg);
+    }
+
+    .script-container {
+        flex-direction: column;
+    }
+
+    .script-container > div,
+    .script-container button {
+        width: 100%;
     }
 }
