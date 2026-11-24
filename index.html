@@ -3,14 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="refresh" content="0; url=en/index.html" />
-    <link rel="canonical" href="en/index.html" />
-    <title>CLMMobile</title>
+    <title>CLMMobile &mdash; Meeting Timer</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
-    <p>
-      This page has moved. If you are not redirected automatically,
-      <a href="en/index.html">continue to the English home page</a>.
-    </p>
+    <nav>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="en/installation.html">Installation</a>
+        <a href="en/guide.html">User guide</a>
+        <a href="en/contact.html">Contact</a>
+      </div>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <div class="lang-switcher">
+        <div class="dropdown" id="lang-dropdown">
+          <button id="lang-btn" aria-expanded="false" aria-controls="lang-content">English</button>
+          <div class="dropdown-content" id="lang-content">
+            <a class="lang-option" href="index.html" aria-current="true">English</a>
+            <a class="lang-option" href="fr/index.html">Fran&ccedil;ais</a>
+            <a class="lang-option" href="nl/index.html">Nederlands</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <script src="assets/js/lang-switcher.js" defer></script>
+    <main>
+      <h1>CLMMobile</h1>
+      <p>
+        CLMMobile is a <strong>meeting timer utility</strong> for Jehovah's Witnesses meetings. It runs as a local web application on your device and helps
+        you keep track of talk times during the meeting so the program stays on
+        schedule. Furthermore, it can display the remaining time during a talk.
+      </p>
+      <p>
+        The app works on desktop and mobile, and can be
+        installed on iOS and iPadOS through the iSH app.
+        The app can then be controlled through the browser of any device on the same network.
+        Please see <a href="en/installation.html">installation instructions</a> for more on this
+      </p>
+
+      <h2>Get started</h2>
+      <div class="card-grid">
+        <a href="en/installation.html" class="card">
+          <h3>Installation</h3>
+          <p>Set up CLMMobile on your device.</p>
+        </a>
+        <a href="en/guide.html" class="card">
+          <h3>User guide</h3>
+          <p>Learn how to use CLMMobile.</p>
+        </a>
+        <a href="en/contact.html" class="card">
+          <h3>Contact</h3>
+          <p>How to get in touch, report an issue or request a feature.</p>
+        </a>
+      </div>
+    </main>
+    <footer>
+      <p>&copy; 2026 Manoah Kinnaert</p>
+    </footer>
   </body>
 </html>
