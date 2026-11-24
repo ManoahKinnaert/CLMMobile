@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CLMMobile &mdash; Minuteur de réunion</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-links">
+        <a href="index.html">Accueil</a>
+        <a href="installation.html">Installation</a>
+        <a href="guide.html" aria-current="page">Guide d'utilisation</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="lang-switcher">
+        <div class="dropdown" id="lang-dropdown">
+          <button id="lang-btn" aria-expanded="false" aria-controls="lang-content">
+            Français
+          </button>
+          <div class="dropdown-content" id="lang-content">
+            <a class="lang-option" href="guide.html" aria-current="true">Français</a>
+            <a class="lang-option" href="../en/guide.html">English</a>
+            <a class="lang-option" href="../nl/guide.html">Nederlands</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <script src="../assets/js/lang-switcher.js" defer></script>
+    <main>
+      <h1>Guide d'utilisation</h1>
+      <ul>
+        <li><a href="#timer">Utiliser le minuteur</a></li>
+        <li><a href="#report">Générer un rapport</a></li>
+        <li><a href="#webclock">Utiliser le webclock</a></li>
+        <li><a href="#switch">Changer de langue</a></li>
+        <li><a href="#auth">Authentification</a></li>
+      </ul>
+      <section id="timer">
+        <h2>Utilisation du minuteur</h2>
+        <article>
+          <h3>Mode normal</h3>
+          <p>
+            Pour utiliser le minuteur, allez sur la page d'accueil et cliquez sur le bouton minuteur. Vous serez alors invité à vous connecter. Entrez le mot de passe utilisateur (le mot de passe admin fonctionne aussi).
+          </p>
+          <p>
+            Après authentification, vous serez présenté avec le minuteur. Il contient déjà l'horaire des réunions d'aujourd'hui et basculera automatiquement entre les emplois du temps en semaine et le week-end.
+          </p>
+          <p>
+            Pour démarrer le minuteur, appuyez sur le bouton de démarrage bleu. Pour l'arrêter, appuyez sur le même bouton. En arrêtant le minuteur, vous remarquerez peut-être qu'il passe automatiquement au prochain discours. Cependant, il est possible de sélectionner manuellement le discours en cours. Vous pouvez le faire en cliquant sur les flèches ou en cliquant sur la case bleue contenant le titre du discours, puis en sélectionnant le discours souhaité.
+          </p>
+        </article>
+        <article>
+          <h3>Mode contrôleur de circuit</h3>
+          <p>
+            Pendant la visite du circuit overseur, vous pouvez activer le mode circuit overseur. Cela peut être accompli en cliquant sur le bouton bleu en bas à droite de l'écran. Il affiche le mode en cours ; en cliquant, vous basculez en mode circuit overseur. Pour revenir au mode normal, cliquez simplement sur le bouton à nouveau. Le fonctionnement du minuteur reste inchangé.
+          </p>
+        </article>
+      </section>
+      <section id="report">
+        <h2>Générer un rapport</h2>
+        <p>
+          Pour générer un rapport de la réunion, allez sur la page d'accueil et cliquez sur « admin ». Cela peut nécessiter que vous vous connectiez en tant qu'admin (si vous n'étiez pas déjà connecté en tant qu'admin). Une fois connecté, cliquez sur le bouton « rapports ». Cela vous mènera à une vue récapitulant toutes les réunions. Cliquez sur la réunion souhaitée. Vous verrez alors un aperçu des temps enregistrés. Vous pouvez télécharger le rapport PDF en cliquant sur le bouton de téléchargement bleu ci-dessus.
+        </p>
+      </section>
+      <section id="webclock">
+        <h2>Utilisation du webclock</h2>
+        <p>
+          L'utilisation du webclock est très simple. Vous pouvez scanner le code QR avec un appareil qui se trouve sur le même réseau que l'appareil exécutant CLMMobile, ou cliquer sur le bouton webclock. Le webclock affiche le temps restant en vert et passe en rouge si l'intervenant est en dépassement de temps, puis commencera à compter à partir de 0.
+        </p>
+      </section>
+      <section id="switch">
+        <h2>Changement de langue</h2>
+        <p>
+          Pour changer la langue de CLMMobile, vous devez aller sur la page d'accueil et cliquer sur « admin ». Cela peut nécessiter que vous vous connectiez en tant qu'admin. Une fois connecté, vous verrez une liste déroulante. Sélectionnez la langue souhaitée et c'est tout.
+        </p>
+      </section>
+      <section id="auth">
+        <h2>Authentification</h2>
+        <p>
+          Pour vous authentifier, vous devez entrer soit le mot de passe utilisateur, soit le mot de passe admin. Les mots de passe par défaut pour l'utilisateur et l'admin sont respectivement « user » et « admin ». Il est évidemment recommandé de les modifier.
+        </p>
+        <p>
+          Pour modifier les mots de passe, vous devez aller sur la page admin (et vous connecter en tant qu'admin). En bas, vous verrez un bouton « changer les mots de passe ». Cliquez dessus, des champs de saisie apparaîtront où vous pourrez modifier les mot de passe (s) et soumettre vos modifications.
+        </p>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2026 Manoah Kinnaert</p>
+    </footer>
+  </body>
+</html>

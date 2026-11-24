@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CLMMobile &mdash; Vergadertimer</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-links">
+        <a href="index.html">Startpagina</a>
+        <a href="installation.html">Installatie</a>
+        <a href="guide.html" aria-current="page">Gebruikersgids</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="lang-switcher">
+        <div class="dropdown" id="lang-dropdown">
+          <button id="lang-btn" aria-expanded="false" aria-controls="lang-content">
+            Nederlands
+          </button>
+          <div class="dropdown-content" id="lang-content">
+            <a class="lang-option" href="guide.html" aria-current="true">Nederlands</a>
+            <a class="lang-option" href="../en/guide.html">English</a>
+            <a class="lang-option" href="../fr/guide.html">Français</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <script src="../assets/js/lang-switcher.js" defer></script>
+    <main>
+      <h1>Gebruikersgids</h1>
+      <ul>
+        <li><a href="#timer">De timer gebruiken</a></li>
+        <li><a href="#rapport">Een rapport genereren</a></li>
+        <li><a href="#webclock">De webclock gebruiken</a></li>
+        <li><a href="#wissel">Taal wisselen</a></li>
+        <li><a href="#auth">Authenticatie</a></li>
+      </ul>
+      <section id="timer">
+        <h2>De timer gebruiken</h2>
+        <article>
+          <h3>Normale modus</h3>
+          <p>
+            Om de timer te gebruiken ga naar de home‑page en klik op de timer‑knop. Je wordt dan gevraagd in te loggen. Vul het gebruikerswachtwoord in (het admin‑wachtwoord werkt ook).
+          </p>
+          <p>
+            Na nadat je bent ingelogd zie je de timer. Deze bevat al het programma van vandaag en schakelt automatisch tussen de werk‑ en weekendroosters.
+          </p>
+          <p>
+            Start de timer door op de blauwe knop te drukken. Stop hem opnieuw door op dezelfde knop te drukken. Bij het stoppen springt de timer automatisch naar het volgende gesprek. Het is echter mogelijk om handmatig het huidige gesprek te selecteren. Dit doe je door op de pijltjes te klikken of op de blauwe balk met de titel van het gesprek en daar het gewenste gesprek te kiezen.
+          </p>
+        </article>
+        <article>
+          <h3>Circuitoevoerder‑modus</h3>
+          <p>
+            Tijdens een circuitbezoek kun je de circuitoevoerder‑modus inschakelen. Dit gebeurt door op de blauwe knop in de rechteronderhoek van het scherm te klikken. Hier wordt de huidige modus getoond; door erop te klikken schakel je over naar circuitoevoerder‑modus. Om terug te keren naar de normale modus, klik je opnieuw op de knop. Het bedienen van de timer blijft ongewijzigd.
+          </p>
+        </article>
+      </section>
+      <section id="rapport">
+        <h2>Rapporten genereren</h2>
+        <p>
+          Om een rapport van de vergadering te genereren, ga naar de
+          <strong>home‑page</strong> en klik op 'admin'. Dit kan betekenen dat je moet inloggen als admin (indien je niet al bent ingelogd als zodanig). Zodra je ingelogd bent, klik je op de knop 'rapporten'. Hier krijg je een overzicht van alle vergaderingen. Klik op de gewenste vergadering. Je ziet nu een overzicht van de vastgelegde tijden. Je kunt het PDF‑rapport downloaden door op de blauwe download‑knop bovenin te klikken.
+        </p>
+      </section>
+      <section id="webclock">
+        <h2>De webclock gebruiken</h2>
+        <p>
+          Het gebruik van de webclock is zeer simpel. Je kunt de QR‑code scannen met een apparaat dat verbonden is met hetzelfde netwerk als het apparaat waarop CLMMobile draait, of je klikt op de webclock‑knop.           De webclock toont de overige tijd in groen en schakelt naar rood als de spreker te veel tijd heeft en begint daarna te tellen van 0.
+        </p>
+      </section>
+      <section id="wissel">
+        <h2>Taal wisselen</h2>
+        <p>
+          Om de taal van CLMMobile te veranderen, ga naar de home‑page en klik op 'admin'. Dit kan betekenen dat je inlogt als admin. Zodra je ingelogd bent, zie je een selectielijst. Kies de gewenste taal en het is gedaan.
+        </p>
+      </section>
+      <section id="auth">
+        <h2>Authenticatie</h2>
+        <p>
+          Om te authenticeren, voer je het gebruikerswachtwoord of het admin‑wachtwoord in. De standaardwachtwoorden voor gebruiker en admin zijn respectievelijk 'user' en 'admin'. Het is uiteraard aanbevolen deze te wijzigen.
+        </p>
+        <p>
+          Om de wachtwoorden te wijzigen, moet je de admin‑pagina bezoeken (en inloggen als admin). Onderaan zie je een knop 'wachtwoorden wijzigen'. Klik hierop, er verschijnen invoervelden waar je de nieuwe wachtwoorden kunt invullen en verzenden.
+        </p>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2026 Manoah Kinnaert</p>
+    </footer>
+  </body>
+</html>
