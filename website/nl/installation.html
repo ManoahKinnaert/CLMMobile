@@ -29,12 +29,17 @@
     <script src="../assets/js/lang-switcher.js" defer></script>
     <!-- Content -->
     <nav>
-      <div class="nav-links">
+      <div class="nav-links" id="nav-links">
         <a href="index.html">Startpagina</a>
         <a href="installation.html" aria-current="page">Installatie</a>
         <a href="guide.html">Gebruikersgids</a>
         <a href="contact.html">Contact</a>
       </div>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
       <div class="lang-switcher">
         <div class="dropdown" id="lang-dropdown">
           <button id="lang-btn" aria-expanded="false" aria-controls="lang-content">Nederlands</button>
