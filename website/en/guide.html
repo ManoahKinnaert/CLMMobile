@@ -8,12 +8,17 @@
   </head>
   <body>
     <nav>
-      <div class="nav-links">
+      <div class="nav-links" id="nav-links">
         <a href="index.html">Home</a>
         <a href="installation.html">Installation</a>
         <a href="guide.html" aria-current="page">User guide</a>
         <a href="contact.html">Contact</a>
       </div>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
       <div class="lang-switcher">
         <div class="dropdown" id="lang-dropdown">
           <button
