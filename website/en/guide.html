@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CLMMobile &mdash; Meeting Timer</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="installation.html">Installation</a>
+        <a href="guide.html" aria-current="page">User guide</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="lang-switcher">
+        <div class="dropdown" id="lang-dropdown">
+          <button
+            id="lang-btn"
+            aria-expanded="false"
+            aria-controls="lang-content"
+          >
+            English
+          </button>
+          <div class="dropdown-content" id="lang-content">
+            <a class="lang-option" href="guide.html" aria-current="true"
+              >English</a
+            >
+            <a class="lang-option" href="../fr/guide.html">Fran&ccedil;ais</a>
+            <a class="lang-option" href="../nl/guide.html">Nederlands</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <script src="../assets/js/lang-switcher.js" defer></script>
+    <main>
+      <h1>User Guide</h1>
+      <ul>
+        <li><a href="#timer">Using the timer</a></li>
+        <li><a href="#report">Generate a report</a></li>
+        <li><a href="#webclock">Use the webclock</a></li>
+        <li><a href="#switch">Switch language</a></li>
+        <li><a href="#auth">Authentication</a></li>
+      </ul>
+      <section id="timer">
+        <h2>Using the timer</h2>
+        <article>
+          <h3>Normal mode</h3>
+          <p>
+            To use the timer go to the home page and click on the timer button.
+            You will then be asked to log in. Please enter the user password
+            (using the admin password works too).
+          </p>
+          <p>
+            After authenticating you will be presented with the timer. It
+            already contains the meeting schedule for today. And will
+            automatically choose between the midweek and weekend schedules.
+          </p>
+          <p>
+            To start the timer press the blue start button. To stop you press
+            the same button. When stopping the timer you might notice it jumps
+            to the next talk automatically. However it is possible to manually
+            select the current talk. You can do this by clicking the arrows or
+            by clicking on the blue box containing the talk title and selecting
+            the desired talk from there.
+          </p>
+        </article>
+        <article>
+          <h3>Circuit overseer mode</h3>
+          <p>
+            During the visit of the circuit overseer, you can enable circuit
+            overseer mode. This can be accomplished by clicking the blue bottom
+            in the bottom right corner of the screen. It displays the current
+            mode, by clicking it you switch mode to circuit overseer mode. To
+            move back to normal mode, simply click the button again. Operating
+            the timer remains unchanged.
+          </p>
+        </article>
+      </section>
+      <section id="report">
+        <h2>Generating reports</h2>
+        <p>
+          To generate a report of the meeting, go to the
+          <strong>home page</strong> and click on admin. This may require you to
+          login as admin (if you weren't already logged in as admin). Once
+          logged in you must click on the reports button. This will take you to
+          a view with a list of <strong>all</strong> meetings. Click on the
+          desired meeting. Now you will see an overview of the recorded times.
+          You can download the pdf report by clicking the blue download button
+          above.
+        </p>
+      </section>
+      <section id="webclock">
+        <h2>Using the webclock</h2>
+        <p>
+          Using the webclock is very straightforward. You can scan the qr code
+          with a device that is on the same network as the device running
+          CLMMobile, or you can click the webclock button. The webclock displays
+          the remaining time in green and switches to red if the speaker is
+          overtime and will start counting upwards from 0.
+        </p>
+      </section>
+      <section id="switch">
+        <h2>Switching language</h2>
+        <p>
+          To change the language of CLMMobile, you must go to the home page and
+          click on admin. This may require you to log in as the admin. Once
+          logged in you will see a language dropdown. Select the desired
+          language and that's it.
+        </p>
+      </section>
+      <section id="auth">
+        <h2>Authentication</h2>
+        <p>
+          To authenticate, you must enter either the user or admin password. The
+          default passwords for the user and admin are user and admin
+          respectively. It is obviously recommended to change these.
+        </p>
+        <p>
+          To change the passwords, you will need to go to the admin page (and
+          log in as the admin). Then at the bottom you will see a change
+          passwords button. Click it, now there should be input fields where you
+          can change the password(s) and submit your changes.
+        </p>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2026 Manoah Kinnaert</p>
+    </footer>
+  </body>
+</html>
