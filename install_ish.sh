@@ -1,9 +1,11 @@
 # add package dependencies
 apk add git gcc python3-dev py3-pip musl-dev zlib-dev jpeg-dev py3-gevent
 # upgrade pip to latest version
-python3 -m pip install --upgrade pip
+python3 -m pip --root-user-action=ignore install --upgrade pip
 # install as a python package
-python3 -m pip install git+https://github.com/ManoahKinnaert/CLMMobile.git
+python3 -m pip --root-user-action=ignore install git+https://github.com/ManoahKinnaert/CLMMobile.git
 # write timer command to .ashrc
 echo "alias timer='python3 -m CLMMobile'" >> ~/.ashrc
+# write an update command to .ashrc
+echo "alias update='curl -fsSL https://raw.githubusercontent.com/ManoahKinnaert/CLMMobile/main/update_ish.sh | ash'" >> ~/.ashrc
 source ~/.ashrc
