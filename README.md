@@ -2,6 +2,10 @@
 
 [![tests](https://github.com/ManoahKinnaert/CLMMobile/actions/workflows/testing.yml/badge.svg)](https://github.com/ManoahKinnaert/CLMMobile/actions/workflows/testing.yml)
 
+## Website
+You can check out the website here:
+[CLMMobile website](https://manoahkinnaert.github.io/CLMMobile)
+
 ## Basic installation on ISH (for ios and ipados)
 First you will need the ISH app on your iPhone or iPad.
 You can find it [here](https://ish.app/).
@@ -21,6 +25,11 @@ apk add curl && curl -fsSL https://raw.githubusercontent.com/ManoahKinnaert/CLMM
 To launch:
 ```bash
 timer
+```
+
+To update:
+```bash
+update
 ```
 
 ## Installation from source
