@@ -5,6 +5,7 @@
 ## Website
 You can check out the website here:
 [CLMMobile website](https://manoahkinnaert.github.io/CLMMobile)
+It basically contains the same installation instructions as provided below.
 
 ## Basic installation on ISH (for ios and ipados)
 First you will need the ISH app on your iPhone or iPad.
